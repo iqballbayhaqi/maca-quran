@@ -4,7 +4,7 @@ import backgroundImg from "../../images/background.png";
 const useStyles = makeStyles((theme) => ({
     root: {
       backgroundColor: "#f2f2f2",
-      height: "100%",
+      // height: "100%",
       paddingTop: 20
     },
     greetingContainer: {
