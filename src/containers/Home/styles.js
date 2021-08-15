@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import backgroundImg from "../../images/background.png";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -8,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     title: {
       color: "#017901",
       fontWeight: "bold",
-      marginTop: 100,
+      marginTop: 50,
       marginBottom: 25,
     },
     captionTitle: {
@@ -31,12 +32,16 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
       alignItems: "center",
       flexDirection: "column",
+      backgroundImage: `url(${backgroundImg})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundPositionX: -50
     },
     quranImage: {
       height: 200,
     },
     btnGetStarted: {
-      marginTop: -30
+      color: "#fff"
     },
     btnGetStartedContainer: {
       textAlign: 'center'

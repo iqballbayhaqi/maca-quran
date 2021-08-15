@@ -5,6 +5,7 @@ import theme from "../../theme";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import MenuSurat from "../../components/menuSurat";
 import Header from "../../components/header";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const MenuPage = () => {
   const classes = useStyles();
@@ -20,7 +21,6 @@ const MenuPage = () => {
       });
 
     const history = localStorage.getItem("history");
-      console.log(history)
     if (history) {
       setHistoryRead(JSON.parse(history));
     }
@@ -35,7 +35,7 @@ const MenuPage = () => {
         <Typography variant="h5" style={{ color: theme.palette.grey.main }}>
           Assalamualaikum
         </Typography>
-        <Typography variant="h5">Iqballbaihaqi</Typography>
+        <Typography variant="h5">{localStorage.getItem("nama")}</Typography>
       </div>
 
       {historyRead ? (
@@ -65,8 +65,13 @@ const MenuPage = () => {
       )}
 
       <div style={{ marginTop: 20 }}>
-        {dataSurat &&
-          dataSurat.map((res) => <MenuSurat key={res.nomor} data={res} />)}
+        {dataSurat ?
+          dataSurat.map((res) => <MenuSurat key={res.nomor} data={res} />)
+        :
+        <div style={{textAlign: "center", marginTop: 150}}>
+          <CircularProgress/>
+        </div>
+        }
       </div>
     </Container>
   );

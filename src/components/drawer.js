@@ -13,6 +13,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import HistoryIcon from "@material-ui/icons/History";
 import SearchIcon from "@material-ui/icons/Search";
 import mosqueImg from "../images/mosque.jpg";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   list: {
@@ -33,7 +34,10 @@ const useStyles = makeStyles({
 });
 
 export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
+  const Router = useHistory();
   const classes = useStyles();
+
+  const dataLocal = JSON.parse(localStorage.getItem("history"))
 
   return (
     <Drawer open={isDrawerOpen} onClose={isDrawerClose}>
@@ -42,25 +46,25 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
 
           </div>
         <List>
-          <ListItem button>
+          <ListItem button onClick={() => Router.push("/search")}>
             <ListItemIcon>
               <SearchIcon />
             </ListItemIcon>
             <ListItemText primary="Cari Surat" />
           </ListItem>
-          <ListItem button>
+          <ListItem button onClick={() => Router.push(`/surah/${dataLocal.nomor}`)}>
             <ListItemIcon>
               <HistoryIcon />
             </ListItemIcon>
             <ListItemText primary="Terakhir Dibaca" />
           </ListItem>
-          <ListItem button>
+          {/* <ListItem button>
             <ListItemIcon>
               <FavoriteIcon />
             </ListItemIcon>
             <ListItemText primary="Surat Favorite" />
-          </ListItem>
-          <ListItem button>
+          </ListItem> */}
+          <ListItem button onClick={() => Router.push("/about")}>
             <ListItemIcon>
               <InfoIcon />
             </ListItemIcon>

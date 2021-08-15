@@ -35,7 +35,7 @@ const Header = () => {
         <Typography color="primary" variant="h5" onClick={() => Router.push("/menu")}>
           Maca Quran
         </Typography>
-        <SearchIcon style={{ fontSize: 40, color: theme.palette.grey.main }} />
+        <SearchIcon style={{ fontSize: 40, color: theme.palette.grey.main }} onClick={() => Router.push("/search")} />
       </div>
     </Fragment>
   );

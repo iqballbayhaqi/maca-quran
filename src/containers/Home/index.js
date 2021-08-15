@@ -3,11 +3,27 @@ import { Container, Typography, Button } from "@material-ui/core";
 import quranImage from "../../images/quran.png";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
-
+import swal from 'sweetalert';
 
 const Home = () => {
   const classes = useStyles();
   const Router = useHistory();
+
+  const mulaiMembaca = () => {
+    swal({
+      text: 'Perkenalan yuk! Siapa namamu ?',
+      content: "input",
+      button: {
+        text: "Halo!",
+        closeModal: false,
+      },
+    })
+    .then(name => {
+      localStorage.setItem("nama", name);
+      Router.push("/menu")
+      swal.close()
+    })
+  }
 
   return (
     <Container maxWidth="xs" className={classes.root}>
@@ -22,15 +38,14 @@ const Home = () => {
 
       <div className={classes.illustrationContainer}>
         <img src={quranImage} className={classes.quranImage} alt="quran" />
-      </div>
-      <div className={classes.btnGetStartedContainer}>
         <Button
           variant="contained"
           color="secondary"
           className={classes.btnGetStarted}
-          onClick={() => Router.push("/menu")}
+          // onClick={() => Router.push("/menu")}
+          onClick={mulaiMembaca}
         >
-          Get Started
+          Mulai Membaca
         </Button>
       </div>
     </Container>

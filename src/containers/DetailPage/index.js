@@ -9,6 +9,8 @@ import MenuAyat from "../../components/menuAyat";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import Header from "../../components/header";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const DetailPage = () => {
   const classes = useStyles();
@@ -21,19 +23,23 @@ const DetailPage = () => {
     fetch(`https://api-alquranid.herokuapp.com/surah/${params.id}`)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         setDataAyat(result.data);
       });
   }, []);
 
+  const saveToFavorite = () => {
+
+  }
+
   return (
     <Container maxWidth="xs" className={classes.root}>
-      <Header/>
+      <Header />
 
       <div>
         <div className={classes.headSurah}>
-          <Typography variant="h5">
+          <Typography variant="h5" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
             {detailSurah.nama} ( {detailSurah.asma} )
+            {/* <FavoriteIcon color="primary" style={{marginLeft: 10}} /> */}
           </Typography>
           <Typography>{detailSurah.arti}</Typography>
         </div>
@@ -44,8 +50,13 @@ const DetailPage = () => {
       </div>
 
       <div style={{ marginTop: 20 }}>
-        {dataAyat &&
-          dataAyat.map((res) => <MenuAyat key={res.nomor} data={res} />)}
+        {dataAyat ? (
+          dataAyat.map((res) => <MenuAyat key={res.nomor} data={res} />)
+        ) : (
+          <div style={{ textAlign: "center", marginTop: 150, paddingBottom: 300 }}>
+            <CircularProgress />
+          </div>
+        )}
       </div>
     </Container>
   );
