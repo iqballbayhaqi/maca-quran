@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   headerContainer: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
 });
 
@@ -29,16 +29,32 @@ const Header = () => {
 
       <div className={classes.headerContainer}>
         <ShortTextIcon
-          style={{ fontSize: 40, color: theme.palette.grey.main }}
+          style={{
+            fontSize: 40,
+            color: theme.palette.grey.main,
+            cursor: "pointer",
+          }}
           onClick={() => setIsDrawerOpen(true)}
         />
-        <Typography color="primary" variant="h5" onClick={() => Router.push("/menu")}>
+        <Typography
+          color="primary"
+          variant="h5"
+          onClick={() => Router.push("/menu")}
+          style={{ cursor: "pointer" }}
+        >
           Maca Quran
         </Typography>
-        <SearchIcon style={{ fontSize: 40, color: theme.palette.grey.main }} onClick={() => Router.push("/search")} />
+        <SearchIcon
+          style={{
+            fontSize: 40,
+            color: theme.palette.grey.main,
+            cursor: "pointer",
+          }}
+          onClick={() => Router.push("/search")}
+        />
       </div>
     </Fragment>
   );
-}
+};
 
 export default Header;

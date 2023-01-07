@@ -8,7 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import SearchIcon from "@material-ui/icons/Search";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const SearchPage = () => {
   const classes = useStyles();
@@ -17,7 +17,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     // fetch semua surat
-    fetch("https://api-alquranid.herokuapp.com/surah")
+    fetch("https://api.quran.gading.dev/surah")
       .then((response) => response.json())
       .then((result) => {
         setDataSurat(result.data);
@@ -26,16 +26,22 @@ const SearchPage = () => {
   }, []);
 
   const searchFiltered = (keyword) => {
-    console.log(keyword);
     setDataSuratFiltered(
       dataSurat.filter(
-        (item) => item.nama.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+        (item) =>
+          item.name.transliteration.id
+            .toLowerCase()
+            .indexOf(keyword.toLowerCase()) !== -1
       )
     );
   };
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container
+      maxWidth="xs"
+      className={classes.root}
+      style={{ height: !dataSuratFiltered && "100vh" }}
+    >
       <Header />
 
       <div style={{ paddingTop: 20 }}>
@@ -60,7 +66,7 @@ const SearchPage = () => {
       <div style={{ marginTop: 20 }}>
         {dataSuratFiltered ? (
           dataSuratFiltered.map((res) => (
-            <MenuSurat key={res.nomor} data={res} />
+            <MenuSurat key={res.number} data={res} />
           ))
         ) : (
           <div style={{ textAlign: "center", marginTop: 150 }}>

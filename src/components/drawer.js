@@ -52,7 +52,7 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
             </ListItemIcon>
             <ListItemText primary="Cari Surat" />
           </ListItem>
-          <ListItem button onClick={() => Router.push(`/surah/${dataLocal.nomor}`)}>
+          <ListItem button onClick={() => Router.push(`/surah/${dataLocal.number}`)}>
             <ListItemIcon>
               <HistoryIcon />
             </ListItemIcon>
