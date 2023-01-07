@@ -39,7 +39,7 @@ const MenuPage = () => {
         <Typography variant="h5">{localStorage.getItem("nama")}</Typography>
       </div>
 
-      {historyRead ? (
+      {historyRead && historyRead.name.transliteration ? (
         <div className={classes.lastHistoryContainer} onClick={() => Router.push(`/surah/${historyRead.number}`)}>
           <div>
             <div className={classes.lastRead}>
@@ -64,7 +64,7 @@ const MenuPage = () => {
         </div>
       ) : (
         <div className={classes.lastHistoryContainer}>
-          <div>
+          <div style={{opacity: 0}}>
             <div className={classes.lastRead}>
               <ImportContactsIcon />
               <Typography style={{ marginLeft: 10 }}>Last read</Typography>
