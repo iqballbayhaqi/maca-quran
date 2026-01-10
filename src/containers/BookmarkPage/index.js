@@ -6,6 +6,7 @@ import Header from "../../components/header";
 import useStyles from "./styles";
 import { useLanguage } from "../../i18n";
 import { TajwidText } from "../../tajwid";
+import SEO from "../../components/SEO";
 
 const BookmarkPage = () => {
   const classes = useStyles();
@@ -67,6 +68,12 @@ const BookmarkPage = () => {
 
   return (
     <Container maxWidth="xs" className={classes.root}>
+      <SEO 
+        title="Bookmark Saya"
+        description="Kelola bookmark surah dan ayat Al-Quran favorit Anda. Simpan ayat-ayat penting untuk dibaca kembali di Maca Quran."
+        keywords="bookmark quran, simpan ayat, ayat favorit, surah tersimpan"
+        path="/bookmark"
+      />
       <Header />
       
       <Typography className={classes.pageTitle}>

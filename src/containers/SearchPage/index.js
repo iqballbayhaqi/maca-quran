@@ -10,6 +10,7 @@ import FormControl from "@material-ui/core/FormControl";
 import SearchIcon from "@material-ui/icons/Search";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useLanguage } from "../../i18n";
+import SEO from "../../components/SEO";
 
 const SearchPage = () => {
   const classes = useStyles();
@@ -44,6 +45,12 @@ const SearchPage = () => {
       className={classes.root}
       style={{ height: !dataSuratFiltered && "100vh" }}
     >
+      <SEO 
+        title="Cari Surah Al-Quran"
+        description="Cari surah Al-Quran dengan mudah. Temukan surah yang ingin dibaca dengan fitur pencarian cepat di Maca Quran."
+        keywords="cari surah, pencarian quran, search quran, temukan surah"
+        path="/search"
+      />
       <Header />
 
       <div className={classes.searchContainer}>

@@ -7,6 +7,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { useLanguage } from "../../i18n";
+import SEO from "../../components/SEO";
 
 const AboutPage = () => {
   const classes = useStyles();
@@ -14,6 +15,12 @@ const AboutPage = () => {
 
   return (
     <Container maxWidth="xs" className={classes.root}>
+      <SEO 
+        title="Tentang Aplikasi"
+        description="Tentang Maca Quran - Aplikasi baca Al-Quran online gratis buatan iqballbayhaqi. Dibuat dengan React.js dan Material-UI menggunakan API quran.gading.dev."
+        keywords="tentang maca quran, about, developer quran app, iqballbayhaqi"
+        path="/about"
+      />
       <Header />
 
       {/* Hero Section */}

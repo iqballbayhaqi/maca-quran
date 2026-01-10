@@ -1,34 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="theme-color" content="#1B5E20" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Maca Quran - Baca Al-Quran Online dengan Terjemahan Indonesia</title>
+    <meta name="title" content="Maca Quran - Baca Al-Quran Online dengan Terjemahan Indonesia" />
+    <meta name="description" content="Aplikasi baca Al-Quran online gratis dengan terjemahan bahasa Indonesia, audio murottal, tajwid berwarna, pencarian ayat, bookmark, dan ayat harian. Mudah digunakan dan responsif." />
+    <meta name="keywords" content="quran, al-quran, baca quran, quran online, terjemahan quran, quran indonesia, murottal, tajwid, ayat harian, aplikasi quran, maca quran, baca al-quran online" />
+    <meta name="author" content="iqballbayhaqi" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Indonesian" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://maca-quran.vercel.app/" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://maca-quran.vercel.app/" />
+    <meta property="og:title" content="Maca Quran - Baca Al-Quran Online dengan Terjemahan Indonesia" />
+    <meta property="og:description" content="Aplikasi baca Al-Quran online gratis dengan terjemahan bahasa Indonesia, audio murottal, tajwid berwarna, pencarian ayat, bookmark, dan ayat harian." />
+    <meta property="og:image" content="https://maca-quran.vercel.app/logo512.png" />
+    <meta property="og:site_name" content="Maca Quran" />
+    <meta property="og:locale" content="id_ID" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://maca-quran.vercel.app/" />
+    <meta name="twitter:title" content="Maca Quran - Baca Al-Quran Online dengan Terjemahan Indonesia" />
+    <meta name="twitter:description" content="Aplikasi baca Al-Quran online gratis dengan terjemahan bahasa Indonesia, audio murottal, tajwid berwarna, pencarian ayat, bookmark, dan ayat harian." />
+    <meta name="twitter:image" content="https://maca-quran.vercel.app/logo512.png" />
+    <meta name="twitter:creator" content="@iqballbayhaqi" />
+    
+    <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Maca Quran" />
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileColor" content="#1B5E20" />
+    <meta name="msapplication-TileImage" content="%PUBLIC_URL%/logo192.png" />
+    
+    <!-- Manifest -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
     <!-- Google Fonts - Arabic Theme -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=El+Messiri:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Maca Quran | iqballbayhaqi</title>
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Maca Quran",
+      "description": "Aplikasi baca Al-Quran online gratis dengan terjemahan bahasa Indonesia, audio murottal, tajwid berwarna, pencarian ayat, bookmark, dan ayat harian.",
+      "url": "https://maca-quran.vercel.app/",
+      "applicationCategory": "ReligiousApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "author": {
+        "@type": "Person",
+        "name": "iqballbayhaqi"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "IDR"
+      },
+      "inLanguage": ["id", "ar"],
+      "featureList": [
+        "Baca Al-Quran 114 Surah lengkap",
+        "Terjemahan bahasa Indonesia",
+        "Audio Murottal",
+        "Tajwid berwarna",
+        "Pencarian ayat",
+        "Bookmark ayat",
+        "Ayat harian"
+      ]
+    }
+    </script>
+    
     <style>
       html, body, #root {
         height: 100%;
@@ -36,17 +94,7 @@
     </style>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>Anda perlu mengaktifkan JavaScript untuk menjalankan aplikasi ini. Maca Quran adalah aplikasi baca Al-Quran online dengan terjemahan Indonesia.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>

@@ -10,6 +10,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import { useLanguage } from "../../i18n";
+import SEO from "../../components/SEO";
 
 const DetailPage = () => {
   const classes = useStyles();
@@ -119,6 +120,14 @@ const DetailPage = () => {
       className={classes.root}
       style={{ height: !dataAyat && "100vh" }}
     >
+      <SEO 
+        title={`Surah ${detailSurah?.name?.transliteration?.id || ''} - ${detailSurah?.name?.translation?.id || ''}`}
+        description={`Baca Surah ${detailSurah?.name?.transliteration?.id || ''} (${detailSurah?.name?.translation?.id || ''}) lengkap dengan terjemahan Indonesia, audio murottal, dan tajwid berwarna. ${detailSurah?.numberOfVerses || ''} ayat.`}
+        keywords={`surah ${detailSurah?.name?.transliteration?.id || ''}, ${detailSurah?.name?.short || ''}, ${detailSurah?.name?.translation?.id || ''}, baca surah`}
+        path={`/surah/${params.id}`}
+        surahNumber={detailSurah?.number}
+        surahName={detailSurah?.name?.transliteration?.id}
+      />
       <Header />
 
       <div>

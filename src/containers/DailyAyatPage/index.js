@@ -14,6 +14,7 @@ import { useLanguage } from "../../i18n";
 import { useHistory } from "react-router-dom";
 import html2canvas from "html2canvas";
 import { TajwidText } from "../../tajwid";
+import SEO from "../../components/SEO";
 
 // Array of Islamic themed background images
 const BACKGROUND_IMAGES = [
@@ -216,6 +217,12 @@ const DailyAyatPage = () => {
 
   return (
     <Container maxWidth="xs" className={classes.root}>
+      <SEO 
+        title="Ayat Harian"
+        description="Dapatkan ayat Al-Quran harian untuk inspirasi dan renungan. Bagikan ayat favorit dengan teman dan keluarga di Maca Quran."
+        keywords="ayat harian, daily quran, ayat hari ini, inspirasi quran, renungan islami"
+        path="/daily-ayat"
+      />
       <Header />
 
       <div className={classes.pageHeader}>

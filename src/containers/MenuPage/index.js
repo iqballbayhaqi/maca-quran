@@ -8,6 +8,7 @@ import Header from "../../components/header";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useHistory } from "react-router-dom";
 import { useLanguage } from "../../i18n";
+import SEO from "../../components/SEO";
 
 // Mapping: juz number -> array of {surah, startAyat, endAyat}
 // Surahs that span multiple juz are included in each juz with their verse ranges
@@ -266,6 +267,12 @@ const MenuPage = () => {
 
   return (
     <Container maxWidth="xs" className={classes.root} style={{height: !dataSurat && '100vh'}}>
+      <SEO 
+        title="Daftar Surah Al-Quran"
+        description="Daftar lengkap 114 surah Al-Quran dengan terjemahan Indonesia. Baca Al-Quran berdasarkan surah atau juz dengan mudah di Maca Quran."
+        keywords="daftar surah, 114 surah, quran lengkap, juz quran, daftar surat al-quran"
+        path="/menu"
+      />
       <Header />
 
       <div className={classes.greetingContainer}>

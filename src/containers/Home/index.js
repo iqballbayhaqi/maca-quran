@@ -6,6 +6,7 @@ import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import swal from 'sweetalert';
 import { useLanguage } from "../../i18n";
+import SEO from "../../components/SEO";
 
 const Home = () => {
   const classes = useStyles();
@@ -30,6 +31,12 @@ const Home = () => {
 
   return (
     <Container maxWidth="xs" className={classes.root}>
+      <SEO 
+        title="Beranda"
+        description="Maca Quran - Aplikasi baca Al-Quran online gratis dengan terjemahan Indonesia, audio murottal, tajwid berwarna, dan fitur bookmark. Mulai membaca Al-Quran sekarang."
+        keywords="baca quran online, quran digital, al-quran indonesia"
+        path="/"
+      />
       {/* Decorative Elements */}
       <Box position="absolute" top={20} left={20} className={classes.decorativeIcon}>
         <Star style={{ fontSize: 40 }} />
