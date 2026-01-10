@@ -9,8 +9,22 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import ShareIcon from "@material-ui/icons/Share";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import GetAppIcon from "@material-ui/icons/GetApp";
 import { useLanguage } from "../../i18n";
 import { useHistory } from "react-router-dom";
+import html2canvas from "html2canvas";
+
+// Array of Islamic themed background images
+const BACKGROUND_IMAGES = [
+  "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800&q=80",
+  "https://images.unsplash.com/photo-1519817650390-64a93db51149?w=800&q=80",
+  "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800&q=80",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+  "https://images.unsplash.com/photo-1590076215667-875c48af19be?w=800&q=80",
+  "https://images.unsplash.com/photo-1585036156261-1e2ac055e3aa?w=800&q=80",
+  "https://images.unsplash.com/photo-1466442929976-97f336a657be?w=800&q=80",
+  "https://images.unsplash.com/photo-1473177104440-ffee2f376098?w=800&q=80",
+];
 
 const DailyAyatPage = () => {
   const classes = useStyles();
@@ -20,12 +34,20 @@ const DailyAyatPage = () => {
   const [surahInfo, setSurahInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [backgroundImage, setBackgroundImage] = useState(BACKGROUND_IMAGES[0]);
   const audioRef = useRef(null);
+  const cardRef = useRef(null);
 
   // Get current user name for bookmark keys
   const userName = localStorage.getItem("nama") || "default";
   const bookmarkAyatKey = `bookmarks_ayat_${userName}`;
   const dailyAyatKey = `daily_ayat_${userName}`;
+
+  // Get random background image
+  const getRandomBackground = () => {
+    const randomIndex = Math.floor(Math.random() * BACKGROUND_IMAGES.length);
+    return BACKGROUND_IMAGES[randomIndex];
+  };
 
   // Get today's date as string (YYYY-MM-DD)
   const getTodayDate = () => {
@@ -46,6 +68,7 @@ const DailyAyatPage = () => {
       if (parsed.date === today) {
         setDailyAyat(parsed.ayat);
         setSurahInfo(parsed.surahInfo);
+        setBackgroundImage(parsed.backgroundImage || BACKGROUND_IMAGES[0]);
         checkIfBookmarked(parsed.ayat);
         setLoading(false);
         return;
@@ -75,16 +98,21 @@ const DailyAyatPage = () => {
         numberOfVerses: surahData.data.numberOfVerses,
       };
 
+      // Get random background image
+      const newBackground = getRandomBackground();
+
       // Save to localStorage
       const dailyData = {
         date: today,
         ayat: ayat,
         surahInfo: surahInfo,
+        backgroundImage: newBackground,
       };
       localStorage.setItem(dailyAyatKey, JSON.stringify(dailyData));
 
       setDailyAyat(ayat);
       setSurahInfo(surahInfo);
+      setBackgroundImage(newBackground);
       checkIfBookmarked(ayat);
     } catch (error) {
       console.error("Error fetching daily ayat:", error);
@@ -142,6 +170,38 @@ const DailyAyatPage = () => {
     }
   };
 
+  // Download card as image
+  const handleDownload = async () => {
+    if (!cardRef.current || !dailyAyat || !surahInfo) return;
+
+    try {
+      // Temporarily remove border-radius for download
+      const originalBorderRadius = cardRef.current.style.borderRadius;
+      cardRef.current.style.borderRadius = "0";
+
+      const canvas = await html2canvas(cardRef.current, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+      });
+
+      // Restore border-radius
+      cardRef.current.style.borderRadius = originalBorderRadius;
+
+      const link = document.createElement("a");
+      link.download = `${surahInfo.name.transliteration.id}-ayat-${dailyAyat.number.inSurah}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    } catch (error) {
+      console.error("Error downloading card:", error);
+      // Restore border-radius in case of error
+      if (cardRef.current) {
+        cardRef.current.style.borderRadius = "";
+      }
+    }
+  };
+
   // Navigate to surah detail
   const goToSurah = () => {
     if (!surahInfo || !dailyAyat) return;
@@ -187,28 +247,14 @@ const DailyAyatPage = () => {
         dailyAyat &&
         surahInfo && (
           <>
-            <div className={classes.ayatCard}>
-              {/* Surah Info */}
-              <div className={classes.surahBadge} onClick={goToSurah}>
-                <Typography className={classes.surahName}>
-                  {surahInfo.name.transliteration.id}
-                </Typography>
-                <Typography className={classes.surahArabic}>
-                  {surahInfo.name.short}
-                </Typography>
-                <Typography className={classes.ayatNumber}>
-                  {t("ayat")} {dailyAyat.number.inSurah}
-                </Typography>
-              </div>
-
+            <div 
+              className={classes.ayatCard} 
+              ref={cardRef}
+              style={{ backgroundImage: `url('${backgroundImage}')` }}
+            >
               {/* Arabic Text */}
               <Typography className={classes.arabicText}>
                 {dailyAyat.text.arab}
-              </Typography>
-
-              {/* Transliteration */}
-              <Typography className={classes.transliteration}>
-                {dailyAyat.text.transliteration.en}
               </Typography>
 
               {/* Translation */}
@@ -218,18 +264,34 @@ const DailyAyatPage = () => {
                 </Typography>
               </div>
 
-              {/* Action Buttons */}
-              <div className={classes.actionButtons}>
-                <IconButton
-                  className={classes.actionBtn}
-                  onClick={toggleBookmark}
-                >
-                  {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
-                </IconButton>
-                <IconButton className={classes.actionBtn} onClick={handleShare}>
-                  <ShareIcon />
-                </IconButton>
+              {/* Surah Info - Bottom */}
+              <div className={classes.surahInfo} onClick={goToSurah} style={{ cursor: "pointer" }}>
+                <Typography className={classes.surahLabel}>
+                  {surahInfo.name.transliteration.id.toUpperCase()} | {t("ayat").toUpperCase()} {dailyAyat.number.inSurah}
+                </Typography>
               </div>
+
+              {/* Watermark */}
+              <div className={classes.watermark}>
+                <span>Maca Quran</span>
+                <span>@iqballbayhaqi</span>
+              </div>
+            </div>
+
+            {/* Action Buttons - Outside Card */}
+            <div className={classes.actionButtons}>
+              <IconButton
+                className={classes.actionBtn}
+                onClick={toggleBookmark}
+              >
+                {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+              </IconButton>
+              <IconButton className={classes.actionBtn} onClick={handleShare}>
+                <ShareIcon />
+              </IconButton>
+              <IconButton className={classes.actionBtn} onClick={handleDownload}>
+                <GetAppIcon />
+              </IconButton>
             </div>
 
             {/* Audio Player */}
