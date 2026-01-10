@@ -11,8 +11,11 @@ import HistoryIcon from "@material-ui/icons/History";
 import SearchIcon from "@material-ui/icons/Search";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
+import LanguageIcon from "@material-ui/icons/Language";
+import Flag from "react-world-flags";
 import mosqueImg from "../images/mosque.jpg";
 import { useHistory } from "react-router-dom";
+import { useLanguage } from "../i18n";
 
 const useStyles = makeStyles({
   drawerPaper: {
@@ -84,6 +87,20 @@ const useStyles = makeStyles({
       fontSize: "1rem",
       color: "#333",
     },
+    "& .MuiListItemText-secondary": {
+      fontFamily: "'El Messiri', sans-serif",
+      fontSize: "0.85rem",
+      display: "flex",
+      alignItems: "center",
+      gap: 6,
+    },
+  },
+  flagIcon: {
+    width: 20,
+    height: 14,
+    borderRadius: 2,
+    objectFit: "cover",
+    boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
   },
   footer: {
     padding: "20px",
@@ -109,6 +126,7 @@ const useStyles = makeStyles({
 export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
   const Router = useHistory();
   const classes = useStyles();
+  const { t, language, toggleLanguage } = useLanguage();
 
   const dataLocal = JSON.parse(localStorage.getItem("history"));
 
@@ -129,10 +147,10 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
           <Typography className={classes.arabicDecor}>﷽</Typography>
           <MenuBookIcon className={classes.headerIcon} />
           <Typography className={classes.headerTitle}>
-            Maca Quran
+            {t("appName")}
           </Typography>
           <Typography className={classes.headerSubtitle}>
-            Baca Al-Quran Setiap Hari
+            {t("drawerSubtitle")}
           </Typography>
         </div>
 
@@ -146,7 +164,7 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
             <ListItemIcon className={classes.menuIcon}>
               <SearchIcon />
             </ListItemIcon>
-            <ListItemText primary="Cari Surat" className={classes.menuText} />
+            <ListItemText primary={t("searchSurah")} className={classes.menuText} />
           </ListItem>
 
           <ListItem 
@@ -157,7 +175,7 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
             <ListItemIcon className={classes.menuIcon}>
               <BookmarkIcon />
             </ListItemIcon>
-            <ListItemText primary="Bookmark" className={classes.menuText} />
+            <ListItemText primary={t("bookmark")} className={classes.menuText} />
           </ListItem>
 
           {dataLocal && (
@@ -169,7 +187,7 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
               <ListItemIcon className={classes.menuIcon}>
                 <HistoryIcon />
               </ListItemIcon>
-              <ListItemText primary="Terakhir Dibaca" className={classes.menuText} />
+              <ListItemText primary={t("lastRead")} className={classes.menuText} />
             </ListItem>
           )}
 
@@ -181,14 +199,35 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
             <ListItemIcon className={classes.menuIcon}>
               <InfoIcon />
             </ListItemIcon>
-            <ListItemText primary="Tentang" className={classes.menuText} />
+            <ListItemText primary={t("about")} className={classes.menuText} />
+          </ListItem>
+
+          {/* Language Switcher */}
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={toggleLanguage}
+          >
+            <ListItemIcon className={classes.menuIcon}>
+              <LanguageIcon />
+            </ListItemIcon>
+            <ListItemText 
+              primary={t("language")} 
+              secondary={
+                <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <Flag code={language === "id" ? "ID" : "GB"} className={classes.flagIcon} />
+                  {language === "id" ? "Indonesia" : "English"}
+                </span>
+              }
+              className={classes.menuText} 
+            />
           </ListItem>
         </List>
 
         {/* Footer */}
         <div className={classes.footer}>
           <Typography className={classes.footerText}>
-            Made with ❤️ in Jakarta
+            {t("madeWith")}
           </Typography>
         </div>
       </Box>

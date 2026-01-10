@@ -4,10 +4,12 @@ import { useHistory } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Header from "../../components/header";
 import useStyles from "./styles";
+import { useLanguage } from "../../i18n";
 
 const BookmarkPage = () => {
   const classes = useStyles();
   const Router = useHistory();
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("surat");
   const [bookmarksSurat, setBookmarksSurat] = useState([]);
   const [bookmarksAyat, setBookmarksAyat] = useState([]);
@@ -67,10 +69,10 @@ const BookmarkPage = () => {
       <Header />
       
       <Typography className={classes.pageTitle}>
-        📖 Bookmark Saya
+        {t("myBookmark")}
       </Typography>
       <Typography className={classes.pageSubtitle}>
-        Simpan surat dan ayat favoritmu
+        {t("bookmarkSubtitle")}
       </Typography>
 
       {/* Tabs */}
@@ -79,7 +81,7 @@ const BookmarkPage = () => {
           className={`${classes.tab} ${activeTab === "surat" ? classes.tabActive : ""}`}
           onClick={() => setActiveTab("surat")}
         >
-          Surat
+          {t("surah")}
           <span className={`${classes.tabCount} ${activeTab === "surat" ? classes.tabCountActive : ""}`}>
             {bookmarksSurat.length}
           </span>
@@ -88,7 +90,7 @@ const BookmarkPage = () => {
           className={`${classes.tab} ${activeTab === "ayat" ? classes.tabActive : ""}`}
           onClick={() => setActiveTab("ayat")}
         >
-          Ayat
+          {t("ayat")}
           <span className={`${classes.tabCount} ${activeTab === "ayat" ? classes.tabCountActive : ""}`}>
             {bookmarksAyat.length}
           </span>
@@ -116,7 +118,7 @@ const BookmarkPage = () => {
                       {surat.name.transliteration.id}
                     </Typography>
                     <Typography className={classes.suratMeta}>
-                      {surat.revelation.id} • {surat.numberOfVerses} Ayat
+                      {surat.revelation.id} • {surat.numberOfVerses} {t("ayat")}
                     </Typography>
                   </div>
                 </div>
@@ -138,10 +140,10 @@ const BookmarkPage = () => {
             <div className={classes.emptyState}>
               <div className={classes.emptyIcon}>📑</div>
               <Typography className={classes.emptyTitle}>
-                Belum ada surat yang disimpan
+                {t("noSurahBookmark")}
               </Typography>
               <Typography className={classes.emptySubtitle}>
-                Tap ikon bookmark di halaman surat untuk menyimpan
+                {t("noSurahBookmarkHint")}
               </Typography>
             </div>
           )
@@ -184,10 +186,10 @@ const BookmarkPage = () => {
             <div className={classes.emptyState}>
               <div className={classes.emptyIcon}>📝</div>
               <Typography className={classes.emptyTitle}>
-                Belum ada ayat yang disimpan
+                {t("noAyatBookmark")}
               </Typography>
               <Typography className={classes.emptySubtitle}>
-                Tap ikon bookmark di setiap ayat untuk menyimpan
+                {t("noAyatBookmarkHint")}
               </Typography>
             </div>
           )

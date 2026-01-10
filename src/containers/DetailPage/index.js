@@ -9,11 +9,13 @@ import Header from "../../components/header";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import { useLanguage } from "../../i18n";
 
 const DetailPage = () => {
   const classes = useStyles();
   const params = useParams();
   const location = useLocation();
+  const { t } = useLanguage();
   const [dataAyat, setDataAyat] = useState();
   const detailSurah = JSON.parse(localStorage.getItem("history"));
   const [currentTrack, setTrackIndex] = useState(0);
@@ -137,7 +139,7 @@ const DetailPage = () => {
           </Typography>
           <div className={classes.surahMeta}>
             <span className={classes.metaBadge}>
-              {detailSurah.numberOfVerses} Ayat
+              {detailSurah.numberOfVerses} {t("verses")}
             </span>
             <span className={classes.metaBadge}>
               {detailSurah.revelation.id}
@@ -185,7 +187,7 @@ const DetailPage = () => {
                 ﷽
               </Typography>
               <Typography className={classes.loadingText}>
-                Memuat ayat-ayat suci...
+                {t("loadingAyat")}
               </Typography>
               <div className={classes.loadingDots}>
                 <span className={classes.dot}></span>

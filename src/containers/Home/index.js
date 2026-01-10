@@ -5,17 +5,19 @@ import quranImage from "../../images/quran.png";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import swal from 'sweetalert';
+import { useLanguage } from "../../i18n";
 
 const Home = () => {
   const classes = useStyles();
   const Router = useHistory();
+  const { t } = useLanguage();
 
   const mulaiMembaca = () => {
     swal({
-      text: 'Perkenalan yuk! Siapa namamu ?',
+      text: t("introPrompt"),
       content: "input",
       button: {
-        text: "Halo!",
+        text: t("introButton"),
         closeModal: false,
       },
     })
@@ -38,10 +40,10 @@ const Home = () => {
 
       <div className={classes.titleContainer}>
         <Typography variant="h4" className={classes.title}>
-          Maca Quran
+          {t("appName")}
         </Typography>
         <Typography variant="h6" className={classes.captionTitle}>
-          Learn Quran and Recite Once Everyday
+          {t("tagline")}
         </Typography>
       </div>
 
@@ -53,7 +55,7 @@ const Home = () => {
           className={classes.btnGetStarted}
           onClick={mulaiMembaca}
         >
-          🕌 Mulai Membaca
+          {t("startReading")}
         </Button>
       </div>
     </Container>

@@ -7,10 +7,12 @@ import MenuSurat from "../../components/menuSurat";
 import Header from "../../components/header";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useHistory } from "react-router-dom";
+import { useLanguage } from "../../i18n";
 
 const MenuPage = () => {
   const Router = useHistory();
   const classes = useStyles();
+  const { t } = useLanguage();
   const [dataSurat, setDataSurat] = useState();
   const [historyRead, setHistoryRead] = useState();
 
@@ -34,7 +36,7 @@ const MenuPage = () => {
 
       <div className={classes.greetingContainer}>
         <Typography variant="h5" style={{ color: theme.palette.grey.main }}>
-          Assalamualaikum
+          {t("greeting")}
         </Typography>
         <Typography variant="h5">{localStorage.getItem("nama")}</Typography>
       </div>
@@ -45,7 +47,7 @@ const MenuPage = () => {
             <div className={classes.lastRead}>
               <ImportContactsIcon />
               <Typography variant="caption">
-                Terakhir dibaca
+                {t("lastReadLabel")}
               </Typography>
             </div>
             <Typography
@@ -77,7 +79,7 @@ const MenuPage = () => {
           <div>
             <div className={classes.lastRead}>
               <ImportContactsIcon />
-              <Typography variant="caption">Terakhir dibaca</Typography>
+              <Typography variant="caption">{t("lastReadLabel")}</Typography>
             </div>
             <Typography 
               variant="h6"
@@ -87,7 +89,7 @@ const MenuPage = () => {
                 fontFamily: "'El Messiri', sans-serif",
               }}
             >
-              Belum ada
+              {t("noLastRead")}
             </Typography>
           </div>
         </div>

@@ -6,9 +6,11 @@ import quranImage from "../../images/quran.png";
 import InfoIcon from "@material-ui/icons/Info";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import { useLanguage } from "../../i18n";
 
 const AboutPage = () => {
   const classes = useStyles();
+  const { t } = useLanguage();
 
   return (
     <Container maxWidth="xs" className={classes.root}>
@@ -18,10 +20,10 @@ const AboutPage = () => {
       <div className={classes.heroSection}>
         <img src={quranImage} className={classes.quranImage} alt="quran" />
         <Typography className={classes.appName}>
-          Maca Quran
+          {t("appName")}
         </Typography>
         <Typography className={classes.appTagline}>
-          Baca Al-Quran Setiap Hari
+          {t("aboutTagline")}
         </Typography>
         <Typography className={classes.arabicText}>
           ﴿ اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ ﴾
@@ -36,16 +38,16 @@ const AboutPage = () => {
       {/* Info Card */}
       <div className={classes.infoCard}>
         <Typography className={classes.infoTitle}>
-          <InfoIcon /> Informasi Aplikasi
+          <InfoIcon /> {t("appInfo")}
         </Typography>
         
         <div className={classes.infoItem}>
-          <Typography className={classes.infoLabel}>Nama</Typography>
+          <Typography className={classes.infoLabel}>{t("name")}</Typography>
           <Typography className={classes.infoValue}>Maca Quran App</Typography>
         </div>
 
         <div className={classes.infoItem}>
-          <Typography className={classes.infoLabel}>Repository</Typography>
+          <Typography className={classes.infoLabel}>{t("repository")}</Typography>
           <Typography className={classes.infoValue}>
             <Link 
               href="https://github.com/iqballbayhaqi/maca-quran"
@@ -62,7 +64,7 @@ const AboutPage = () => {
         </div>
 
         <div className={classes.infoItem}>
-          <Typography className={classes.infoLabel}>Teknologi</Typography>
+          <Typography className={classes.infoLabel}>{t("technology")}</Typography>
           <Typography className={classes.infoValue}>
             React.js, Material-UI
           </Typography>

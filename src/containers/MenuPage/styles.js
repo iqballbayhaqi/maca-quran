@@ -71,6 +71,10 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 18,
       marginRight: 8,
     },
+    "& span": {
+      fontFamily: "'El Messiri', sans-serif",
+      fontSize: "0.85rem",
+    },
   },
   surahListContainer: {
     marginTop: 25,

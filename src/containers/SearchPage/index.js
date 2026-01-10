@@ -9,9 +9,11 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import SearchIcon from "@material-ui/icons/Search";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { useLanguage } from "../../i18n";
 
 const SearchPage = () => {
   const classes = useStyles();
+  const { t } = useLanguage();
   const [dataSurat, setDataSurat] = useState();
   const [dataSuratFiltered, setDataSuratFiltered] = useState();
 
@@ -47,7 +49,7 @@ const SearchPage = () => {
       <div className={classes.searchContainer}>
         <FormControl fullWidth variant="outlined" className={classes.searchInput}>
           <InputLabel htmlFor="outlined-adornment-amount">
-            Cari Surat
+            {t("searchPlaceholder")}
           </InputLabel>
           <OutlinedInput
             id="outlined-adornment-amount"

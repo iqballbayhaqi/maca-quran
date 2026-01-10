@@ -6,6 +6,7 @@ import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import { useLanguage } from "../i18n";
 
 const Styles = makeStyles((theme) => ({
   ayatCard: {
@@ -152,6 +153,7 @@ const toArabicNumeral = (num) => {
 
 const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
   const classes = Styles();
+  const { t } = useLanguage();
   const [expanded, setExpanded] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
@@ -240,7 +242,7 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
         <div className={classes.expandedContent}>
           {/* Transliteration */}
           <Typography className={classes.sectionLabel}>
-            Transliterasi:
+            {t("transliteration")}
           </Typography>
           <Typography className={classes.transliteration}>
             <span
@@ -250,7 +252,7 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
 
           {/* Tafsir */}
           <Typography className={classes.sectionLabel}>
-            <MenuBookIcon /> Tafsir:
+            <MenuBookIcon /> {t("tafsir")}
           </Typography>
           <Typography className={classes.tafsirText}>
             {data.tafsir.id.short}
