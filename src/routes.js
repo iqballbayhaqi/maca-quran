@@ -7,6 +7,7 @@ import Bookmark from "./containers/BookmarkPage";
 import DailyAyat from "./containers/DailyAyatPage";
 import ShareAyat from "./containers/ShareAyatPage";
 import Memorization from "./containers/MemorizationPage";
+import ReadingHistory from "./containers/ReadingHistoryPage";
 
 const routes = [
     {
@@ -70,6 +71,13 @@ const routes = [
         name: "Memorization",
         path: "/memorization",
         page: <Memorization/>,
+        exact: false
+    },
+    {
+        id: 10,
+        name: "ReadingHistory",
+        path: "/reading-history",
+        page: <ReadingHistory/>,
         exact: false
     }
 ]

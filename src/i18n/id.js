@@ -78,6 +78,20 @@ const id = {
   tajwidOff: "Nonaktif",
   tajwidLegend: "Keterangan Warna",
 
+  // Reading History
+  readingHistory: "Riwayat Bacaan",
+  readingHistorySubtitle: "Tracking konsistensi membaca Al-Quran",
+  dayStreak: "Hari Berturut-turut",
+  longestStreak: "Terpanjang",
+  totalDaysRead: "Total Hari",
+  surahsRead: "Surat Dibaca",
+  totalSessions: "Total Sesi",
+  activityCalendar: "Kalender Aktivitas",
+  recentReadings: "Bacaan Terbaru",
+  noReadingHistory: "Belum ada riwayat bacaan",
+  noReadingHistoryHint: "Mulai membaca Al-Quran untuk melacak progresmu",
+  clearHistory: "Hapus Riwayat",
+
   // Memorization Mode
   memorizationMode: "Mode Hafalan",
   memorizationSubtitle: "Latih hafalan Al-Quran dengan mudah",

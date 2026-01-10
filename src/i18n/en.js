@@ -78,6 +78,20 @@ const en = {
   tajwidOff: "Off",
   tajwidLegend: "Color Legend",
 
+  // Reading History
+  readingHistory: "Reading History",
+  readingHistorySubtitle: "Track your Quran reading consistency",
+  dayStreak: "Day Streak",
+  longestStreak: "Longest",
+  totalDaysRead: "Total Days",
+  surahsRead: "Surahs Read",
+  totalSessions: "Total Sessions",
+  activityCalendar: "Activity Calendar",
+  recentReadings: "Recent Readings",
+  noReadingHistory: "No reading history yet",
+  noReadingHistoryHint: "Start reading the Quran to track your progress",
+  clearHistory: "Clear History",
+
   // Memorization Mode
   memorizationMode: "Memorization Mode",
   memorizationSubtitle: "Practice your Quran memorization easily",

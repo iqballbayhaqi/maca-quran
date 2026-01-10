@@ -8,6 +8,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InfoIcon from "@material-ui/icons/Info";
 import HistoryIcon from "@material-ui/icons/History";
+import TimelineIcon from "@material-ui/icons/Timeline";
 import SearchIcon from "@material-ui/icons/Search";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
@@ -262,6 +263,17 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
               <SchoolIcon />
             </ListItemIcon>
             <ListItemText primary={t("memorizationMode")} className={classes.menuText} />
+          </ListItem>
+
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={() => handleNavigation("/reading-history")}
+          >
+            <ListItemIcon className={classes.menuIcon}>
+              <TimelineIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("readingHistory")} className={classes.menuText} />
           </ListItem>
 
           {dataLocal && (

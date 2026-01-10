@@ -27,10 +27,38 @@ const DetailPage = () => {
   // Get current user name for bookmark keys
   const userName = localStorage.getItem("nama") || "default";
   const bookmarkSuratKey = `bookmarks_surat_${userName}`;
+  const historyKey = `reading_history_${userName}`;
 
   // Get ayat parameter from URL
   const queryParams = new URLSearchParams(location.search);
   const ayatParam = queryParams.get("ayat");
+
+  // Function to save reading history
+  const saveReadingHistory = () => {
+    if (!detailSurah) return;
+    
+    const savedHistory = localStorage.getItem(historyKey);
+    let history = savedHistory ? JSON.parse(savedHistory) : [];
+    
+    // Add new reading entry
+    const newEntry = {
+      surahNumber: detailSurah.number,
+      surahName: detailSurah.name,
+      numberOfVerses: detailSurah.numberOfVerses,
+      revelation: detailSurah.revelation,
+      timestamp: new Date().toISOString()
+    };
+    
+    // Add to beginning of array (most recent first)
+    history.unshift(newEntry);
+    
+    // Keep only last 100 entries to prevent localStorage from getting too large
+    if (history.length > 100) {
+      history = history.slice(0, 100);
+    }
+    
+    localStorage.setItem(historyKey, JSON.stringify(history));
+  };
 
   useEffect(() => {
     // fetch detail surat
@@ -47,6 +75,10 @@ const DetailPage = () => {
       const found = bookmarks.some((b) => b.number === detailSurah.number);
       setIsSuratBookmarked(found);
     }
+
+    // Save reading history when user opens the surah
+    saveReadingHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id, detailSurah.number, bookmarkSuratKey]);
 
   // Handle ayat parameter - scroll to and activate specific ayat
