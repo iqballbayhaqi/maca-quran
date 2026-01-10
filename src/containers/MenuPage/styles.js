@@ -84,6 +84,87 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     padding: "10px 0",
   },
+  viewToggleContainer: {
+    marginTop: 20,
+    display: "flex",
+    background: "#fff",
+    borderRadius: 16,
+    padding: 4,
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
+  },
+  viewToggleButton: {
+    flex: 1,
+    padding: "12px 16px",
+    border: "none",
+    borderRadius: "12px !important",
+    background: "transparent",
+    cursor: "pointer",
+    fontFamily: "'El Messiri', sans-serif !important",
+    fontSize: "0.95rem !important",
+    fontWeight: "600 !important",
+    color: "#757575",
+    transition: "all 0.3s ease",
+    textTransform: "none !important",
+    "&:hover": {
+      color: "#1b5e20",
+      background: "rgba(27, 94, 32, 0.05)",
+    },
+  },
+  viewToggleButtonActive: {
+    background: "linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%) !important",
+    color: "#fff !important",
+    boxShadow: "0 4px 12px rgba(27, 94, 32, 0.3)",
+    "&:hover": {
+      background: "linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%) !important",
+      color: "#fff !important",
+    },
+  },
+  juzHeader: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontSize: "1.1rem",
+    fontWeight: 700,
+    color: "#fff",
+    background: "linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #1b5e20 100%)",
+    padding: "14px 20px",
+    margin: "0",
+    position: "sticky",
+    top: 0,
+    zIndex: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+    boxShadow: "0 4px 15px rgba(27, 94, 32, 0.3)",
+    textShadow: "0 1px 2px rgba(0,0,0,0.2)",
+    letterSpacing: "0.5px",
+    // Decorative borders
+    borderTop: "3px solid rgba(255,215,0,0.6)",
+    borderBottom: "3px solid rgba(255,215,0,0.6)",
+    // Decorative pattern overlay
+    backgroundImage: `
+      linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #1b5e20 100%),
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.03) 10px,
+        rgba(255,255,255,0.03) 20px
+      )
+    `,
+    // Ornamental pseudo elements
+    "&::before": {
+      content: '"✦"',
+      fontSize: "0.9rem",
+      opacity: 0.8,
+      color: "rgba(255,215,0,0.9)",
+    },
+    "&::after": {
+      content: '"✦"',
+      fontSize: "0.9rem",
+      opacity: 0.8,
+      color: "rgba(255,215,0,0.9)",
+    },
+  },
   loadingContainer: {
     textAlign: "center",
     marginTop: 100,

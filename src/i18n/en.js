@@ -18,6 +18,11 @@ const en = {
   greeting: "Assalamualaikum",
   lastReadLabel: "Last read",
   noLastRead: "None yet",
+  allSurah: "All Surah",
+  byJuz: "By Juz",
+  juz: "Juz",
+  selectJuz: "Select Juz",
+  surahRange: "Surah",
 
   // Search Page
   searchPlaceholder: "Search Surah",

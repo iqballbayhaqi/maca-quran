@@ -18,6 +18,11 @@ const id = {
   greeting: "Assalamualaikum",
   lastReadLabel: "Terakhir dibaca",
   noLastRead: "Belum ada",
+  allSurah: "Semua Surat",
+  byJuz: "Per Juz",
+  juz: "Juz",
+  selectJuz: "Pilih Juz",
+  surahRange: "Surat",
 
   // Search Page
   searchPlaceholder: "Cari Surat",

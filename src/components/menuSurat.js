@@ -74,15 +74,24 @@ const Styles = makeStyles((theme) => ({
   },
 }));
 
-const MenuSurat = (data) => {
+const MenuSurat = ({ data, ayatRange }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const Router = useHistory();
   const classes = Styles();
-  data = data.data;
 
   const saveToLocalStorage = () => {
     Router.push(`/surah/${data.number}`);
     localStorage.setItem("history", JSON.stringify(data));
+  };
+
+  // Determine what to show for ayat info
+  const getAyatInfo = () => {
+    if (ayatRange) {
+      // Show ayat range for juz view
+      return `${data.revelation.id} • Ayat ${ayatRange.start}-${ayatRange.end}`;
+    }
+    // Show total ayat for normal view
+    return `${data.revelation.id} • ${data.numberOfVerses} Ayat`;
   };
 
   return (
@@ -96,7 +105,7 @@ const MenuSurat = (data) => {
             {data.name.transliteration.id}
           </Typography>
           <Typography className={classes.surahMeta}>
-            {data.revelation.id} • {data.numberOfVerses} Ayat
+            {getAyatInfo()}
           </Typography>
         </div>
       </div>
