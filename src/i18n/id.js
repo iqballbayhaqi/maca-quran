@@ -56,6 +56,14 @@ const id = {
   language: "Bahasa",
   indonesian: "Indonesia",
   english: "English",
+
+  // Daily Ayat
+  dailyAyat: "Ayat Harian",
+  dailyAyatSubtitle: "Renungi ayat Al-Quran setiap hari",
+  loadingDailyAyat: "Memuat ayat harian...",
+  getNewAyat: "Dapatkan Ayat Baru",
+  readFullSurah: "Baca Surat Lengkap",
+  copiedToClipboard: "Berhasil disalin!",
 };
 
 export default id;

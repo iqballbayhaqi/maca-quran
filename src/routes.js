@@ -4,6 +4,7 @@ import Detail from "./containers/DetailPage";
 import Search from "./containers/SearchPage";
 import About from "./containers/AboutPage";
 import Bookmark from "./containers/BookmarkPage";
+import DailyAyat from "./containers/DailyAyatPage";
 
 const routes = [
     {
@@ -46,6 +47,13 @@ const routes = [
         name: "Bookmark",
         path: "/bookmark",
         page: <Bookmark/>,
+        exact: false
+    },
+    {
+        id: 7,
+        name: "DailyAyat",
+        path: "/daily-ayat",
+        page: <DailyAyat/>,
         exact: false
     }
 ]

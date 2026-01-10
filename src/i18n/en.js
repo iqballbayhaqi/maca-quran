@@ -56,6 +56,14 @@ const en = {
   language: "Language",
   indonesian: "Indonesia",
   english: "English",
+
+  // Daily Ayat
+  dailyAyat: "Daily Verse",
+  dailyAyatSubtitle: "Reflect on a Quran verse every day",
+  loadingDailyAyat: "Loading daily verse...",
+  getNewAyat: "Get New Verse",
+  readFullSurah: "Read Full Surah",
+  copiedToClipboard: "Copied to clipboard!",
 };
 
 export default en;

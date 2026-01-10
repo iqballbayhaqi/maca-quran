@@ -12,6 +12,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import LanguageIcon from "@material-ui/icons/Language";
+import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import Flag from "react-world-flags";
 import mosqueImg from "../images/mosque.jpg";
 import { useHistory } from "react-router-dom";
@@ -176,6 +177,17 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
               <BookmarkIcon />
             </ListItemIcon>
             <ListItemText primary={t("bookmark")} className={classes.menuText} />
+          </ListItem>
+
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={() => handleNavigation("/daily-ayat")}
+          >
+            <ListItemIcon className={classes.menuIcon}>
+              <WbSunnyIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("dailyAyat")} className={classes.menuText} />
           </ListItem>
 
           {dataLocal && (
