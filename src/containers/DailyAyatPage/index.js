@@ -13,6 +13,7 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import { useLanguage } from "../../i18n";
 import { useHistory } from "react-router-dom";
 import html2canvas from "html2canvas";
+import { TajwidText } from "../../tajwid";
 
 // Array of Islamic themed background images
 const BACKGROUND_IMAGES = [
@@ -254,7 +255,7 @@ const DailyAyatPage = () => {
             >
               {/* Arabic Text */}
               <Typography className={classes.arabicText}>
-                {dailyAyat.text.arab}
+                <TajwidText text={dailyAyat.text.arab} />
               </Typography>
 
               {/* Translation */}

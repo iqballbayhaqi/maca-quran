@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Box } from "@material-ui/core";
+import { Typography, Box, Switch, Collapse } from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,10 +13,13 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import LanguageIcon from "@material-ui/icons/Language";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
+import ColorLensIcon from "@material-ui/icons/ColorLens";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Flag from "react-world-flags";
 import mosqueImg from "../images/mosque.jpg";
 import { useHistory } from "react-router-dom";
 import { useLanguage } from "../i18n";
+import { useTajwid, TAJWID_LEGEND } from "../tajwid";
 
 const useStyles = makeStyles({
   drawerPaper: {
@@ -122,12 +125,71 @@ const useStyles = makeStyles({
     top: 16,
     right: 16,
   },
+  // Tajwid styles
+  tajwidSwitch: {
+    marginLeft: "auto",
+  },
+  tajwidSwitchTrack: {
+    backgroundColor: "#ccc",
+  },
+  tajwidSwitchChecked: {
+    color: "#1b5e20 !important",
+    "& + $tajwidSwitchTrack": {
+      backgroundColor: "#4caf50 !important",
+    },
+  },
+  legendContainer: {
+    padding: "8px 16px 16px 16px",
+    backgroundColor: "rgba(27, 94, 32, 0.04)",
+    borderRadius: 8,
+    margin: "0 12px 8px 12px",
+  },
+  legendTitle: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontWeight: 600,
+    fontSize: "0.85rem",
+    color: "#1b5e20",
+    marginBottom: 8,
+  },
+  legendGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "6px 12px",
+  },
+  legendItem: {
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+  },
+  legendColor: {
+    width: 14,
+    height: 14,
+    borderRadius: 3,
+    flexShrink: 0,
+  },
+  legendLabel: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontSize: "0.7rem",
+    color: "#555",
+    lineHeight: 1.2,
+  },
+  expandIcon: {
+    marginLeft: "auto",
+    transition: "transform 0.2s ease",
+    color: "#757575",
+    fontSize: 20,
+  },
+  expandIconOpen: {
+    transform: "rotate(180deg)",
+  },
 });
 
 export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
   const Router = useHistory();
   const classes = useStyles();
   const { t, language, toggleLanguage } = useLanguage();
+  const { tajwidEnabled, toggleTajwid } = useTajwid();
+  const [showLegend, setShowLegend] = useState(false);
 
   const dataLocal = JSON.parse(localStorage.getItem("history"));
 
@@ -213,6 +275,57 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
             </ListItemIcon>
             <ListItemText primary={t("about")} className={classes.menuText} />
           </ListItem>
+
+          {/* Tajwid Color Toggle */}
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={() => setShowLegend(!showLegend)}
+          >
+            <ListItemIcon className={classes.menuIcon}>
+              <ColorLensIcon />
+            </ListItemIcon>
+            <ListItemText 
+              primary={t("tajwidColor")} 
+              secondary={tajwidEnabled ? t("tajwidOn") : t("tajwidOff")}
+              className={classes.menuText} 
+            />
+            <Switch
+              checked={tajwidEnabled}
+              onChange={(e) => {
+                e.stopPropagation();
+                toggleTajwid();
+              }}
+              onClick={(e) => e.stopPropagation()}
+              size="small"
+              color="primary"
+            />
+            <ExpandMoreIcon 
+              className={`${classes.expandIcon} ${showLegend ? classes.expandIconOpen : ''}`}
+            />
+          </ListItem>
+
+          {/* Tajwid Legend */}
+          <Collapse in={showLegend}>
+            <div className={classes.legendContainer}>
+              <Typography className={classes.legendTitle}>
+                {t("tajwidLegend")}
+              </Typography>
+              <div className={classes.legendGrid}>
+                {TAJWID_LEGEND.map((item) => (
+                  <div key={item.id} className={classes.legendItem}>
+                    <div 
+                      className={classes.legendColor}
+                      style={{ backgroundColor: item.color }}
+                    />
+                    <Typography className={classes.legendLabel}>
+                      {language === "id" ? item.name : item.nameEn}
+                    </Typography>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Collapse>
 
           {/* Language Switcher */}
           <ListItem 

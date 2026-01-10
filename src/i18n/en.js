@@ -64,6 +64,12 @@ const en = {
   getNewAyat: "Get New Verse",
   readFullSurah: "Read Full Surah",
   copiedToClipboard: "Copied to clipboard!",
+
+  // Tajwid
+  tajwidColor: "Tajwid Color",
+  tajwidOn: "On",
+  tajwidOff: "Off",
+  tajwidLegend: "Color Legend",
 };
 
 export default en;

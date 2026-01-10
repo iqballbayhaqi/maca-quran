@@ -7,6 +7,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import { useLanguage } from "../i18n";
+import { TajwidText } from "../tajwid";
 
 const Styles = makeStyles((theme) => ({
   ayatCard: {
@@ -229,7 +230,7 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
 
       {/* Arabic Text */}
       <Typography className={classes.arabicText}>
-        {data.text.arab}
+        <TajwidText text={data.text.arab} />
       </Typography>
 
       {/* Translation (always visible) */}

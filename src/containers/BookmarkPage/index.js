@@ -5,6 +5,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Header from "../../components/header";
 import useStyles from "./styles";
 import { useLanguage } from "../../i18n";
+import { TajwidText } from "../../tajwid";
 
 const BookmarkPage = () => {
   const classes = useStyles();
@@ -175,7 +176,7 @@ const BookmarkPage = () => {
                   </IconButton>
                 </div>
                 <Typography className={classes.arabicText}>
-                  {ayat.text.arab}
+                  <TajwidText text={ayat.text.arab} />
                 </Typography>
                 <Typography className={classes.translationText}>
                   {ayat.translation.id}

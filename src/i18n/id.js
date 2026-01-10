@@ -64,6 +64,12 @@ const id = {
   getNewAyat: "Dapatkan Ayat Baru",
   readFullSurah: "Baca Surat Lengkap",
   copiedToClipboard: "Berhasil disalin!",
+
+  // Tajwid
+  tajwidColor: "Warna Tajwid",
+  tajwidOn: "Aktif",
+  tajwidOff: "Nonaktif",
+  tajwidLegend: "Keterangan Warna",
 };
 
 export default id;
