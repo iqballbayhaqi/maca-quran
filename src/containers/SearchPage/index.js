@@ -44,32 +44,31 @@ const SearchPage = () => {
     >
       <Header />
 
-      <div style={{ paddingTop: 20 }}>
-        <FormControl fullWidth className={classes.margin} variant="outlined">
+      <div className={classes.searchContainer}>
+        <FormControl fullWidth variant="outlined" className={classes.searchInput}>
           <InputLabel htmlFor="outlined-adornment-amount">
             Cari Surat
           </InputLabel>
           <OutlinedInput
             id="outlined-adornment-amount"
-            // value={values.amount}
             onChange={(res) => searchFiltered(res.target.value)}
             startAdornment={
               <InputAdornment position="start">
-                <SearchIcon style={{ color: "#b9b3cd" }} />
+                <SearchIcon className={classes.searchIcon} />
               </InputAdornment>
             }
-            labelWidth={60}
+            labelWidth={70}
           />
         </FormControl>
       </div>
 
-      <div style={{ marginTop: 20 }}>
+      <div className={classes.surahListContainer}>
         {dataSuratFiltered ? (
           dataSuratFiltered.map((res) => (
             <MenuSurat key={res.number} data={res} />
           ))
         ) : (
-          <div style={{ textAlign: "center", marginTop: 150 }}>
+          <div className={classes.loadingContainer}>
             <CircularProgress />
           </div>
         )}

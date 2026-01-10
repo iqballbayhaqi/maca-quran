@@ -1,0 +1,190 @@
+import React, { useState, useEffect } from "react";
+import { Container, Typography, Box, IconButton } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Header from "../../components/header";
+import useStyles from "./styles";
+
+const BookmarkPage = () => {
+  const classes = useStyles();
+  const Router = useHistory();
+  const [activeTab, setActiveTab] = useState("surat");
+  const [bookmarksSurat, setBookmarksSurat] = useState([]);
+  const [bookmarksAyat, setBookmarksAyat] = useState([]);
+
+  useEffect(() => {
+    loadBookmarks();
+  }, []);
+
+  const loadBookmarks = () => {
+    const savedSurat = localStorage.getItem("bookmarks_surat");
+    const savedAyat = localStorage.getItem("bookmarks_ayat");
+    
+    if (savedSurat) {
+      setBookmarksSurat(JSON.parse(savedSurat));
+    }
+    if (savedAyat) {
+      setBookmarksAyat(JSON.parse(savedAyat));
+    }
+  };
+
+  const removeSuratBookmark = (suratNumber, e) => {
+    e.stopPropagation();
+    const updated = bookmarksSurat.filter((s) => s.number !== suratNumber);
+    setBookmarksSurat(updated);
+    localStorage.setItem("bookmarks_surat", JSON.stringify(updated));
+  };
+
+  const removeAyatBookmark = (ayatId, e) => {
+    e.stopPropagation();
+    const updated = bookmarksAyat.filter((a) => a.number.inQuran !== ayatId);
+    setBookmarksAyat(updated);
+    localStorage.setItem("bookmarks_ayat", JSON.stringify(updated));
+  };
+
+  const goToSurat = (surat) => {
+    localStorage.setItem("history", JSON.stringify(surat));
+    Router.push(`/surah/${surat.number}`);
+  };
+
+  const goToAyat = (ayat) => {
+    localStorage.setItem("history", JSON.stringify(ayat.suratInfo));
+    Router.push(`/surah/${ayat.suratInfo.number}?ayat=${ayat.number.inSurah}`);
+  };
+
+  return (
+    <Container maxWidth="xs" className={classes.root}>
+      <Header />
+      
+      <Typography className={classes.pageTitle}>
+        📖 Bookmark Saya
+      </Typography>
+      <Typography className={classes.pageSubtitle}>
+        Simpan surat dan ayat favoritmu
+      </Typography>
+
+      {/* Tabs */}
+      <div className={classes.tabsContainer}>
+        <button
+          className={`${classes.tab} ${activeTab === "surat" ? classes.tabActive : ""}`}
+          onClick={() => setActiveTab("surat")}
+        >
+          Surat
+          <span className={`${classes.tabCount} ${activeTab === "surat" ? classes.tabCountActive : ""}`}>
+            {bookmarksSurat.length}
+          </span>
+        </button>
+        <button
+          className={`${classes.tab} ${activeTab === "ayat" ? classes.tabActive : ""}`}
+          onClick={() => setActiveTab("ayat")}
+        >
+          Ayat
+          <span className={`${classes.tabCount} ${activeTab === "ayat" ? classes.tabCountActive : ""}`}>
+            {bookmarksAyat.length}
+          </span>
+        </button>
+      </div>
+
+      {/* Content */}
+      <div className={classes.bookmarkListContainer}>
+        {activeTab === "surat" ? (
+          bookmarksSurat.length > 0 ? (
+            bookmarksSurat.map((surat) => (
+              <div
+                key={surat.number}
+                className={classes.bookmarkSuratItem}
+                onClick={() => goToSurat(surat)}
+              >
+                <div className={classes.suratInfo}>
+                  <Box className={classes.numberBadge}>
+                    <Typography className={classes.numberText}>
+                      {surat.number}
+                    </Typography>
+                  </Box>
+                  <div className={classes.suratDetails}>
+                    <Typography className={classes.suratName}>
+                      {surat.name.transliteration.id}
+                    </Typography>
+                    <Typography className={classes.suratMeta}>
+                      {surat.revelation.id} • {surat.numberOfVerses} Ayat
+                    </Typography>
+                  </div>
+                </div>
+                <div className={classes.suratActions}>
+                  <Typography className={classes.arabicName}>
+                    {surat.name.short}
+                  </Typography>
+                  <IconButton
+                    className={classes.deleteBtn}
+                    onClick={(e) => removeSuratBookmark(surat.number, e)}
+                    size="small"
+                  >
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className={classes.emptyState}>
+              <div className={classes.emptyIcon}>📑</div>
+              <Typography className={classes.emptyTitle}>
+                Belum ada surat yang disimpan
+              </Typography>
+              <Typography className={classes.emptySubtitle}>
+                Tap ikon bookmark di halaman surat untuk menyimpan
+              </Typography>
+            </div>
+          )
+        ) : (
+          bookmarksAyat.length > 0 ? (
+            bookmarksAyat.map((ayat) => (
+              <div
+                key={ayat.number.inQuran}
+                className={classes.bookmarkAyatItem}
+                onClick={() => goToAyat(ayat)}
+              >
+                <div className={classes.ayatHeader}>
+                  <div className={classes.ayatBadge}>
+                    <Box className={classes.ayatNumberBadge}>
+                      <Typography className={classes.ayatNumberText}>
+                        {ayat.number.inSurah}
+                      </Typography>
+                    </Box>
+                    <Typography className={classes.ayatSuratName}>
+                      {ayat.suratInfo.name.transliteration.id}
+                    </Typography>
+                  </div>
+                  <IconButton
+                    className={classes.deleteBtn}
+                    onClick={(e) => removeAyatBookmark(ayat.number.inQuran, e)}
+                    size="small"
+                  >
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
+                </div>
+                <Typography className={classes.arabicText}>
+                  {ayat.text.arab}
+                </Typography>
+                <Typography className={classes.translationText}>
+                  {ayat.translation.id}
+                </Typography>
+              </div>
+            ))
+          ) : (
+            <div className={classes.emptyState}>
+              <div className={classes.emptyIcon}>📝</div>
+              <Typography className={classes.emptyTitle}>
+                Belum ada ayat yang disimpan
+              </Typography>
+              <Typography className={classes.emptySubtitle}>
+                Tap ikon bookmark di setiap ayat untuk menyimpan
+              </Typography>
+            </div>
+          )
+        )}
+      </div>
+    </Container>
+  );
+};
+
+export default BookmarkPage;

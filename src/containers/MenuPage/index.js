@@ -43,44 +43,61 @@ const MenuPage = () => {
         <div className={classes.lastHistoryContainer} onClick={() => Router.push(`/surah/${historyRead.number}`)}>
           <div>
             <div className={classes.lastRead}>
-              <ImportContactsIcon style={{ fontSize: 20 }} />
-              <Typography variant="caption" style={{ marginLeft: 10 }}>
+              <ImportContactsIcon />
+              <Typography variant="caption">
                 Terakhir dibaca
               </Typography>
             </div>
             <Typography
               variant="h6"
-              style={{ margin: "20px 0 5px 0", color: "#fff" }}
+              style={{ 
+                marginTop: 12, 
+                color: "#fff", 
+                fontFamily: "'El Messiri', sans-serif",
+                fontWeight: 600,
+                fontSize: "1.2rem"
+              }}
             >
               {historyRead.name.transliteration.id}
             </Typography>
           </div>
           <Typography
-            variant="h6"
-            style={{ margin: "20px 0 5px 0", color: "#fff" }}
+            style={{ 
+              color: "#fff",
+              fontFamily: "'Amiri', serif",
+              fontSize: "1.8rem",
+              opacity: 0.95
+            }}
           >
             {historyRead.name.long}
           </Typography>
         </div>
       ) : (
-        <div className={classes.lastHistoryContainer}>
-          <div style={{opacity: 0}}>
+        <div className={classes.lastHistoryContainer} style={{ opacity: 0.5 }}>
+          <div>
             <div className={classes.lastRead}>
               <ImportContactsIcon />
-              <Typography style={{ marginLeft: 10 }}>Last read</Typography>
+              <Typography variant="caption">Terakhir dibaca</Typography>
             </div>
-            <Typography variant="h5">
-              Al-fatihah
+            <Typography 
+              variant="h6"
+              style={{ 
+                marginTop: 12, 
+                color: "#fff", 
+                fontFamily: "'El Messiri', sans-serif",
+              }}
+            >
+              Belum ada
             </Typography>
           </div>
         </div>
       )}
 
-      <div style={{ marginTop: 20 }}>
+      <div className={classes.surahListContainer}>
         {dataSurat ? (
           dataSurat.map((res) => <MenuSurat key={res.number} data={res} />)
         ) : (
-          <div style={{ textAlign: "center", marginTop: 150 }}>
+          <div className={classes.loadingContainer}>
             <CircularProgress />
           </div>
         )}

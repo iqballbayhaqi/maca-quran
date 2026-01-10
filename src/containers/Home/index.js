@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Typography, Button } from "@material-ui/core";
+import { Container, Typography, Button, Box } from "@material-ui/core";
+import { MenuBook, Star } from "@material-ui/icons";
 import quranImage from "../../images/quran.png";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
@@ -27,12 +28,20 @@ const Home = () => {
 
   return (
     <Container maxWidth="xs" className={classes.root}>
+      {/* Decorative Elements */}
+      <Box position="absolute" top={20} left={20} className={classes.decorativeIcon}>
+        <Star style={{ fontSize: 40 }} />
+      </Box>
+      <Box position="absolute" top={80} right={30} className={classes.decorativeIcon}>
+        <MenuBook style={{ fontSize: 35 }} />
+      </Box>
+
       <div className={classes.titleContainer}>
         <Typography variant="h4" className={classes.title}>
           Maca Quran
         </Typography>
         <Typography variant="h6" className={classes.captionTitle}>
-          learn quran and recrite once everyday
+          Learn Quran and Recite Once Everyday
         </Typography>
       </div>
 
@@ -42,10 +51,9 @@ const Home = () => {
           variant="contained"
           color="secondary"
           className={classes.btnGetStarted}
-          // onClick={() => Router.push("/menu")}
           onClick={mulaiMembaca}
         >
-          Mulai Membaca
+          🕌 Mulai Membaca
         </Button>
       </div>
     </Container>

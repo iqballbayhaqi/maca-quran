@@ -1,86 +1,260 @@
-import React, { useState } from "react";
-import { Button, Typography } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Typography, Box, IconButton, Collapse } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import AudioPlayer from "react-h5-audio-player";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
+import VolumeUpIcon from "@material-ui/icons/VolumeUp";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
+import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 
 const Styles = makeStyles((theme) => ({
-  ar: {
-    textAlign: "right",
+  ayatCard: {
+    backgroundColor: "#fff",
+    padding: "16px",
+    borderRadius: 16,
+    marginBottom: 12,
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+    transition: "all 0.3s ease",
+    border: "2px solid transparent",
   },
-  tr: {
-    textAlign: "right",
+  ayatCardActive: {
+    background: "linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%)",
+    border: "2px solid #2e7d32",
+    boxShadow: "0 6px 25px rgba(27, 94, 32, 0.3)",
+    transform: "scale(0.98)",
   },
-  zebra: {
-    backgroundColor: "#dfdfdf",
-    padding: 10,
-    borderRadius: 10,
+  // Header row: number + actions
+  headerRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 12,
+  },
+  ayatNumber: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 32,
+    height: 32,
+    background: "linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%)",
+    borderRadius: 8,
+  },
+  ayatNumberText: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontWeight: 700,
+    fontSize: "0.85rem",
+    color: "#fff",
+  },
+  actionButtons: {
+    display: "flex",
+    gap: 4,
+  },
+  iconBtn: {
+    padding: 8,
+    color: "#1b5e20",
+    backgroundColor: "rgba(27, 94, 32, 0.08)",
+    "&:hover": {
+      backgroundColor: "rgba(27, 94, 32, 0.15)",
+    },
+  },
+  playBtn: {
+    color: "#ff9800",
+    backgroundColor: "rgba(255, 152, 0, 0.1)",
+    "&:hover": {
+      backgroundColor: "rgba(255, 152, 0, 0.2)",
+    },
+  },
+  bookmarkBtn: {
+    color: "#1976d2",
+    backgroundColor: "rgba(25, 118, 210, 0.08)",
+    "&:hover": {
+      backgroundColor: "rgba(25, 118, 210, 0.15)",
+    },
+  },
+  bookmarkBtnActive: {
+    color: "#1976d2",
+    backgroundColor: "rgba(25, 118, 210, 0.2)",
+  },
+  expandBtn: {
+    color: "#757575",
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    transition: "transform 0.2s ease",
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.08)",
+    },
+  },
+  expandBtnOpen: {
+    transform: "rotate(180deg)",
+  },
+  // Arabic text
+  arabicText: {
+    textAlign: "right",
+    fontFamily: "'Amiri', serif",
+    fontSize: "1.6rem",
+    lineHeight: 2,
+    color: "#1b5e20",
+    marginBottom: 8,
+    direction: "rtl",
+  },
+  // Translation (always visible, compact)
+  translationText: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontSize: "0.9rem",
+    color: "#555",
+    lineHeight: 1.5,
+  },
+  // Expanded content
+  expandedContent: {
+    marginTop: 12,
+    paddingTop: 12,
+    borderTop: "1px dashed rgba(0,0,0,0.1)",
+  },
+  transliteration: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontSize: "0.85rem",
+    color: "#888",
+    fontStyle: "italic",
     marginBottom: 10,
+    textAlign: "right",
+    direction: "rtl",
   },
-  ayatContainer: {
-    backgroundColor: "#f2f2f2",
-    padding: 10,
-    borderRadius: 10,
+  sectionLabel: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontWeight: 600,
+    fontSize: "0.8rem",
+    color: "#1b5e20",
+    marginBottom: 4,
+    marginTop: 10,
+    display: "flex",
+    alignItems: "center",
+    "& svg": {
+      fontSize: 14,
+      marginRight: 4,
+    },
+  },
+  tafsirText: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontSize: "0.85rem",
+    color: "#666",
+    lineHeight: 1.6,
+    padding: "10px 12px",
+    background: "rgba(27, 94, 32, 0.04)",
+    borderRadius: 8,
+    borderLeft: "3px solid #1b5e20",
   },
 }));
 
-const MenuSurat = ({data, playSound}) => {
+// Convert number to Arabic numerals
+const toArabicNumeral = (num) => {
+  const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+  return String(num).split('').map(digit => arabicNumerals[parseInt(digit)]).join('');
+};
+
+const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
   const classes = Styles();
-  const [tafsir, setTafsir] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  useEffect(() => {
+    // Check if this ayat is bookmarked
+    const savedBookmarks = localStorage.getItem("bookmarks_ayat");
+    if (savedBookmarks) {
+      const bookmarks = JSON.parse(savedBookmarks);
+      const found = bookmarks.some((b) => b.number.inQuran === data.number.inQuran);
+      setIsBookmarked(found);
+    }
+  }, [data.number.inQuran]);
+
+  const toggleBookmark = () => {
+    const savedBookmarks = localStorage.getItem("bookmarks_ayat");
+    let bookmarks = savedBookmarks ? JSON.parse(savedBookmarks) : [];
+
+    if (isBookmarked) {
+      // Remove from bookmarks
+      bookmarks = bookmarks.filter((b) => b.number.inQuran !== data.number.inQuran);
+    } else {
+      // Add to bookmarks with surat info
+      bookmarks.push({
+        ...data,
+        suratInfo: suratInfo,
+      });
+    }
+
+    localStorage.setItem("bookmarks_ayat", JSON.stringify(bookmarks));
+    setIsBookmarked(!isBookmarked);
+  };
 
   return (
-    <div
-      className={data.nomor % 2 === 0 ? classes.ayatContainer : classes.zebra}
+    <div 
+      className={`${classes.ayatCard} ${isActive ? classes.ayatCardActive : ''}`} 
       id={data.number.inQuran}
     >
-      <Typography variant="h5" className={classes.ar}>
+      {/* Header: Number + Action Buttons */}
+      <Box className={classes.headerRow}>
+        <Box className={classes.ayatNumber}>
+          <Typography className={classes.ayatNumberText}>
+            {toArabicNumeral(data.number.inSurah)}
+          </Typography>
+        </Box>
+        <Box className={classes.actionButtons}>
+          <IconButton 
+            className={`${classes.iconBtn} ${classes.bookmarkBtn} ${isBookmarked ? classes.bookmarkBtnActive : ''}`}
+            onClick={toggleBookmark}
+            size="small"
+          >
+            {isBookmarked ? <BookmarkIcon fontSize="small" /> : <BookmarkBorderIcon fontSize="small" />}
+          </IconButton>
+          <IconButton 
+            className={`${classes.iconBtn} ${classes.playBtn}`}
+            onClick={() => playSound(data.number.inSurah - 1)}
+            size="small"
+          >
+            <VolumeUpIcon fontSize="small" />
+          </IconButton>
+          <IconButton 
+            className={`${classes.iconBtn} ${classes.expandBtn} ${expanded ? classes.expandBtnOpen : ''}`}
+            onClick={() => setExpanded(!expanded)}
+            size="small"
+          >
+            <ExpandMoreIcon fontSize="small" />
+          </IconButton>
+        </Box>
+      </Box>
+
+      {/* Arabic Text */}
+      <Typography className={classes.arabicText}>
         {data.text.arab}
       </Typography>
-      <Typography className={classes.tr} variant="caption">
-        <div
-          contentEditable="false"
-          dangerouslySetInnerHTML={{ __html: data.text.transliteration.en }}
-        ></div>
+
+      {/* Translation (always visible) */}
+      <Typography className={classes.translationText}>
+        {data.translation.id}
       </Typography>
-      <Typography variant="caption" color="primary" style={{ fontWeight: 600 }}>
-        Artinya :
-      </Typography>
-      <br />
-      <Typography variant="caption">{data.translation.id}</Typography>
-      {tafsir && (
-        <>
-          <br />
-          <Typography
-            variant="caption"
-            color="primary"
-            style={{ fontWeight: 600 }}
-          >
-            Tafsir :
+
+      {/* Expanded Content: Transliteration + Tafsir */}
+      <Collapse in={expanded}>
+        <div className={classes.expandedContent}>
+          {/* Transliteration */}
+          <Typography className={classes.sectionLabel}>
+            Transliterasi:
           </Typography>
-          <br />
-          <Typography variant="caption">{data.tafsir.id.short}</Typography>
-        </>
-      )}
-      <br />
-      <br />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => setTafsir(!tafsir)}
-        size="small"
-      >
-        Tafsir
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ marginLeft: 10 }}
-        onClick={() => playSound(data.number.inSurah - 1)}
-        size="small"
-      >
-        Bunyi
-      </Button>
+          <Typography className={classes.transliteration}>
+            <span
+              dangerouslySetInnerHTML={{ __html: data.text.transliteration.en }}
+            />
+          </Typography>
+
+          {/* Tafsir */}
+          <Typography className={classes.sectionLabel}>
+            <MenuBookIcon /> Tafsir:
+          </Typography>
+          <Typography className={classes.tafsirText}>
+            {data.tafsir.id.short}
+          </Typography>
+        </div>
+      </Collapse>
     </div>
   );
 };
 
-export default MenuSurat;
+export default MenuAyat;

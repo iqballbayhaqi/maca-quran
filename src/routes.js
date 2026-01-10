@@ -3,6 +3,7 @@ import Menu from "./containers/MenuPage";
 import Detail from "./containers/DetailPage";
 import Search from "./containers/SearchPage";
 import About from "./containers/AboutPage";
+import Bookmark from "./containers/BookmarkPage";
 
 const routes = [
     {
@@ -38,6 +39,13 @@ const routes = [
         name: "About",
         path: "/about",
         page: <About/>,
+        exact: false
+    },
+    {
+        id: 6,
+        name: "Bookmark",
+        path: "/bookmark",
+        page: <Bookmark/>,
         exact: false
     }
 ]

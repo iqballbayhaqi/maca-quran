@@ -1,23 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { Container, Typography } from "@material-ui/core";
+import React, { useState, useEffect, useRef } from "react";
+import { Container, Typography, IconButton } from "@material-ui/core";
 import useStyles from "./styles";
-import theme from "../../theme";
-import ShortTextIcon from "@material-ui/icons/ShortText";
-import SearchIcon from "@material-ui/icons/Search";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import MenuAyat from "../../components/menuAyat";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import Header from "../../components/header";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
+import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 
 const DetailPage = () => {
   const classes = useStyles();
   const params = useParams();
+  const location = useLocation();
   const [dataAyat, setDataAyat] = useState();
   const detailSurah = JSON.parse(localStorage.getItem("history"));
   const [currentTrack, setTrackIndex] = useState(0);
+  const [shouldAutoPlay, setShouldAutoPlay] = useState(false);
+  const audioRef = useRef(null);
+  const [isSuratBookmarked, setIsSuratBookmarked] = useState(false);
+
+  // Get ayat parameter from URL
+  const queryParams = new URLSearchParams(location.search);
+  const ayatParam = queryParams.get("ayat");
 
   useEffect(() => {
     // fetch detail surat
@@ -26,34 +32,79 @@ const DetailPage = () => {
       .then((result) => {
         setDataAyat(result.data.verses);
       });
-  }, []);
 
-  const saveToFavorite = () => {};
+    // Check if surat is bookmarked
+    const savedBookmarks = localStorage.getItem("bookmarks_surat");
+    if (savedBookmarks) {
+      const bookmarks = JSON.parse(savedBookmarks);
+      const found = bookmarks.some((b) => b.number === detailSurah.number);
+      setIsSuratBookmarked(found);
+    }
+  }, [params.id, detailSurah.number]);
+
+  // Handle ayat parameter - scroll to and activate specific ayat
+  useEffect(() => {
+    if (dataAyat && ayatParam) {
+      const ayatIndex = parseInt(ayatParam) - 1; // Convert to 0-based index
+      if (ayatIndex >= 0 && ayatIndex < dataAyat.length) {
+        setTrackIndex(ayatIndex);
+        // Scroll to the ayat after a short delay to ensure DOM is ready
+        setTimeout(() => {
+          scrollToAyat(dataAyat[ayatIndex].number.inQuran);
+        }, 300);
+      }
+    }
+  }, [dataAyat, ayatParam]);
+
+  const toggleSuratBookmark = () => {
+    const savedBookmarks = localStorage.getItem("bookmarks_surat");
+    let bookmarks = savedBookmarks ? JSON.parse(savedBookmarks) : [];
+
+    if (isSuratBookmarked) {
+      // Remove from bookmarks
+      bookmarks = bookmarks.filter((b) => b.number !== detailSurah.number);
+    } else {
+      // Add to bookmarks
+      bookmarks.push(detailSurah);
+    }
+
+    localStorage.setItem("bookmarks_surat", JSON.stringify(bookmarks));
+    setIsSuratBookmarked(!isSuratBookmarked);
+  };
 
   const handleClickNext = () => {
-    setTrackIndex((currentTrack) =>
-      currentTrack < dataAyat.length - 1 ? currentTrack + 1 : 0
-    );
-    scrollTo(dataAyat[currentTrack].number.inQuran);
+    const nextTrack = currentTrack < dataAyat.length - 1 ? currentTrack + 1 : 0;
+    setTrackIndex(nextTrack);
+    scrollToAyat(dataAyat[nextTrack].number.inQuran);
   };
 
   const handleEnd = () => {
     if (currentTrack < dataAyat.length - 1) {
-      setTrackIndex((currentTrack) => currentTrack + 1);
-      scrollTo(dataAyat[currentTrack].number.inQuran);
+      const nextTrack = currentTrack + 1;
+      setTrackIndex(nextTrack);
+      setShouldAutoPlay(true); // Auto-play next ayat
+      scrollToAyat(dataAyat[nextTrack].number.inQuran);
     } else {
       setTrackIndex(0);
+      setShouldAutoPlay(false); // Stop at end of surah
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
-  const scrollTo = (id) => {
-    const scroll = document.getElementById(id);
-    window.scrollTo({
-      top: scroll?.offsetTop ? scroll?.offsetTop + 100 : 100,
-      left: 0,
-      behavior: "smooth",
-    });
+  const scrollToAyat = (id) => {
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        const headerHeight = 70; // sticky header height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }, 100);
   };
 
   return (
@@ -66,43 +117,78 @@ const DetailPage = () => {
 
       <div>
         <div className={classes.headSurah}>
-          <Typography
-            variant="h5"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+          <IconButton 
+            className={classes.bookmarkSuratBtn}
+            onClick={toggleSuratBookmark}
+            size="small"
           >
-            {detailSurah.name.transliteration.id} ( {detailSurah.name.short} )
+            {isSuratBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+          </IconButton>
+          <Typography className={classes.surahName}>
+            {detailSurah.name.transliteration.id}
+            <span className={classes.surahArabic}>{detailSurah.name.short}</span>
           </Typography>
-          <Typography>{detailSurah.name.translation.id}</Typography>
+          <Typography className={classes.surahTranslation}>
+            {detailSurah.name.translation.id}
+          </Typography>
+          <div className={classes.surahMeta}>
+            <span className={classes.metaBadge}>
+              {detailSurah.numberOfVerses} Ayat
+            </span>
+            <span className={classes.metaBadge}>
+              {detailSurah.revelation.id}
+            </span>
+          </div>
         </div>
+        
         {dataAyat && (
-          <AudioPlayer
-            src={dataAyat[currentTrack].audio.primary}
-            showSkipControls
-            onClickNext={handleClickNext}
-            onEnded={handleEnd}
-            autoPlay={false}
-          />
+          <div className={classes.audioPlayerContainer}>
+            <AudioPlayer
+              ref={audioRef}
+              src={dataAyat[currentTrack].audio.primary}
+              showSkipControls
+              onClickNext={handleClickNext}
+              onEnded={handleEnd}
+              autoPlay={shouldAutoPlay}
+              onPlay={() => setShouldAutoPlay(false)}
+            />
+          </div>
         )}
       </div>
 
-      <div style={{ marginTop: 20 }}>
+      <div className={classes.ayatListContainer}>
         {dataAyat ? (
-          dataAyat.map((res) => (
+          dataAyat.map((res, index) => (
             <MenuAyat
-              key={res.nomor}
+              key={res.number.inQuran}
               data={res}
-              playSound={(id) => setTrackIndex(id)}
+              isActive={currentTrack === index}
+              suratInfo={detailSurah}
+              playSound={(id) => {
+                setTrackIndex(id);
+                setShouldAutoPlay(true);
+                scrollToAyat(dataAyat[id].number.inQuran);
+              }}
             />
           ))
         ) : (
-          <div
-            style={{ textAlign: "center", marginTop: 150, paddingBottom: 300 }}
-          >
-            <CircularProgress />
+          <div className={classes.loadingContainer}>
+            <div className={classes.loadingCard}>
+              <div className={classes.loadingIcon}>
+                <CircularProgress size={28} className={classes.loadingSpinner} />
+              </div>
+              <Typography className={classes.loadingArabic}>
+                ﷽
+              </Typography>
+              <Typography className={classes.loadingText}>
+                Memuat ayat-ayat suci...
+              </Typography>
+              <div className={classes.loadingDots}>
+                <span className={classes.dot}></span>
+                <span className={classes.dot}></span>
+                <span className={classes.dot}></span>
+              </div>
+            </div>
           </div>
         )}
       </div>

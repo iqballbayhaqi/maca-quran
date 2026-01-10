@@ -1,81 +1,197 @@
-import React, { useState } from "react";
-import clsx from "clsx";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
+import { Typography, Box } from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import InfoIcon from "@material-ui/icons/Info";
 import HistoryIcon from "@material-ui/icons/History";
 import SearchIcon from "@material-ui/icons/Search";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
 import mosqueImg from "../images/mosque.jpg";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: "auto",
-  },
-  footer: {
-    padding: 10,
+  drawerPaper: {
+    width: 280,
+    background: "linear-gradient(180deg, #f8faf8 0%, #ffffff 100%)",
   },
   header: {
-      backgroundImage: `url(${mosqueImg})`,
-      height: 150,
-      backgroundPosition: "center",
-      backgroundSize: "cover"
-  }
+    backgroundImage: `linear-gradient(180deg, rgba(27, 94, 32, 0.85) 0%, rgba(21, 101, 50, 0.9) 100%), url(${mosqueImg})`,
+    height: 180,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    padding: "20px",
+    position: "relative",
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: 30,
+      background: "linear-gradient(180deg, transparent 0%, rgba(248, 250, 248, 0.3) 100%)",
+    },
+  },
+  headerIcon: {
+    color: "rgba(255, 255, 255, 0.9)",
+    fontSize: 40,
+    marginBottom: 8,
+  },
+  headerTitle: {
+    fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
+    fontWeight: 700,
+    fontSize: "1.6rem",
+    color: "#fff",
+    letterSpacing: "1px",
+    textShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+  },
+  headerSubtitle: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontSize: "0.85rem",
+    color: "rgba(255, 255, 255, 0.85)",
+    marginTop: 4,
+  },
+  menuList: {
+    padding: "16px 12px",
+  },
+  menuItem: {
+    borderRadius: 12,
+    marginBottom: 8,
+    padding: "12px 16px",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      backgroundColor: "rgba(27, 94, 32, 0.08)",
+    },
+  },
+  menuIcon: {
+    color: "#1b5e20",
+    minWidth: 44,
+    "& svg": {
+      fontSize: 24,
+    },
+  },
+  menuText: {
+    "& .MuiListItemText-primary": {
+      fontFamily: "'El Messiri', sans-serif",
+      fontWeight: 600,
+      fontSize: "1rem",
+      color: "#333",
+    },
+  },
+  footer: {
+    padding: "20px",
+    marginTop: "auto",
+    borderTop: "1px solid rgba(0, 0, 0, 0.08)",
+    textAlign: "center",
+  },
+  footerText: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontSize: "0.8rem",
+    color: "#757575",
+  },
+  arabicDecor: {
+    fontFamily: "'Amiri', serif",
+    fontSize: "1.2rem",
+    color: "rgba(255, 255, 255, 0.6)",
+    position: "absolute",
+    top: 16,
+    right: 16,
+  },
 });
 
 export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
   const Router = useHistory();
   const classes = useStyles();
 
-  const dataLocal = JSON.parse(localStorage.getItem("history"))
+  const dataLocal = JSON.parse(localStorage.getItem("history"));
+
+  const handleNavigation = (path) => {
+    Router.push(path);
+    isDrawerClose();
+  };
 
   return (
-    <Drawer open={isDrawerOpen} onClose={isDrawerClose}>
-      <div>
-          <div className={classes.header}>
+    <Drawer 
+      open={isDrawerOpen} 
+      onClose={isDrawerClose}
+      classes={{ paper: classes.drawerPaper }}
+    >
+      <Box display="flex" flexDirection="column" height="100%">
+        {/* Header */}
+        <div className={classes.header}>
+          <Typography className={classes.arabicDecor}>﷽</Typography>
+          <MenuBookIcon className={classes.headerIcon} />
+          <Typography className={classes.headerTitle}>
+            Maca Quran
+          </Typography>
+          <Typography className={classes.headerSubtitle}>
+            Baca Al-Quran Setiap Hari
+          </Typography>
+        </div>
 
-          </div>
-        <List>
-          <ListItem button onClick={() => Router.push("/search")}>
-            <ListItemIcon>
+        {/* Menu Items */}
+        <List className={classes.menuList}>
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={() => handleNavigation("/search")}
+          >
+            <ListItemIcon className={classes.menuIcon}>
               <SearchIcon />
             </ListItemIcon>
-            <ListItemText primary="Cari Surat" />
+            <ListItemText primary="Cari Surat" className={classes.menuText} />
           </ListItem>
-          <ListItem button onClick={() => Router.push(`/surah/${dataLocal.number}`)}>
-            <ListItemIcon>
-              <HistoryIcon />
+
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={() => handleNavigation("/bookmark")}
+          >
+            <ListItemIcon className={classes.menuIcon}>
+              <BookmarkIcon />
             </ListItemIcon>
-            <ListItemText primary="Terakhir Dibaca" />
+            <ListItemText primary="Bookmark" className={classes.menuText} />
           </ListItem>
-          {/* <ListItem button>
-            <ListItemIcon>
-              <FavoriteIcon />
-            </ListItemIcon>
-            <ListItemText primary="Surat Favorite" />
-          </ListItem> */}
-          <ListItem button onClick={() => Router.push("/about")}>
-            <ListItemIcon>
+
+          {dataLocal && (
+            <ListItem 
+              button 
+              className={classes.menuItem}
+              onClick={() => handleNavigation(`/surah/${dataLocal.number}`)}
+            >
+              <ListItemIcon className={classes.menuIcon}>
+                <HistoryIcon />
+              </ListItemIcon>
+              <ListItemText primary="Terakhir Dibaca" className={classes.menuText} />
+            </ListItem>
+          )}
+
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={() => handleNavigation("/about")}
+          >
+            <ListItemIcon className={classes.menuIcon}>
               <InfoIcon />
             </ListItemIcon>
-            <ListItemText primary="Tentang" />
+            <ListItemText primary="Tentang" className={classes.menuText} />
           </ListItem>
         </List>
-        <Divider />
-        <Typography variant="caption" className={classes.footer}>
-          Made with ❤️ in Jakarta
-        </Typography>
-      </div>
+
+        {/* Footer */}
+        <div className={classes.footer}>
+          <Typography className={classes.footerText}>
+            Made with ❤️ in Jakarta
+          </Typography>
+        </div>
+      </Box>
     </Drawer>
   );
 }
