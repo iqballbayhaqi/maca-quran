@@ -6,6 +6,7 @@ import About from "./containers/AboutPage";
 import Bookmark from "./containers/BookmarkPage";
 import DailyAyat from "./containers/DailyAyatPage";
 import ShareAyat from "./containers/ShareAyatPage";
+import Memorization from "./containers/MemorizationPage";
 
 const routes = [
     {
@@ -62,6 +63,13 @@ const routes = [
         name: "ShareAyat",
         path: "/share-ayat",
         page: <ShareAyat/>,
+        exact: false
+    },
+    {
+        id: 9,
+        name: "Memorization",
+        path: "/memorization",
+        page: <Memorization/>,
         exact: false
     }
 ]

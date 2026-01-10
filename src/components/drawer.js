@@ -15,6 +15,7 @@ import LanguageIcon from "@material-ui/icons/Language";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import ColorLensIcon from "@material-ui/icons/ColorLens";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import SchoolIcon from "@material-ui/icons/School";
 import Flag from "react-world-flags";
 import mosqueImg from "../images/mosque.jpg";
 import { useHistory } from "react-router-dom";
@@ -250,6 +251,17 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
               <WbSunnyIcon />
             </ListItemIcon>
             <ListItemText primary={t("dailyAyat")} className={classes.menuText} />
+          </ListItem>
+
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={() => handleNavigation("/memorization")}
+          >
+            <ListItemIcon className={classes.menuIcon}>
+              <SchoolIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("memorizationMode")} className={classes.menuText} />
           </ListItem>
 
           {dataLocal && (
