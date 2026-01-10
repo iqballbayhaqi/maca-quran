@@ -2,9 +2,8 @@ import React, { useState, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import Drawer from "./drawer";
-import ShortTextIcon from "@material-ui/icons/ShortText";
-import SearchIcon from "@material-ui/icons/Search";
-import theme from "../theme";
+import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
+import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -26,6 +25,25 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  iconButton: {
+    width: 42,
+    height: 42,
+    borderRadius: 12,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "#fff",
+    boxShadow: "0 2px 8px rgba(27, 94, 32, 0.12)",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      transform: "scale(1.05)",
+      boxShadow: "0 4px 12px rgba(27, 94, 32, 0.2)",
+    },
+    "&:active": {
+      transform: "scale(0.95)",
+    },
+  },
 });
 
 const Header = () => {
@@ -42,14 +60,17 @@ const Header = () => {
 
       <div className={classes.headerWrapper}>
         <div className={classes.headerContainer}>
-          <ShortTextIcon
-            style={{
-              fontSize: 40,
-              color: theme.palette.grey.main,
-              cursor: "pointer",
-            }}
+          <div 
+            className={classes.iconButton}
             onClick={() => setIsDrawerOpen(true)}
-          />
+          >
+            <MenuRoundedIcon
+              style={{
+                fontSize: 24,
+                color: "#1b5e20",
+              }}
+            />
+          </div>
           <Typography
             variant="h5"
             onClick={() => Router.push("/menu")}
@@ -67,14 +88,17 @@ const Header = () => {
           >
             Maca Quran
           </Typography>
-          <SearchIcon
-            style={{
-              fontSize: 40,
-              color: theme.palette.grey.main,
-              cursor: "pointer",
-            }}
+          <div 
+            className={classes.iconButton}
             onClick={() => Router.push("/search")}
-          />
+          >
+            <SearchRoundedIcon
+              style={{
+                fontSize: 24,
+                color: "#1b5e20",
+              }}
+            />
+          </div>
         </div>
       </div>
     </Fragment>

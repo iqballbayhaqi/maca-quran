@@ -8,6 +8,7 @@ import DailyAyat from "./containers/DailyAyatPage";
 import ShareAyat from "./containers/ShareAyatPage";
 import Memorization from "./containers/MemorizationPage";
 import ReadingHistory from "./containers/ReadingHistoryPage";
+import DailyTarget from "./containers/DailyTargetPage";
 
 const routes = [
     {
@@ -78,6 +79,13 @@ const routes = [
         name: "ReadingHistory",
         path: "/reading-history",
         page: <ReadingHistory/>,
+        exact: false
+    },
+    {
+        id: 11,
+        name: "DailyTarget",
+        path: "/daily-target",
+        page: <DailyTarget/>,
         exact: false
     }
 ]

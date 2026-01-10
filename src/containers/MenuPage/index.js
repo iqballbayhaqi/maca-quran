@@ -3,6 +3,10 @@ import { Container, Typography, Button, Box } from "@material-ui/core";
 import useStyles from "./styles";
 import theme from "../../theme";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
+import WbSunnyIcon from "@material-ui/icons/WbSunny";
+import SchoolIcon from "@material-ui/icons/School";
+import TimelineIcon from "@material-ui/icons/Timeline";
+import TrackChangesIcon from "@material-ui/icons/TrackChanges";
 import MenuSurat from "../../components/menuSurat";
 import Header from "../../components/header";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -335,6 +339,57 @@ const MenuPage = () => {
           </div>
         </div>
       )}
+
+      {/* Quick Access Shortcuts */}
+      <div className={classes.shortcutContainer}>
+        <div 
+          className={classes.shortcutItem}
+          onClick={() => Router.push("/daily-ayat")}
+        >
+          <div className={classes.shortcutIcon} style={{ background: "linear-gradient(135deg, #ff9800 0%, #f57c00 100%)" }}>
+            <WbSunnyIcon />
+          </div>
+          <Typography className={classes.shortcutLabel}>
+            {t("dailyAyat")}
+          </Typography>
+        </div>
+
+        <div 
+          className={classes.shortcutItem}
+          onClick={() => Router.push("/memorization")}
+        >
+          <div className={classes.shortcutIcon} style={{ background: "linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%)" }}>
+            <SchoolIcon />
+          </div>
+          <Typography className={classes.shortcutLabel}>
+            {t("memorizationMode")}
+          </Typography>
+        </div>
+
+        <div 
+          className={classes.shortcutItem}
+          onClick={() => Router.push("/reading-history")}
+        >
+          <div className={classes.shortcutIcon} style={{ background: "linear-gradient(135deg, #2196f3 0%, #1976d2 100%)" }}>
+            <TimelineIcon />
+          </div>
+          <Typography className={classes.shortcutLabel}>
+            {t("readingHistory")}
+          </Typography>
+        </div>
+
+        <div 
+          className={classes.shortcutItem}
+          onClick={() => Router.push("/daily-target")}
+        >
+          <div className={classes.shortcutIcon} style={{ background: "linear-gradient(135deg, #4caf50 0%, #388e3c 100%)" }}>
+            <TrackChangesIcon />
+          </div>
+          <Typography className={classes.shortcutLabel}>
+            {t("dailyTarget")}
+          </Typography>
+        </div>
+      </div>
 
       {/* View Toggle: All Surah / By Juz */}
       <Box className={classes.viewToggleContainer}>
