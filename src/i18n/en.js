@@ -65,6 +65,13 @@ const en = {
   readFullSurah: "Read Full Surah",
   copiedToClipboard: "Copied to clipboard!",
 
+  // Share Ayat
+  shareAyat: "Share Verse",
+  shareAyatSubtitle: "Share this beautiful verse with others",
+  noAyatSelected: "No verse selected",
+  back: "Back",
+  chooseBackground: "Choose Background",
+
   // Tajwid
   tajwidColor: "Tajwid Color",
   tajwidOn: "On",

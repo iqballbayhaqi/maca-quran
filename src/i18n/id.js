@@ -65,6 +65,13 @@ const id = {
   readFullSurah: "Baca Surat Lengkap",
   copiedToClipboard: "Berhasil disalin!",
 
+  // Share Ayat
+  shareAyat: "Bagikan Ayat",
+  shareAyatSubtitle: "Bagikan ayat indah ini dengan orang lain",
+  noAyatSelected: "Tidak ada ayat yang dipilih",
+  back: "Kembali",
+  chooseBackground: "Pilih Latar Belakang",
+
   // Tajwid
   tajwidColor: "Warna Tajwid",
   tajwidOn: "Aktif",

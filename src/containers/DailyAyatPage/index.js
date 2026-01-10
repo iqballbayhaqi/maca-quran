@@ -21,11 +21,15 @@ const BACKGROUND_IMAGES = [
   "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800&q=80",
   "https://images.unsplash.com/photo-1519817650390-64a93db51149?w=800&q=80",
   "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800&q=80",
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
-  "https://images.unsplash.com/photo-1590076215667-875c48af19be?w=800&q=80",
-  "https://images.unsplash.com/photo-1585036156261-1e2ac055e3aa?w=800&q=80",
+  "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80",
+  "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=800&q=80",
+  "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=800&q=80",
   "https://images.unsplash.com/photo-1466442929976-97f336a657be?w=800&q=80",
   "https://images.unsplash.com/photo-1473177104440-ffee2f376098?w=800&q=80",
+  "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=80",
+  "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+  "https://images.unsplash.com/photo-1517309230475-6736d926b979?w=800&q=80",
+  "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?w=800&q=80",
 ];
 
 const DailyAyatPage = () => {

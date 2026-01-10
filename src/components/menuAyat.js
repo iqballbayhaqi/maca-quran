@@ -6,8 +6,10 @@ import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import ShareIcon from "@material-ui/icons/Share";
 import { useLanguage } from "../i18n";
 import { TajwidText } from "../tajwid";
+import { useHistory } from "react-router-dom";
 
 const Styles = makeStyles((theme) => ({
   ayatCard: {
@@ -76,6 +78,13 @@ const Styles = makeStyles((theme) => ({
   bookmarkBtnActive: {
     color: "#1976d2",
     backgroundColor: "rgba(25, 118, 210, 0.2)",
+  },
+  shareBtn: {
+    color: "#4caf50",
+    backgroundColor: "rgba(76, 175, 80, 0.1)",
+    "&:hover": {
+      backgroundColor: "rgba(76, 175, 80, 0.2)",
+    },
   },
   expandBtn: {
     color: "#757575",
@@ -155,6 +164,7 @@ const toArabicNumeral = (num) => {
 const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
   const classes = Styles();
   const { t } = useLanguage();
+  const Router = useHistory();
   const [expanded, setExpanded] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
@@ -191,6 +201,17 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
     setIsBookmarked(!isBookmarked);
   };
 
+  // Navigate to share ayat page
+  const handleShareAyat = () => {
+    // Save ayat data to localStorage for share page
+    const shareData = {
+      ayat: data,
+      surahInfo: suratInfo,
+    };
+    localStorage.setItem("share_ayat_data", JSON.stringify(shareData));
+    Router.push("/share-ayat");
+  };
+
   return (
     <div 
       className={`${classes.ayatCard} ${isActive ? classes.ayatCardActive : ''}`} 
@@ -210,6 +231,13 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
             size="small"
           >
             {isBookmarked ? <BookmarkIcon fontSize="small" /> : <BookmarkBorderIcon fontSize="small" />}
+          </IconButton>
+          <IconButton 
+            className={`${classes.iconBtn} ${classes.shareBtn}`}
+            onClick={handleShareAyat}
+            size="small"
+          >
+            <ShareIcon fontSize="small" />
           </IconButton>
           <IconButton 
             className={`${classes.iconBtn} ${classes.playBtn}`}
