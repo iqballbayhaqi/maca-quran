@@ -587,7 +587,7 @@ const MemorizationPage = () => {
             variant="text"
             color="primary"
             fullWidth
-            style={{ marginTop: 16 }}
+            className={classes.changeSurahBtn}
             onClick={() => {
               setIsStarted(false);
               setDataAyat(null);

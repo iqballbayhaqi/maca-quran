@@ -575,6 +575,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.75rem",
     color: "#888",
   },
+  // Change Surah Button
+  changeSurahBtn: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontWeight: 600,
+    textTransform: "none",
+    fontSize: "0.9rem",
+    marginTop: 16,
+  },
 }));
 
 export default useStyles;
