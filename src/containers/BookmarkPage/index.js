@@ -12,19 +12,29 @@ const BookmarkPage = () => {
   const [bookmarksSurat, setBookmarksSurat] = useState([]);
   const [bookmarksAyat, setBookmarksAyat] = useState([]);
 
+  // Get current user name for bookmark keys
+  const userName = localStorage.getItem("nama") || "default";
+  const bookmarkSuratKey = `bookmarks_surat_${userName}`;
+  const bookmarkAyatKey = `bookmarks_ayat_${userName}`;
+
   useEffect(() => {
     loadBookmarks();
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userName]);
 
   const loadBookmarks = () => {
-    const savedSurat = localStorage.getItem("bookmarks_surat");
-    const savedAyat = localStorage.getItem("bookmarks_ayat");
+    const savedSurat = localStorage.getItem(bookmarkSuratKey);
+    const savedAyat = localStorage.getItem(bookmarkAyatKey);
     
     if (savedSurat) {
       setBookmarksSurat(JSON.parse(savedSurat));
+    } else {
+      setBookmarksSurat([]);
     }
     if (savedAyat) {
       setBookmarksAyat(JSON.parse(savedAyat));
+    } else {
+      setBookmarksAyat([]);
     }
   };
 
@@ -32,14 +42,14 @@ const BookmarkPage = () => {
     e.stopPropagation();
     const updated = bookmarksSurat.filter((s) => s.number !== suratNumber);
     setBookmarksSurat(updated);
-    localStorage.setItem("bookmarks_surat", JSON.stringify(updated));
+    localStorage.setItem(bookmarkSuratKey, JSON.stringify(updated));
   };
 
   const removeAyatBookmark = (ayatId, e) => {
     e.stopPropagation();
     const updated = bookmarksAyat.filter((a) => a.number.inQuran !== ayatId);
     setBookmarksAyat(updated);
-    localStorage.setItem("bookmarks_ayat", JSON.stringify(updated));
+    localStorage.setItem(bookmarkAyatKey, JSON.stringify(updated));
   };
 
   const goToSurat = (surat) => {

@@ -155,18 +155,22 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
   const [expanded, setExpanded] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
+  // Get current user name for bookmark keys
+  const userName = localStorage.getItem("nama") || "default";
+  const bookmarkAyatKey = `bookmarks_ayat_${userName}`;
+
   useEffect(() => {
     // Check if this ayat is bookmarked
-    const savedBookmarks = localStorage.getItem("bookmarks_ayat");
+    const savedBookmarks = localStorage.getItem(bookmarkAyatKey);
     if (savedBookmarks) {
       const bookmarks = JSON.parse(savedBookmarks);
       const found = bookmarks.some((b) => b.number.inQuran === data.number.inQuran);
       setIsBookmarked(found);
     }
-  }, [data.number.inQuran]);
+  }, [data.number.inQuran, bookmarkAyatKey]);
 
   const toggleBookmark = () => {
-    const savedBookmarks = localStorage.getItem("bookmarks_ayat");
+    const savedBookmarks = localStorage.getItem(bookmarkAyatKey);
     let bookmarks = savedBookmarks ? JSON.parse(savedBookmarks) : [];
 
     if (isBookmarked) {
@@ -180,7 +184,7 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
       });
     }
 
-    localStorage.setItem("bookmarks_ayat", JSON.stringify(bookmarks));
+    localStorage.setItem(bookmarkAyatKey, JSON.stringify(bookmarks));
     setIsBookmarked(!isBookmarked);
   };
 

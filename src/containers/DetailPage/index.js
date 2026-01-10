@@ -21,6 +21,10 @@ const DetailPage = () => {
   const audioRef = useRef(null);
   const [isSuratBookmarked, setIsSuratBookmarked] = useState(false);
 
+  // Get current user name for bookmark keys
+  const userName = localStorage.getItem("nama") || "default";
+  const bookmarkSuratKey = `bookmarks_surat_${userName}`;
+
   // Get ayat parameter from URL
   const queryParams = new URLSearchParams(location.search);
   const ayatParam = queryParams.get("ayat");
@@ -34,13 +38,13 @@ const DetailPage = () => {
       });
 
     // Check if surat is bookmarked
-    const savedBookmarks = localStorage.getItem("bookmarks_surat");
+    const savedBookmarks = localStorage.getItem(bookmarkSuratKey);
     if (savedBookmarks) {
       const bookmarks = JSON.parse(savedBookmarks);
       const found = bookmarks.some((b) => b.number === detailSurah.number);
       setIsSuratBookmarked(found);
     }
-  }, [params.id, detailSurah.number]);
+  }, [params.id, detailSurah.number, bookmarkSuratKey]);
 
   // Handle ayat parameter - scroll to and activate specific ayat
   useEffect(() => {
@@ -57,7 +61,7 @@ const DetailPage = () => {
   }, [dataAyat, ayatParam]);
 
   const toggleSuratBookmark = () => {
-    const savedBookmarks = localStorage.getItem("bookmarks_surat");
+    const savedBookmarks = localStorage.getItem(bookmarkSuratKey);
     let bookmarks = savedBookmarks ? JSON.parse(savedBookmarks) : [];
 
     if (isSuratBookmarked) {
@@ -68,7 +72,7 @@ const DetailPage = () => {
       bookmarks.push(detailSurah);
     }
 
-    localStorage.setItem("bookmarks_surat", JSON.stringify(bookmarks));
+    localStorage.setItem(bookmarkSuratKey, JSON.stringify(bookmarks));
     setIsSuratBookmarked(!isSuratBookmarked);
   };
 
