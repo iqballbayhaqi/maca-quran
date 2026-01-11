@@ -1,70 +1,133 @@
-# Getting Started with Create React App
+# 📖 Maca Quran
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplikasi baca Al-Quran online gratis dengan terjemahan Indonesia, audio murottal, tajwid berwarna, dan berbagai fitur menarik lainnya.
 
-## Available Scripts
+![React](https://img.shields.io/badge/React-17.0.2-61DAFB?style=flat&logo=react)
+![Material-UI](https://img.shields.io/badge/Material--UI-4.12.2-0081CB?style=flat&logo=mui)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat)
 
-In the project directory, you can run:
+## ✨ Fitur
 
-### `yarn start`
+- 📚 **Baca Al-Quran** - Baca 114 surah Al-Quran lengkap dengan terjemahan Indonesia
+- 🎨 **Tajwid Berwarna** - Tampilan tajwid dengan warna untuk memudahkan bacaan
+- 🔊 **Audio Murottal** - Dengarkan bacaan ayat dengan audio murottal
+- 🔖 **Bookmark** - Simpan ayat favorit untuk dibaca kembali
+- 📝 **Catatan** - Tambahkan catatan pada ayat tertentu
+- 📅 **Ayat Harian** - Dapatkan ayat pilihan setiap hari
+- 🎯 **Target Harian** - Atur target membaca harian
+- 📖 **Mode Hafalan** - Fitur khusus untuk menghafal Al-Quran
+- 📜 **Riwayat Bacaan** - Lacak progress bacaan Anda
+- 🔍 **Pencarian** - Cari ayat dengan mudah
+- 🖼️ **Bagikan Ayat** - Bagikan ayat sebagai gambar
+- 🌙 **Mode Gelap** - Tema gelap untuk kenyamanan membaca
+- 🌐 **Multi Bahasa** - Dukungan bahasa Indonesia dan Inggris
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🛠️ Teknologi
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **Frontend**: React.js 17
+- **UI Framework**: Material-UI v4
+- **Routing**: React Router DOM v5
+- **Audio Player**: React H5 Audio Player
+- **SEO**: React Helmet
+- **API**: [Quran API by Gading](https://api.quran.gading.dev)
 
-### `yarn test`
+## 🚀 Instalasi
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prasyarat
 
-### `yarn build`
+- Node.js 24.x
+- Yarn atau npm
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Langkah Instalasi
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone repository ini
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/iqballbayhaqi/maca-quran.git
+cd maca-quran
+```
 
-### `yarn eject`
+2. Install dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+yarn install
+# atau
+npm install
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Jalankan aplikasi
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+yarn start
+# atau
+npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+4. Buka [http://localhost:3000](http://localhost:3000) di browser
 
-## Learn More
+## 📦 Scripts
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Script | Deskripsi |
+|--------|-----------|
+| `yarn start` | Menjalankan aplikasi dalam mode development |
+| `yarn build` | Build aplikasi untuk production |
+| `yarn test` | Menjalankan test runner |
+| `yarn eject` | Eject dari Create React App |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📁 Struktur Folder
 
-### Code Splitting
+```
+src/
+├── components/          # Komponen reusable
+│   ├── drawer/         # Side drawer navigation
+│   ├── header.js       # Header component
+│   ├── menuAyat.js     # Menu ayat component
+│   ├── menuSurat.js    # Menu surah component
+│   ├── NoteDialog.js   # Dialog untuk catatan
+│   └── SEO.js          # SEO meta tags
+├── containers/          # Halaman utama
+│   ├── AboutPage/      # Halaman tentang
+│   ├── BookmarkPage/   # Halaman bookmark
+│   ├── DailyAyatPage/  # Halaman ayat harian
+│   ├── DailyTargetPage/# Halaman target harian
+│   ├── DetailPage/     # Halaman detail surah
+│   ├── Home/           # Halaman beranda
+│   ├── MemorizationPage/# Halaman mode hafalan
+│   ├── MenuPage/       # Halaman menu surah
+│   ├── NotesPage/      # Halaman catatan
+│   ├── ReadingHistoryPage/# Halaman riwayat
+│   ├── SearchPage/     # Halaman pencarian
+│   └── ShareAyatPage/  # Halaman bagikan ayat
+├── i18n/               # Internasionalisasi
+├── images/             # Gambar dan aset
+├── tajwid/             # Logic tajwid berwarna
+├── theme/              # Theme dan dark mode
+└── utils/              # Utility functions
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🤝 Kontribusi
 
-### Analyzing the Bundle Size
+Kontribusi sangat diterima! Silakan buat pull request atau buka issue untuk saran dan perbaikan.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Fork repository ini
+2. Buat branch fitur (`git checkout -b feature/AmazingFeature`)
+3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buka Pull Request
 
-### Making a Progressive Web App
+## 📄 Lisensi
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
-### Advanced Configuration
+## 👨‍💻 Developer
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**iqballbayhaqi**
 
-### Deployment
+- Website: [iqbalbaihaqi.com](https://iqbalbaihaqi.com/)
+- GitHub: [@iqballbayhaqi](https://github.com/iqballbayhaqi)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p align="center">
+  Made with ❤️ in Jakarta
+</p>
