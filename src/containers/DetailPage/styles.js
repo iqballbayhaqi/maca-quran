@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     transform: "translateX(-50%)",
     width: "calc(100% - 32px)",
-    maxWidth: 412,
+    maxWidth: 568,
     padding: "12px 16px",
     background: (props) => props.isDarkMode 
       ? "linear-gradient(180deg, rgba(37, 37, 37, 0.95) 0%, rgba(30, 30, 30, 0.98) 100%)"

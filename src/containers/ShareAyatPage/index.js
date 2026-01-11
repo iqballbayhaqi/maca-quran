@@ -163,7 +163,7 @@ const ShareAyatPage = () => {
 
   if (loading) {
     return (
-      <Container maxWidth="xs" className={classes.root}>
+      <Container maxWidth="sm" className={classes.root}>
         <Header />
         <div className={classes.loadingContainer}>
           <div className={classes.loadingCard}>
@@ -187,7 +187,7 @@ const ShareAyatPage = () => {
 
   if (!ayatData || !surahInfo) {
     return (
-      <Container maxWidth="xs" className={classes.root}>
+      <Container maxWidth="sm" className={classes.root}>
         <Header />
         <div className={classes.errorContainer}>
           <Typography className={classes.errorText}>
@@ -207,7 +207,7 @@ const ShareAyatPage = () => {
   }
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <SEO 
         title={`Share Ayat - ${surahInfo.name.transliteration.id} Ayat ${ayatData.number.inSurah}`}
         description={`Bagikan ayat dari Surah ${surahInfo.name.transliteration.id} ayat ${ayatData.number.inSurah}. ${ayatData.translation.id}`}

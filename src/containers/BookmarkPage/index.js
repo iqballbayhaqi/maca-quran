@@ -69,7 +69,7 @@ const BookmarkPage = () => {
   };
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <SEO 
         title="Bookmark Saya"
         description="Kelola bookmark surah dan ayat Al-Quran favorit Anda. Simpan ayat-ayat penting untuk dibaca kembali di Maca Quran."

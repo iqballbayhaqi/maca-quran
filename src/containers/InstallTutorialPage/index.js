@@ -120,7 +120,7 @@ const InstallTutorialPage = () => {
   ];
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <SEO
         title="Cara Install Aplikasi"
         description="Panduan cara menginstall Maca Quran sebagai aplikasi di Android, iPhone, dan Desktop. Install sekarang untuk akses cepat dan offline."

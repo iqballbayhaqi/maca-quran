@@ -125,7 +125,7 @@ const NotesPage = () => {
   const highlightedCount = notes.filter((n) => n.highlightColor).length;
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <SEO 
         title="Catatan Saya"
         description="Kelola catatan pribadi dan highlight ayat Al-Quran favorit Anda. Simpan pemikiran dan refleksi Anda di Maca Quran."

@@ -271,7 +271,7 @@ const MenuPage = () => {
   };
 
   return (
-    <Container maxWidth="xs" className={classes.root} style={{height: !dataSurat && '100vh'}}>
+    <Container maxWidth="sm" className={classes.root} style={{height: !dataSurat && '100vh'}}>
       <SEO 
         title="Daftar Surah Al-Quran"
         description="Daftar lengkap 114 surah Al-Quran dengan terjemahan Indonesia. Baca Al-Quran berdasarkan surah atau juz dengan mudah di Maca Quran."

@@ -222,7 +222,7 @@ const DailyAyatPage = () => {
   }, []);
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <SEO 
         title="Ayat Harian"
         description="Dapatkan ayat Al-Quran harian untuk inspirasi dan renungan. Bagikan ayat favorit dengan teman dan keluarga di Maca Quran."

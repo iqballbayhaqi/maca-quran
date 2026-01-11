@@ -81,6 +81,10 @@ const useStyles = makeStyles((theme) => ({
     gridTemplateColumns: "repeat(4, 1fr)",
     gap: 12,
     marginTop: 20,
+    // Tablet styles
+    [theme.breakpoints.up("sm")]: {
+      gap: 16,
+    },
   },
   shortcutItem: {
     display: "flex",
@@ -117,6 +121,15 @@ const useStyles = makeStyles((theme) => ({
     "& svg": {
       fontSize: 22,
     },
+    // Tablet styles
+    [theme.breakpoints.up("sm")]: {
+      width: 52,
+      height: 52,
+      borderRadius: 14,
+      "& svg": {
+        fontSize: 26,
+      },
+    },
   },
   shortcutLabel: {
     fontFamily: "'El Messiri', sans-serif !important",
@@ -131,6 +144,10 @@ const useStyles = makeStyles((theme) => ({
     display: "-webkit-box",
     WebkitLineClamp: 2,
     WebkitBoxOrient: "vertical",
+    // Tablet styles
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "0.8rem !important",
+    },
   },
   surahListContainer: {
     marginTop: 25,

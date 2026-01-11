@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "50%",
         background: "rgba(1, 121, 1, 0.08)",
       },
+      // Tablet styles
+      [theme.breakpoints.up("sm")]: {
+        paddingTop: 20,
+      },
     },
     title: {
       color: "#1b5e20",
@@ -92,6 +96,12 @@ const useStyles = makeStyles((theme) => ({
         background: "linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.2) 100%)",
         borderRadius: 40,
       },
+      // Tablet styles
+      [theme.breakpoints.up("sm")]: {
+        height: 480,
+        margin: "40px 30px 30px",
+        backgroundPositionX: 0,
+      },
     },
     quranImage: {
       height: 200,
@@ -101,6 +111,10 @@ const useStyles = makeStyles((theme) => ({
       zIndex: 1,
       "&:hover": {
         transform: "scale(1.05)",
+      },
+      // Tablet styles
+      [theme.breakpoints.up("sm")]: {
+        height: 240,
       },
     },
     btnGetStarted: {
@@ -146,6 +160,11 @@ const useStyles = makeStyles((theme) => ({
       padding: "0 20px",
       width: "100%",
       maxWidth: 300,
+      // Tablet styles
+      [theme.breakpoints.up("sm")]: {
+        maxWidth: 400,
+        gap: 16,
+      },
     },
     inputLabel: {
       color: "#fff",

@@ -16,7 +16,7 @@ const AboutPage = () => {
   const { t } = useLanguage();
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <SEO 
         title="Tentang Aplikasi"
         description="Tentang Maca Quran - Aplikasi baca Al-Quran online gratis buatan iqballbayhaqi. Dibuat dengan React.js dan Material-UI menggunakan API quran.gading.dev."

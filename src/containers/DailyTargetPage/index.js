@@ -291,7 +291,7 @@ const DailyTargetPage = () => {
   };
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <SEO 
         title={t("dailyTarget")}
         description="Atur target bacaan Al-Quran harian dan tracking progres khatam Anda di Maca Quran."

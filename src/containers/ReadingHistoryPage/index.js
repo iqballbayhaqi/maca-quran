@@ -252,7 +252,7 @@ const ReadingHistoryPage = () => {
   const milestone = getMilestoneMessage(streakData.currentStreak);
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <SEO 
         title={t("readingHistory")}
         description="Lihat riwayat bacaan Al-Quran dan tracking streak konsistensi membaca Anda di Maca Quran."

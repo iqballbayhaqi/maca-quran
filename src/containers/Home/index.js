@@ -34,7 +34,7 @@ const Home = () => {
   };
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <SEO 
         title="Beranda"
         description="Maca Quran - Aplikasi baca Al-Quran online gratis dengan terjemahan Indonesia, audio murottal, tajwid berwarna, dan fitur bookmark. Mulai membaca Al-Quran sekarang."

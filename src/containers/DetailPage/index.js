@@ -150,7 +150,7 @@ const DetailPage = () => {
 
   return (
     <Container
-      maxWidth="xs"
+      maxWidth="sm"
       className={classes.root}
       style={{ height: !dataAyat && "100vh" }}
     >

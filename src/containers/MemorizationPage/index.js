@@ -147,7 +147,7 @@ const MemorizationPage = () => {
   const selectedSurahInfo = surahList.find((s) => s.number === selectedSurah);
 
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
       <SEO
         title={t("memorizationMode")}
         description={t("memorizationSubtitle")}
