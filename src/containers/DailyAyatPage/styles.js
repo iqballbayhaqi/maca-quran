@@ -2,10 +2,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(180deg, #1a2e1a 0%, #121212 100%)"
+      : "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
     minHeight: "100vh",
     paddingTop: 20,
     paddingBottom: 40,
+    transition: "background 0.3s ease",
   },
   pageHeader: {
     textAlign: "center",
@@ -17,13 +20,13 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1.8rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 8,
   },
   pageSubtitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.95rem",
-    color: "#666",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#666",
   },
   ayatCard: {
     backgroundSize: "cover",
@@ -32,7 +35,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 24,
     padding: "40px 24px",
     margin: "0 16px",
-    boxShadow: "0 16px 48px rgba(0, 0, 0, 0.2)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 16px 48px rgba(0, 0, 0, 0.4)" 
+      : "0 16px 48px rgba(0, 0, 0, 0.2)",
     position: "relative",
     overflow: "hidden",
     minHeight: 400,
@@ -113,44 +118,58 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 8,
   },
   actionBtn: {
-    color: "#1b5e20",
-    backgroundColor: "#fff",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-    border: "1px solid rgba(27, 94, 32, 0.2)",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+    backgroundColor: (props) => props.isDarkMode ? "#252525" : "#fff",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 8px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 8px rgba(0, 0, 0, 0.1)",
+    border: (props) => props.isDarkMode 
+      ? "1px solid rgba(129, 199, 132, 0.2)" 
+      : "1px solid rgba(27, 94, 32, 0.2)",
     "&:hover": {
-      backgroundColor: "rgba(27, 94, 32, 0.08)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.15)" 
+        : "rgba(27, 94, 32, 0.08)",
     },
   },
   audioContainer: {
     margin: "24px 16px",
     "& .rhap_container": {
       borderRadius: 16,
-      boxShadow: "0 4px 16px rgba(0, 0, 0, 0.08)",
-      background: "#fff",
+      boxShadow: (props) => props.isDarkMode 
+        ? "0 4px 16px rgba(0, 0, 0, 0.3)" 
+        : "0 4px 16px rgba(0, 0, 0, 0.08)",
+      background: (props) => props.isDarkMode ? "#252525" : "#fff",
       padding: "8px 12px",
     },
     "& .rhap_main-controls-button": {
-      color: "#1b5e20",
+      color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_progress-filled": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_progress-indicator": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_button-clear": {
-      color: "#1b5e20",
+      color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_volume-indicator": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_volume-filled": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_time": {
       fontFamily: "'El Messiri', sans-serif",
       fontSize: "0.8rem",
-      color: "#1b5e20",
+      color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+    },
+    "& .rhap_progress-bar": {
+      backgroundColor: (props) => props.isDarkMode ? "#404040" : "#e0e0e0",
+    },
+    "& .rhap_volume-bar": {
+      backgroundColor: (props) => props.isDarkMode ? "#404040" : "#e0e0e0",
     },
   },
   refreshBtn: {
@@ -159,14 +178,16 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "0.9rem",
-    color: "#1b5e20",
-    borderColor: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+    borderColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     borderRadius: 20,
     padding: "10px 24px",
     textTransform: "none",
     "&:hover": {
-      borderColor: "#1b5e20",
-      backgroundColor: "rgba(27, 94, 32, 0.08)",
+      borderColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.15)" 
+        : "rgba(27, 94, 32, 0.08)",
     },
   },
   goToSurahBtn: {
@@ -195,17 +216,21 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 60,
   },
   loadingCard: {
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 16,
     padding: "24px 40px",
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 4px 20px rgba(0, 0, 0, 0.3)" 
+      : "0 4px 20px rgba(0, 0, 0, 0.08)",
     textAlign: "center",
   },
   loadingIcon: {
     width: 50,
     height: 50,
     borderRadius: "50%",
-    background: "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(135deg, #1a2e1a 0%, #2e7d32 100%)" 
+      : "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -213,18 +238,18 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   loadingSpinner: {
-    color: "#1b5e20 !important",
+    color: (props) => props.isDarkMode ? "#81c784 !important" : "#1b5e20 !important",
   },
   loadingArabic: {
     fontFamily: "'Amiri', serif",
     fontSize: "1.3rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 6,
   },
   loadingText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
     marginBottom: 4,
   },
   loadingDots: {
@@ -237,7 +262,7 @@ const useStyles = makeStyles((theme) => ({
     width: 6,
     height: 6,
     borderRadius: "50%",
-    background: "#1b5e20",
+    background: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     animation: "$bounce 1.4s infinite ease-in-out both",
     "&:nth-child(1)": {
       animationDelay: "-0.32s",

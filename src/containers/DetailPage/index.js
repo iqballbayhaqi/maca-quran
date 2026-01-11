@@ -10,10 +10,12 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import { useLanguage } from "../../i18n";
+import { useThemeContext } from "../../theme";
 import SEO from "../../components/SEO";
 
 const DetailPage = () => {
-  const classes = useStyles();
+  const { isDarkMode } = useThemeContext();
+  const classes = useStyles({ isDarkMode });
   const params = useParams();
   const location = useLocation();
   const { t } = useLanguage();

@@ -2,16 +2,19 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(180deg, #1a2e1a 0%, #121212 100%)"
+      : "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
     minHeight: "100vh",
     paddingTop: 20,
     paddingBottom: 30,
+    transition: "background 0.3s ease",
   },
   pageTitle: {
     fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1.5rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginTop: 20,
     marginBottom: 8,
     textAlign: "center",
@@ -19,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   pageSubtitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.9rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
     textAlign: "center",
     marginBottom: 20,
   },
@@ -34,37 +37,46 @@ const useStyles = makeStyles((theme) => ({
     padding: "12px 16px",
     borderRadius: 12,
     border: "none",
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "0.9rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
     cursor: "pointer",
     transition: "all 0.2s ease",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 8px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 8px rgba(0, 0, 0, 0.05)",
     "&:hover": {
-      background: "#f5f5f5",
+      background: (props) => props.isDarkMode ? "#303030" : "#f5f5f5",
     },
   },
   tabActive: {
     background: "linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%)",
     color: "#fff",
     boxShadow: "0 4px 15px rgba(27, 94, 32, 0.3)",
+    "&:hover": {
+      background: "linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%)",
+    },
   },
   tabCount: {
     marginLeft: 8,
     padding: "2px 8px",
     borderRadius: 10,
     fontSize: "0.75rem",
-    background: "rgba(0, 0, 0, 0.08)",
+    background: (props) => props.isDarkMode 
+      ? "rgba(255, 255, 255, 0.1)" 
+      : "rgba(0, 0, 0, 0.08)",
   },
   tabCountActive: {
     background: "rgba(255, 255, 255, 0.25)",
   },
   bookmarkListContainer: {
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 20,
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 4px 20px rgba(0, 0, 0, 0.3)" 
+      : "0 4px 20px rgba(0, 0, 0, 0.08)",
     overflow: "hidden",
     padding: "10px 0",
   },
@@ -81,13 +93,13 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "1.1rem",
-    color: "#333",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#333",
     marginBottom: 8,
   },
   emptySubtitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#808080" : "#757575",
   },
   // Bookmark Surat Item
   bookmarkSuratItem: {
@@ -100,7 +112,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
     margin: "2px 8px",
     "&:hover": {
-      backgroundColor: "rgba(27, 94, 32, 0.06)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.1)" 
+        : "rgba(27, 94, 32, 0.06)",
     },
   },
   suratInfo: {
@@ -113,7 +127,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(135deg, #1a2e1a 0%, #2e7d32 100%)" 
+      : "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
     borderRadius: 12,
     marginRight: 16,
     position: "relative",
@@ -121,7 +137,7 @@ const useStyles = makeStyles((theme) => ({
       content: '""',
       position: "absolute",
       inset: 2,
-      background: "#fff",
+      background: (props) => props.isDarkMode ? "#252525" : "#fff",
       borderRadius: 10,
     },
   },
@@ -129,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     position: "relative",
     zIndex: 1,
   },
@@ -140,12 +156,12 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', 'Reem Kufi', sans-serif",
     fontWeight: 600,
     fontSize: "1.1rem",
-    color: "#212121",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#212121",
   },
   suratMeta: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.75rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#808080" : "#757575",
     marginTop: 2,
   },
   suratActions: {
@@ -156,14 +172,16 @@ const useStyles = makeStyles((theme) => ({
   arabicName: {
     fontFamily: "'Amiri', 'Reem Kufi', serif",
     fontSize: "1.4rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginRight: 8,
   },
   deleteBtn: {
     color: "#ef5350",
     padding: 8,
     "&:hover": {
-      backgroundColor: "rgba(239, 83, 80, 0.1)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(239, 83, 80, 0.15)" 
+        : "rgba(239, 83, 80, 0.1)",
     },
   },
   // Bookmark Ayat Item
@@ -171,12 +189,16 @@ const useStyles = makeStyles((theme) => ({
     padding: "16px",
     margin: "8px",
     borderRadius: 16,
-    backgroundColor: "#fff",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+    backgroundColor: (props) => props.isDarkMode ? "#1e1e1e" : "#fff",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 8px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 8px rgba(0, 0, 0, 0.05)",
     cursor: "pointer",
     transition: "all 0.2s ease",
     "&:hover": {
-      boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
+      boxShadow: (props) => props.isDarkMode 
+        ? "0 4px 15px rgba(0, 0, 0, 0.4)" 
+        : "0 4px 15px rgba(0, 0, 0, 0.1)",
     },
   },
   ayatHeader: {
@@ -209,21 +231,21 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "0.85rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
   },
   arabicText: {
     textAlign: "right",
     fontFamily: "'Amiri', serif",
     fontSize: "1.4rem",
     lineHeight: 2,
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 8,
     direction: "rtl",
   },
   translationText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#555",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#555",
     lineHeight: 1.5,
   },
 }));

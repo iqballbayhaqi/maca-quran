@@ -21,6 +21,7 @@ import useStyles from "./styles";
 import { useLanguage } from "../../i18n";
 import { TajwidText } from "../../tajwid";
 import SEO from "../../components/SEO";
+import { useThemeContext } from "../../theme";
 
 // Convert number to Arabic numerals
 const toArabicNumeral = (num) => {
@@ -32,7 +33,8 @@ const toArabicNumeral = (num) => {
 };
 
 const MemorizationPage = () => {
-  const classes = useStyles();
+  const { isDarkMode } = useThemeContext();
+  const classes = useStyles({ isDarkMode });
   const { t } = useLanguage();
   const audioRef = useRef(null);
 

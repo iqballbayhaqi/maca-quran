@@ -15,6 +15,7 @@ import { useHistory } from "react-router-dom";
 import html2canvas from "html2canvas";
 import { TajwidText } from "../../tajwid";
 import SEO from "../../components/SEO";
+import { useThemeContext } from "../../theme";
 
 // Array of Islamic themed background images
 const BACKGROUND_IMAGES = [
@@ -33,7 +34,8 @@ const BACKGROUND_IMAGES = [
 ];
 
 const ShareAyatPage = () => {
-  const classes = useStyles();
+  const { isDarkMode } = useThemeContext();
+  const classes = useStyles({ isDarkMode });
   const Router = useHistory();
   const { t, language } = useLanguage();
   const [ayatData, setAyatData] = useState(null);

@@ -7,9 +7,11 @@ import useStyles from "./styles";
 import { useLanguage } from "../../i18n";
 import { TajwidText } from "../../tajwid";
 import SEO from "../../components/SEO";
+import { useThemeContext } from "../../theme";
 
 const BookmarkPage = () => {
-  const classes = useStyles();
+  const { isDarkMode } = useThemeContext();
+  const classes = useStyles({ isDarkMode });
   const Router = useHistory();
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("surat");

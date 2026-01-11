@@ -2,16 +2,19 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(180deg, #1a2e1a 0%, #121212 100%)"
+      : "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
     minHeight: "100vh",
     paddingTop: 20,
     paddingBottom: 30,
+    transition: "background 0.3s ease",
   },
   pageTitle: {
     fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1.5rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginTop: 20,
     marginBottom: 8,
     textAlign: "center",
@@ -19,18 +22,20 @@ const useStyles = makeStyles((theme) => ({
   pageSubtitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.9rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
     textAlign: "center",
     marginBottom: 20,
   },
 
   // Setup Card (when no target)
   setupCard: {
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 24,
     padding: "40px 24px",
     textAlign: "center",
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 4px 20px rgba(0, 0, 0, 0.3)" 
+      : "0 4px 20px rgba(0, 0, 0, 0.08)",
   },
   setupIcon: {
     fontSize: "4rem",
@@ -40,13 +45,13 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1.3rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 8,
   },
   setupSubtitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.9rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
     marginBottom: 24,
     lineHeight: 1.6,
   },
@@ -67,11 +72,15 @@ const useStyles = makeStyles((theme) => ({
 
   // Completed Card
   completedCard: {
-    background: "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(135deg, #1a2e1a 0%, #2e7d32 100%)" 
+      : "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
     borderRadius: 24,
     padding: "40px 24px",
     textAlign: "center",
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 4px 20px rgba(0, 0, 0, 0.3)" 
+      : "0 4px 20px rgba(0, 0, 0, 0.08)",
   },
   completedIcon: {
     marginBottom: 16,
@@ -80,13 +89,13 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1.5rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 8,
   },
   completedSubtitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.95rem",
-    color: "#2e7d32",
+    color: (props) => props.isDarkMode ? "#a5d6a7" : "#2e7d32",
     marginBottom: 24,
     lineHeight: 1.6,
   },
@@ -258,39 +267,43 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 16,
   },
   statCard: {
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 16,
     padding: 16,
     textAlign: "center",
-    boxShadow: "0 2px 12px rgba(0, 0, 0, 0.06)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 12px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 12px rgba(0, 0, 0, 0.06)",
   },
   statValue: {
     fontFamily: "'Reem Kufi', sans-serif",
     fontSize: "1.8rem",
     fontWeight: 700,
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     lineHeight: 1,
   },
   statLabel: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.75rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#808080" : "#757575",
     marginTop: 4,
   },
 
   // Timeline Card
   timelineCard: {
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
-    boxShadow: "0 2px 12px rgba(0, 0, 0, 0.06)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 12px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 12px rgba(0, 0, 0, 0.06)",
   },
   timelineTitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "1rem",
-    color: "#333",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#333",
     marginBottom: 16,
   },
   timelineRow: {
@@ -305,25 +318,27 @@ const useStyles = makeStyles((theme) => ({
   timelineLabel: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.75rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#808080" : "#757575",
     marginBottom: 4,
   },
   timelineValue: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.9rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     fontWeight: 600,
   },
   timelineArrow: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "1.5rem",
-    color: "#c8e6c9",
+    color: (props) => props.isDarkMode ? "#4caf50" : "#c8e6c9",
     margin: "0 12px",
   },
 
   // Tips Card
   tipsCard: {
-    background: "linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(135deg, #3d3000 0%, #5d4500 100%)" 
+      : "linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%)",
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
@@ -332,13 +347,13 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "1rem",
-    color: "#f57c00",
+    color: (props) => props.isDarkMode ? "#ffd54f" : "#f57c00",
     marginBottom: 8,
   },
   tipsText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#5d4037",
+    color: (props) => props.isDarkMode ? "#ffe082" : "#5d4037",
     lineHeight: 1.6,
   },
 
@@ -382,12 +397,13 @@ const useStyles = makeStyles((theme) => ({
   dialogPaper: {
     borderRadius: 20,
     padding: "8px 0",
+    backgroundColor: (props) => props.isDarkMode ? "#252525" : "#fff",
   },
   dialogTitle: {
     fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1.3rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     textAlign: "center",
     paddingBottom: 8,
   },
@@ -397,7 +413,7 @@ const useStyles = makeStyles((theme) => ({
   dialogLabel: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.9rem",
-    color: "#333",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#333",
     fontWeight: 600,
     marginBottom: 8,
     marginTop: 16,
@@ -409,9 +425,25 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiOutlinedInput-root": {
       borderRadius: 12,
       fontFamily: "'El Messiri', sans-serif",
+      backgroundColor: (props) => props.isDarkMode ? "#1e1e1e" : "#fff",
+      color: (props) => props.isDarkMode ? "#e0e0e0" : "inherit",
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: (props) => props.isDarkMode 
+          ? "rgba(129, 199, 132, 0.3)" 
+          : "rgba(0, 0, 0, 0.23)",
+      },
+      "&:hover .MuiOutlinedInput-notchedOutline": {
+        borderColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+      },
+      "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+        borderColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+      },
     },
     "& .MuiSelect-select": {
       fontFamily: "'El Messiri', sans-serif",
+    },
+    "& .MuiSelect-icon": {
+      color: (props) => props.isDarkMode ? "#81c784" : "inherit",
     },
   },
   dialogActions: {
@@ -421,7 +453,7 @@ const useStyles = makeStyles((theme) => ({
   },
   dialogCancelButton: {
     fontFamily: "'El Messiri', sans-serif",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
     textTransform: "none",
     padding: "10px 24px",
     borderRadius: 10,
@@ -443,23 +475,34 @@ const useStyles = makeStyles((theme) => ({
   // Enhanced Preset Menu
   menuPaper: {
     borderRadius: 16,
-    boxShadow: "0 8px 30px rgba(0, 0, 0, 0.15)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 8px 30px rgba(0, 0, 0, 0.4)" 
+      : "0 8px 30px rgba(0, 0, 0, 0.15)",
     marginTop: 4,
+    backgroundColor: (props) => props.isDarkMode ? "#252525" : "#fff",
   },
   presetMenuItem: {
     padding: "12px 16px",
-    borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
+    borderBottom: (props) => props.isDarkMode 
+      ? "1px solid rgba(255, 255, 255, 0.06)" 
+      : "1px solid rgba(0, 0, 0, 0.06)",
     transition: "all 0.2s ease",
     "&:last-child": {
       borderBottom: "none",
     },
     "&:hover": {
-      backgroundColor: "rgba(27, 94, 32, 0.08)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.15)" 
+        : "rgba(27, 94, 32, 0.08)",
     },
     "&.Mui-selected": {
-      backgroundColor: "rgba(27, 94, 32, 0.12)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.2)" 
+        : "rgba(27, 94, 32, 0.12)",
       "&:hover": {
-        backgroundColor: "rgba(27, 94, 32, 0.16)",
+        backgroundColor: (props) => props.isDarkMode 
+          ? "rgba(76, 175, 80, 0.25)" 
+          : "rgba(27, 94, 32, 0.16)",
       },
     },
   },
@@ -476,7 +519,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(27, 94, 32, 0.08)",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.15)" 
+      : "rgba(27, 94, 32, 0.08)",
     borderRadius: 10,
     flexShrink: 0,
   },
@@ -494,7 +539,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "0.95rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
   },
   presetDuration: {
     fontFamily: "'El Messiri', sans-serif",
@@ -508,7 +553,7 @@ const useStyles = makeStyles((theme) => ({
   presetDesc: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.75rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#808080" : "#757575",
     lineHeight: 1.3,
   },
   presetBadge: {
@@ -522,16 +567,16 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
   },
   badgeIntensive: {
-    backgroundColor: "#ffebee",
-    color: "#c62828",
+    backgroundColor: (props) => props.isDarkMode ? "rgba(198, 40, 40, 0.2)" : "#ffebee",
+    color: (props) => props.isDarkMode ? "#ef5350" : "#c62828",
   },
   badgeModerate: {
-    backgroundColor: "#fff3e0",
-    color: "#e65100",
+    backgroundColor: (props) => props.isDarkMode ? "rgba(230, 81, 0, 0.2)" : "#fff3e0",
+    color: (props) => props.isDarkMode ? "#ffb74d" : "#e65100",
   },
   badgeRelaxed: {
-    backgroundColor: "#e8f5e9",
-    color: "#2e7d32",
+    backgroundColor: (props) => props.isDarkMode ? "rgba(46, 125, 50, 0.2)" : "#e8f5e9",
+    color: (props) => props.isDarkMode ? "#81c784" : "#2e7d32",
   },
 }));
 

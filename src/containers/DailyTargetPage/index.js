@@ -19,6 +19,7 @@ import Header from "../../components/header";
 import useStyles from "./styles";
 import { useLanguage } from "../../i18n";
 import SEO from "../../components/SEO";
+import { useThemeContext } from "../../theme";
 
 // Juz data - pages per juz (standard mushaf has 604 pages, 30 juz)
 const JUZ_DATA = [
@@ -111,7 +112,8 @@ const TARGET_PRESETS = [
 ];
 
 const DailyTargetPage = () => {
-  const classes = useStyles();
+  const { isDarkMode } = useThemeContext();
+  const classes = useStyles({ isDarkMode });
   const Router = useHistory();
   const { t, language } = useLanguage();
   

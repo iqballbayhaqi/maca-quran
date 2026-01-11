@@ -8,9 +8,11 @@ import Header from "../../components/header";
 import useStyles from "./styles";
 import { useLanguage } from "../../i18n";
 import SEO from "../../components/SEO";
+import { useThemeContext } from "../../theme";
 
 const ReadingHistoryPage = () => {
-  const classes = useStyles();
+  const { isDarkMode } = useThemeContext();
+  const classes = useStyles({ isDarkMode });
   const Router = useHistory();
   const { t, language } = useLanguage();
   const [readingHistory, setReadingHistory] = useState([]);
@@ -375,14 +377,7 @@ const ReadingHistoryPage = () => {
           {Object.keys(groupedHistory).length > 0 ? (
             Object.entries(groupedHistory).slice(0, 10).map(([date, items]) => (
               <React.Fragment key={date}>
-                <div style={{ 
-                  padding: "8px 20px", 
-                  backgroundColor: "rgba(27, 94, 32, 0.04)",
-                  fontFamily: "'El Messiri', sans-serif",
-                  fontSize: "0.8rem",
-                  color: "#1b5e20",
-                  fontWeight: 600
-                }}>
+                <div className={classes.historyDateHeader}>
                   {date}
                 </div>
                 {items.map((item, index) => (

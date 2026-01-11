@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography, Button, Box } from "@material-ui/core";
 import useStyles from "./styles";
-import theme from "../../theme";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import SchoolIcon from "@material-ui/icons/School";
@@ -12,6 +11,7 @@ import Header from "../../components/header";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useHistory } from "react-router-dom";
 import { useLanguage } from "../../i18n";
+import { useThemeContext } from "../../theme";
 import SEO from "../../components/SEO";
 
 // Mapping: juz number -> array of {surah, startAyat, endAyat}
@@ -212,8 +212,9 @@ const JUZ_TO_SURAHS = {
 
 const MenuPage = () => {
   const Router = useHistory();
-  const classes = useStyles();
   const { t } = useLanguage();
+  const { isDarkMode } = useThemeContext();
+  const classes = useStyles({ isDarkMode });
   const [dataSurat, setDataSurat] = useState();
   const [historyRead, setHistoryRead] = useState();
   const [viewMode, setViewMode] = useState("all"); // "all" or "juz"
@@ -280,10 +281,10 @@ const MenuPage = () => {
       <Header />
 
       <div className={classes.greetingContainer}>
-        <Typography variant="h5" style={{ color: theme.palette.grey.main }}>
+        <Typography variant="h5" className={classes.greetingText}>
           {t("greeting")}
         </Typography>
-        <Typography variant="h5">{localStorage.getItem("nama")}</Typography>
+        <Typography variant="h5" className={classes.nameText}>{localStorage.getItem("nama")}</Typography>
       </div>
 
       {historyRead && historyRead.name.transliteration ? (

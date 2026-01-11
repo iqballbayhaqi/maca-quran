@@ -78,6 +78,11 @@ const en = {
   tajwidOff: "Off",
   tajwidLegend: "Color Legend",
 
+  // Dark Mode
+  darkMode: "Dark Mode",
+  darkModeOn: "On",
+  darkModeOff: "Off",
+
   // Reading History
   readingHistory: "Reading History",
   readingHistorySubtitle: "Track your Quran reading consistency",
@@ -148,6 +153,24 @@ const en = {
   correct: "Correct",
   attempted: "Attempted",
   accuracy: "Accuracy",
+
+  // Notes / Verse Notes
+  notes: "Notes",
+  myNotes: "📝 My Notes",
+  notesSubtitle: "Personal notes and highlighted favorite verses",
+  addNote: "Add Note",
+  editNote: "Edit Note",
+  deleteNote: "Delete Note",
+  writeYourNote: "Write your note...",
+  highlightColor: "Highlight Color",
+  noHighlight: "No Highlight",
+  saveNote: "Save",
+  noNotes: "No notes yet",
+  noNotesHint: "Tap the note icon on a verse to add personal notes",
+  noteDeleted: "Note deleted successfully",
+  noteSaved: "Note saved successfully",
+  confirmDeleteNote: "Are you sure you want to delete this note?",
+  viewNote: "View Note",
 };
 
 export default en;

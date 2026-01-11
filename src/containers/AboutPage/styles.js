@@ -3,9 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 20,
-    background: "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(180deg, #1a2e1a 0%, #121212 100%)"
+      : "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
     minHeight: "100vh",
     paddingBottom: 40,
+    transition: "background 0.3s ease",
   },
   heroSection: {
     textAlign: "center",
@@ -16,44 +19,45 @@ const useStyles = makeStyles((theme) => ({
     height: 120,
     margin: "auto",
     display: "block",
-    filter: "drop-shadow(0 10px 30px rgba(27, 94, 32, 0.3))",
+    filter: (props) => props.isDarkMode 
+      ? "drop-shadow(0 10px 30px rgba(76, 175, 80, 0.4))" 
+      : "drop-shadow(0 10px 30px rgba(27, 94, 32, 0.3))",
     marginBottom: 24,
   },
   appName: {
     fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "2rem",
-    background: "linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 8,
   },
   appTagline: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "1rem",
-    color: "#4caf50",
+    color: (props) => props.isDarkMode ? "#81c784" : "#4caf50",
     marginBottom: 8,
   },
   arabicText: {
     fontFamily: "'Amiri', serif",
     fontSize: "1.4rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#a5d6a7" : "#1b5e20",
     marginTop: 16,
     opacity: 0.8,
   },
   infoCard: {
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 20,
     padding: "24px",
     margin: "30px 16px",
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 4px 20px rgba(0, 0, 0, 0.3)" 
+      : "0 4px 20px rgba(0, 0, 0, 0.08)",
   },
   infoTitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "1.1rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 16,
     display: "flex",
     alignItems: "center",
@@ -67,7 +71,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     marginBottom: 16,
     padding: "12px 16px",
-    background: "rgba(27, 94, 32, 0.04)",
+    background: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.08)" 
+      : "rgba(27, 94, 32, 0.04)",
     borderRadius: 12,
     "&:last-child": {
       marginBottom: 0,
@@ -77,22 +83,22 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "0.85rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#808080" : "#757575",
     minWidth: 90,
   },
   infoValue: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.95rem",
-    color: "#333",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#333",
     flex: 1,
   },
   link: {
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     fontWeight: 600,
     textDecoration: "none",
     transition: "all 0.2s ease",
     "&:hover": {
-      color: "#2e7d32",
+      color: (props) => props.isDarkMode ? "#a5d6a7" : "#2e7d32",
       textDecoration: "underline",
     },
   },
@@ -110,7 +116,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     margin: "0 auto 16px",
-    boxShadow: "0 8px 25px rgba(27, 94, 32, 0.3)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 8px 25px rgba(76, 175, 80, 0.4)" 
+      : "0 8px 25px rgba(27, 94, 32, 0.3)",
   },
   creatorInitial: {
     fontFamily: "'Reem Kufi', sans-serif",
@@ -122,28 +130,32 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1.2rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 4,
   },
   creatorRole: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.9rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
   },
   footer: {
     textAlign: "center",
     marginTop: 30,
     padding: "20px",
-    borderTop: "1px solid rgba(0, 0, 0, 0.08)",
+    borderTop: (props) => props.isDarkMode 
+      ? "1px solid rgba(255, 255, 255, 0.08)" 
+      : "1px solid rgba(0, 0, 0, 0.08)",
   },
   footerText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#9e9e9e",
+    color: (props) => props.isDarkMode ? "#666" : "#9e9e9e",
   },
   versionBadge: {
     display: "inline-block",
-    background: "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(135deg, #1a3d1a 0%, #2e5d2e 100%)" 
+      : "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
     padding: "6px 16px",
     borderRadius: 20,
     marginTop: 16,
@@ -151,7 +163,7 @@ const useStyles = makeStyles((theme) => ({
   versionText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.8rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     fontWeight: 600,
   },
 }));

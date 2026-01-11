@@ -2,10 +2,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(180deg, #1a2e1a 0%, #121212 100%)"
+      : "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
     minHeight: "100vh",
     paddingTop: 20,
     paddingBottom: 140,
+    transition: "background 0.3s ease",
   },
   headerContainer: {
     display: "flex",
@@ -105,41 +108,53 @@ const useStyles = makeStyles((theme) => ({
     width: "calc(100% - 32px)",
     maxWidth: 412,
     padding: "12px 16px",
-    background: "linear-gradient(180deg, rgba(232, 245, 233, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(180deg, rgba(37, 37, 37, 0.95) 0%, rgba(30, 30, 30, 0.98) 100%)"
+      : "linear-gradient(180deg, rgba(232, 245, 233, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%)",
     backdropFilter: "blur(10px)",
-    boxShadow: "0 -4px 30px rgba(0, 0, 0, 0.15)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 -4px 30px rgba(0, 0, 0, 0.4)"
+      : "0 -4px 30px rgba(0, 0, 0, 0.15)",
     zIndex: 1000,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     boxSizing: "border-box",
     "& .rhap_container": {
       borderRadius: 16,
-      boxShadow: "0 2px 12px rgba(0, 0, 0, 0.08)",
-      background: "#fff",
+      boxShadow: (props) => props.isDarkMode 
+        ? "0 2px 12px rgba(0, 0, 0, 0.3)"
+        : "0 2px 12px rgba(0, 0, 0, 0.08)",
+      background: (props) => props.isDarkMode ? "#1e1e1e" : "#fff",
       padding: "8px 12px",
     },
     "& .rhap_main-controls-button": {
-      color: "#1b5e20",
+      color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_progress-filled": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_progress-indicator": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_button-clear": {
-      color: "#1b5e20",
+      color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_volume-indicator": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_volume-filled": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_time": {
       fontFamily: "'El Messiri', sans-serif",
       fontSize: "0.8rem",
-      color: "#1b5e20",
+      color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+    },
+    "& .rhap_progress-bar": {
+      background: (props) => props.isDarkMode ? "#333" : "#e0e0e0",
+    },
+    "& .rhap_volume-bar": {
+      background: (props) => props.isDarkMode ? "#333" : "#e0e0e0",
     },
   },
   ayatListContainer: {
@@ -155,17 +170,21 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 60,
   },
   loadingCard: {
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 16,
     padding: "24px 40px",
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 4px 20px rgba(0, 0, 0, 0.3)"
+      : "0 4px 20px rgba(0, 0, 0, 0.08)",
     textAlign: "center",
   },
   loadingIcon: {
     width: 50,
     height: 50,
     borderRadius: "50%",
-    background: "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%)"
+      : "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -173,18 +192,18 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   loadingSpinner: {
-    color: "#1b5e20 !important",
+    color: (props) => props.isDarkMode ? "#81c784 !important" : "#1b5e20 !important",
   },
   loadingArabic: {
     fontFamily: "'Amiri', serif",
     fontSize: "1.3rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 6,
   },
   loadingText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
     marginBottom: 4,
   },
   loadingDots: {
@@ -197,7 +216,7 @@ const useStyles = makeStyles((theme) => ({
     width: 6,
     height: 6,
     borderRadius: "50%",
-    background: "#1b5e20",
+    background: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     animation: "$bounce 1.4s infinite ease-in-out both",
     "&:nth-child(1)": {
       animationDelay: "-0.32s",

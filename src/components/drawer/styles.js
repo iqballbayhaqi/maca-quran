@@ -4,13 +4,18 @@ import mosqueImg from "../../images/mosque.jpg";
 const useStyles = makeStyles({
   drawerPaper: {
     width: 280,
-    background: "linear-gradient(180deg, #f8faf8 0%, #ffffff 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(180deg, #1a2e1a 0%, #1e1e1e 100%)"
+      : "linear-gradient(180deg, #f8faf8 0%, #ffffff 100%)",
+    transition: "background 0.3s ease",
     // Custom scrollbar styles
     "&::-webkit-scrollbar": {
       width: 6,
     },
     "&::-webkit-scrollbar-track": {
-      background: "rgba(27, 94, 32, 0.05)",
+      background: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.1)" 
+        : "rgba(27, 94, 32, 0.05)",
       borderRadius: 3,
     },
     "&::-webkit-scrollbar-thumb": {
@@ -63,7 +68,9 @@ const useStyles = makeStyles({
       left: 0,
       right: 0,
       height: 30,
-      background: "linear-gradient(180deg, transparent 0%, rgba(248, 250, 248, 0.3) 100%)",
+      background: (props) => props.isDarkMode 
+        ? "linear-gradient(180deg, transparent 0%, rgba(30, 30, 30, 0.3) 100%)"
+        : "linear-gradient(180deg, transparent 0%, rgba(248, 250, 248, 0.3) 100%)",
     },
   },
   headerIcon: {
@@ -94,11 +101,13 @@ const useStyles = makeStyles({
     padding: "12px 16px",
     transition: "all 0.2s ease",
     "&:hover": {
-      backgroundColor: "rgba(27, 94, 32, 0.08)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.15)" 
+        : "rgba(27, 94, 32, 0.08)",
     },
   },
   menuIcon: {
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     minWidth: 44,
     "& svg": {
       fontSize: 24,
@@ -109,7 +118,7 @@ const useStyles = makeStyles({
       fontFamily: "'El Messiri', sans-serif",
       fontWeight: 600,
       fontSize: "1rem",
-      color: "#333",
+      color: (props) => props.isDarkMode ? "#e0e0e0" : "#333",
     },
     "& .MuiListItemText-secondary": {
       fontFamily: "'El Messiri', sans-serif",
@@ -117,6 +126,7 @@ const useStyles = makeStyles({
       display: "flex",
       alignItems: "center",
       gap: 6,
+      color: (props) => props.isDarkMode ? "#a0a0a0" : "inherit",
     },
   },
   flagIcon: {
@@ -129,13 +139,15 @@ const useStyles = makeStyles({
   footer: {
     padding: "20px",
     marginTop: "auto",
-    borderTop: "1px solid rgba(0, 0, 0, 0.08)",
+    borderTop: (props) => props.isDarkMode 
+      ? "1px solid rgba(255, 255, 255, 0.12)" 
+      : "1px solid rgba(0, 0, 0, 0.08)",
     textAlign: "center",
   },
   footerText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.8rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
   },
   arabicDecor: {
     fontFamily: "'Amiri', serif",
@@ -160,7 +172,9 @@ const useStyles = makeStyles({
   },
   legendContainer: {
     padding: "8px 16px 16px 16px",
-    backgroundColor: "rgba(27, 94, 32, 0.04)",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.08)" 
+      : "rgba(27, 94, 32, 0.04)",
     borderRadius: 8,
     margin: "0 12px 8px 12px",
   },
@@ -168,7 +182,7 @@ const useStyles = makeStyles({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "0.85rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 8,
   },
   legendGrid: {
@@ -190,13 +204,13 @@ const useStyles = makeStyles({
   legendLabel: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.7rem",
-    color: "#555",
+    color: (props) => props.isDarkMode ? "#b0b0b0" : "#555",
     lineHeight: 1.2,
   },
   expandIcon: {
     marginLeft: "auto",
     transition: "transform 0.2s ease",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
     fontSize: 20,
   },
   expandIconOpen: {

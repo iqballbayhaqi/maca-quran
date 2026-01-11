@@ -11,9 +11,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useLanguage } from "../../i18n";
 import SEO from "../../components/SEO";
+import { useThemeContext } from "../../theme";
 
 const SearchPage = () => {
-  const classes = useStyles();
+  const { isDarkMode } = useThemeContext();
+  const classes = useStyles({ isDarkMode });
   const { t } = useLanguage();
   const [dataSurat, setDataSurat] = useState();
   const [dataSuratFiltered, setDataSuratFiltered] = useState();

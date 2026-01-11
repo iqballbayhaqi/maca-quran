@@ -78,6 +78,11 @@ const id = {
   tajwidOff: "Nonaktif",
   tajwidLegend: "Keterangan Warna",
 
+  // Dark Mode
+  darkMode: "Mode Gelap",
+  darkModeOn: "Aktif",
+  darkModeOff: "Nonaktif",
+
   // Reading History
   readingHistory: "Riwayat Bacaan",
   readingHistorySubtitle: "Tracking konsistensi membaca Al-Quran",
@@ -148,6 +153,24 @@ const id = {
   correct: "Benar",
   attempted: "Dicoba",
   accuracy: "Akurasi",
+
+  // Notes / Catatan Ayat
+  notes: "Catatan",
+  myNotes: "📝 Catatan Saya",
+  notesSubtitle: "Catatan pribadi dan highlight ayat favorit",
+  addNote: "Tambah Catatan",
+  editNote: "Edit Catatan",
+  deleteNote: "Hapus Catatan",
+  writeYourNote: "Tulis catatan Anda...",
+  highlightColor: "Warna Highlight",
+  noHighlight: "Tanpa Highlight",
+  saveNote: "Simpan",
+  noNotes: "Belum ada catatan",
+  noNotesHint: "Tap ikon catatan di ayat untuk menambahkan catatan pribadi",
+  noteDeleted: "Catatan berhasil dihapus",
+  noteSaved: "Catatan berhasil disimpan",
+  confirmDeleteNote: "Yakin ingin menghapus catatan ini?",
+  viewNote: "Lihat Catatan",
 };
 
 export default id;

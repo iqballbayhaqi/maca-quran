@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Box, IconButton, Collapse } from "@material-ui/core";
+import { Typography, Box, IconButton, Collapse, Snackbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
@@ -7,22 +7,30 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ShareIcon from "@material-ui/icons/Share";
+import NoteIcon from "@material-ui/icons/Note";
+import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import { useLanguage } from "../i18n";
 import { TajwidText } from "../tajwid";
 import { useHistory } from "react-router-dom";
+import NoteDialog from "./NoteDialog";
+import { useThemeContext } from "../theme";
 
 const Styles = makeStyles((theme) => ({
   ayatCard: {
-    backgroundColor: "#fff",
+    backgroundColor: (props) => props.isDarkMode ? "#252525" : "#fff",
     padding: "16px",
     borderRadius: 16,
     marginBottom: 12,
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 8px rgba(0, 0, 0, 0.3)"
+      : "0 2px 8px rgba(0, 0, 0, 0.05)",
     transition: "all 0.3s ease",
     border: "2px solid transparent",
   },
   ayatCardActive: {
-    background: "linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%)"
+      : "linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%)",
     border: "2px solid #2e7d32",
     boxShadow: "0 6px 25px rgba(27, 94, 32, 0.3)",
     transform: "scale(0.98)",
@@ -55,10 +63,14 @@ const Styles = makeStyles((theme) => ({
   },
   iconBtn: {
     padding: 8,
-    color: "#1b5e20",
-    backgroundColor: "rgba(27, 94, 32, 0.08)",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.15)" 
+      : "rgba(27, 94, 32, 0.08)",
     "&:hover": {
-      backgroundColor: "rgba(27, 94, 32, 0.15)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.25)" 
+        : "rgba(27, 94, 32, 0.15)",
     },
   },
   playBtn: {
@@ -79,6 +91,17 @@ const Styles = makeStyles((theme) => ({
     color: "#1976d2",
     backgroundColor: "rgba(25, 118, 210, 0.2)",
   },
+  noteBtn: {
+    color: "#9c27b0",
+    backgroundColor: "rgba(156, 39, 176, 0.08)",
+    "&:hover": {
+      backgroundColor: "rgba(156, 39, 176, 0.15)",
+    },
+  },
+  noteBtnActive: {
+    color: "#9c27b0",
+    backgroundColor: "rgba(156, 39, 176, 0.2)",
+  },
   shareBtn: {
     color: "#4caf50",
     backgroundColor: "rgba(76, 175, 80, 0.1)",
@@ -87,11 +110,15 @@ const Styles = makeStyles((theme) => ({
     },
   },
   expandBtn: {
-    color: "#757575",
-    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(255, 255, 255, 0.08)" 
+      : "rgba(0, 0, 0, 0.04)",
     transition: "transform 0.2s ease",
     "&:hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.08)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(255, 255, 255, 0.15)" 
+        : "rgba(0, 0, 0, 0.08)",
     },
   },
   expandBtnOpen: {
@@ -103,7 +130,7 @@ const Styles = makeStyles((theme) => ({
     fontFamily: "'Amiri', serif",
     fontSize: "1.6rem",
     lineHeight: 2,
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 8,
     direction: "rtl",
   },
@@ -111,19 +138,21 @@ const Styles = makeStyles((theme) => ({
   translationText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.9rem",
-    color: "#555",
+    color: (props) => props.isDarkMode ? "#b0b0b0" : "#555",
     lineHeight: 1.5,
   },
   // Expanded content
   expandedContent: {
     marginTop: 12,
     paddingTop: 12,
-    borderTop: "1px dashed rgba(0,0,0,0.1)",
+    borderTop: (props) => props.isDarkMode 
+      ? "1px dashed rgba(255,255,255,0.1)" 
+      : "1px dashed rgba(0,0,0,0.1)",
   },
   transliteration: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#888",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#888",
     fontStyle: "italic",
     marginBottom: 10,
     textAlign: "right",
@@ -133,7 +162,7 @@ const Styles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "0.8rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 4,
     marginTop: 10,
     display: "flex",
@@ -146,12 +175,48 @@ const Styles = makeStyles((theme) => ({
   tafsirText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#666",
+    color: (props) => props.isDarkMode ? "#b0b0b0" : "#666",
     lineHeight: 1.6,
     padding: "10px 12px",
-    background: "rgba(27, 94, 32, 0.04)",
+    background: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.1)" 
+      : "rgba(27, 94, 32, 0.04)",
     borderRadius: 8,
-    borderLeft: "3px solid #1b5e20",
+    borderLeft: (props) => props.isDarkMode 
+      ? "3px solid #81c784" 
+      : "3px solid #1b5e20",
+  },
+  // Note indicator
+  noteIndicator: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 8,
+    marginTop: 12,
+    padding: "10px 12px",
+    background: (props) => props.isDarkMode 
+      ? "rgba(156, 39, 176, 0.15)" 
+      : "rgba(156, 39, 176, 0.08)",
+    borderRadius: 8,
+    borderLeft: "3px solid #9c27b0",
+  },
+  noteIndicatorIcon: {
+    color: "#9c27b0",
+    fontSize: "1rem",
+    marginTop: 2,
+  },
+  noteIndicatorText: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontSize: "0.85rem",
+    color: (props) => props.isDarkMode ? "#b0b0b0" : "#666",
+    lineHeight: 1.5,
+    flex: 1,
+  },
+  snackbar: {
+    "& .MuiSnackbarContent-root": {
+      fontFamily: "'El Messiri', sans-serif",
+      borderRadius: 8,
+      backgroundColor: (props) => props.isDarkMode ? "#2e7d32" : "#1b5e20",
+    },
   },
 }));
 
@@ -162,15 +227,21 @@ const toArabicNumeral = (num) => {
 };
 
 const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
-  const classes = Styles();
   const { t } = useLanguage();
+  const { isDarkMode } = useThemeContext();
+  const classes = Styles({ isDarkMode });
   const Router = useHistory();
   const [expanded, setExpanded] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [noteDialogOpen, setNoteDialogOpen] = useState(false);
+  const [currentNote, setCurrentNote] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   // Get current user name for bookmark keys
   const userName = localStorage.getItem("nama") || "default";
   const bookmarkAyatKey = `bookmarks_ayat_${userName}`;
+  const notesKey = `ayat_notes_${userName}`;
 
   useEffect(() => {
     // Check if this ayat is bookmarked
@@ -180,7 +251,15 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
       const found = bookmarks.some((b) => b.number.inQuran === data.number.inQuran);
       setIsBookmarked(found);
     }
-  }, [data.number.inQuran, bookmarkAyatKey]);
+
+    // Check if this ayat has a note
+    const savedNotes = localStorage.getItem(notesKey);
+    if (savedNotes) {
+      const notes = JSON.parse(savedNotes);
+      const foundNote = notes.find((n) => n.ayatId === data.number.inQuran);
+      setCurrentNote(foundNote || null);
+    }
+  }, [data.number.inQuran, bookmarkAyatKey, notesKey]);
 
   const toggleBookmark = () => {
     const savedBookmarks = localStorage.getItem(bookmarkAyatKey);
@@ -212,10 +291,52 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
     Router.push("/share-ayat");
   };
 
+  // Handle save note
+  const handleSaveNote = (noteData) => {
+    const savedNotes = localStorage.getItem(notesKey);
+    let notes = savedNotes ? JSON.parse(savedNotes) : [];
+
+    // Check if note already exists
+    const existingIndex = notes.findIndex((n) => n.ayatId === noteData.ayatId);
+    if (existingIndex >= 0) {
+      notes[existingIndex] = noteData;
+    } else {
+      notes.push(noteData);
+    }
+
+    localStorage.setItem(notesKey, JSON.stringify(notes));
+    setCurrentNote(noteData);
+    setSnackbarMessage(t("noteSaved"));
+    setSnackbarOpen(true);
+  };
+
+  // Handle delete note
+  const handleDeleteNote = (ayatId) => {
+    const savedNotes = localStorage.getItem(notesKey);
+    let notes = savedNotes ? JSON.parse(savedNotes) : [];
+    notes = notes.filter((n) => n.ayatId !== ayatId);
+    localStorage.setItem(notesKey, JSON.stringify(notes));
+    setCurrentNote(null);
+    setSnackbarMessage(t("noteDeleted"));
+    setSnackbarOpen(true);
+  };
+
+  // Get highlight style
+  const getHighlightStyle = () => {
+    if (currentNote?.highlightColor) {
+      return {
+        background: `linear-gradient(135deg, ${currentNote.highlightColor}40 0%, ${currentNote.highlightColor}20 100%)`,
+        borderLeft: `4px solid ${currentNote.highlightColor}`,
+      };
+    }
+    return {};
+  };
+
   return (
     <div 
       className={`${classes.ayatCard} ${isActive ? classes.ayatCardActive : ''}`} 
       id={data.number.inQuran}
+      style={getHighlightStyle()}
     >
       {/* Header: Number + Action Buttons */}
       <Box className={classes.headerRow}>
@@ -231,6 +352,14 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
             size="small"
           >
             {isBookmarked ? <BookmarkIcon fontSize="small" /> : <BookmarkBorderIcon fontSize="small" />}
+          </IconButton>
+          <IconButton 
+            className={`${classes.iconBtn} ${classes.noteBtn} ${currentNote ? classes.noteBtnActive : ''}`}
+            onClick={() => setNoteDialogOpen(true)}
+            size="small"
+            title={currentNote ? t("editNote") : t("addNote")}
+          >
+            {currentNote ? <NoteIcon fontSize="small" /> : <NoteAddIcon fontSize="small" />}
           </IconButton>
           <IconButton 
             className={`${classes.iconBtn} ${classes.shareBtn}`}
@@ -266,6 +395,16 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
         {data.translation.id}
       </Typography>
 
+      {/* Note indicator */}
+      {currentNote?.note && (
+        <Box className={classes.noteIndicator} onClick={() => setNoteDialogOpen(true)} style={{ cursor: "pointer" }}>
+          <NoteIcon className={classes.noteIndicatorIcon} />
+          <Typography className={classes.noteIndicatorText}>
+            {currentNote.note}
+          </Typography>
+        </Box>
+      )}
+
       {/* Expanded Content: Transliteration + Tafsir */}
       <Collapse in={expanded}>
         <div className={classes.expandedContent}>
@@ -288,6 +427,27 @@ const MenuAyat = ({data, playSound, isActive, suratInfo}) => {
           </Typography>
         </div>
       </Collapse>
+
+      {/* Note Dialog */}
+      <NoteDialog
+        open={noteDialogOpen}
+        onClose={() => setNoteDialogOpen(false)}
+        ayatData={data}
+        suratInfo={suratInfo}
+        existingNote={currentNote}
+        onSave={handleSaveNote}
+        onDelete={handleDeleteNote}
+      />
+
+      {/* Snackbar for notifications */}
+      <Snackbar
+        className={classes.snackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={() => setSnackbarOpen(false)}
+        message={snackbarMessage}
+      />
     </div>
   );
 };

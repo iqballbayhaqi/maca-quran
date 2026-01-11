@@ -1,17 +1,16 @@
 import { Fragment } from "react";
 import routes from "./routes";
-import { ThemeProvider } from "@material-ui/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import theme from "./theme";
 import { LanguageProvider } from "./i18n";
 import { TajwidProvider } from "./tajwid";
+import { ThemeContextProvider } from "./theme";
 
 function App() {
   return (
     <Fragment>
       <LanguageProvider>
         <TajwidProvider>
-          <ThemeProvider theme={theme}>
+          <ThemeContextProvider>
             <Router>
               <Switch>
                 {routes.map((res) => (
@@ -21,7 +20,7 @@ function App() {
                 ))}
               </Switch>
             </Router>
-          </ThemeProvider>
+          </ThemeContextProvider>
         </TajwidProvider>
       </LanguageProvider>
     </Fragment>

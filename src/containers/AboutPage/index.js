@@ -8,9 +8,11 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { useLanguage } from "../../i18n";
 import SEO from "../../components/SEO";
+import { useThemeContext } from "../../theme";
 
 const AboutPage = () => {
-  const classes = useStyles();
+  const { isDarkMode } = useThemeContext();
+  const classes = useStyles({ isDarkMode });
   const { t } = useLanguage();
 
   return (

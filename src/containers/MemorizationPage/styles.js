@@ -2,10 +2,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(180deg, #1a2e1a 0%, #121212 100%)"
+      : "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
     minHeight: "100vh",
     paddingTop: 20,
     paddingBottom: 40,
+    transition: "background 0.3s ease",
   },
   headerCard: {
     textAlign: "center",
@@ -51,17 +54,19 @@ const useStyles = makeStyles((theme) => ({
   },
   // Selection Card
   selectionCard: {
-    backgroundColor: "#fff",
+    backgroundColor: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 16,
     padding: "20px",
     marginBottom: 16,
-    boxShadow: "0 2px 12px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 12px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 12px rgba(0, 0, 0, 0.08)",
   },
   selectionTitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "1rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 12,
   },
   selectContainer: {
@@ -71,43 +76,53 @@ const useStyles = makeStyles((theme) => ({
   selectLabel: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#666",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#666",
     marginBottom: 6,
     display: "block",
   },
   select: {
     fontFamily: "'El Messiri', sans-serif",
     borderRadius: 12,
+    backgroundColor: (props) => props.isDarkMode ? "#1e1e1e" : "#fff",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "inherit",
     "& .MuiSelect-select": {
       fontFamily: "'El Messiri', sans-serif",
       padding: "12px 14px",
     },
+    "& .MuiSelect-icon": {
+      color: (props) => props.isDarkMode ? "#81c784" : "inherit",
+    },
     "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: "rgba(27, 94, 32, 0.3)",
+      borderColor: (props) => props.isDarkMode 
+        ? "rgba(129, 199, 132, 0.3)" 
+        : "rgba(27, 94, 32, 0.3)",
       borderRadius: 12,
     },
     "&:hover .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#1b5e20",
+      borderColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#1b5e20",
+      borderColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
   },
   // Custom Menu Dropdown
   menuPaper: {
     borderRadius: 16,
     marginTop: 8,
-    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.15)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 8px 32px rgba(0, 0, 0, 0.4)" 
+      : "0 8px 32px rgba(0, 0, 0, 0.15)",
     maxHeight: 350,
+    backgroundColor: (props) => props.isDarkMode ? "#252525" : "#fff",
     "&::-webkit-scrollbar": {
       width: 6,
     },
     "&::-webkit-scrollbar-track": {
-      background: "#f1f1f1",
+      background: (props) => props.isDarkMode ? "#1e1e1e" : "#f1f1f1",
       borderRadius: 3,
     },
     "&::-webkit-scrollbar-thumb": {
-      background: "#1b5e20",
+      background: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
       borderRadius: 3,
     },
   },
@@ -123,23 +138,32 @@ const useStyles = makeStyles((theme) => ({
     transition: "all 0.2s ease",
     whiteSpace: "normal",
     overflow: "hidden",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "inherit",
     "&:hover": {
-      backgroundColor: "rgba(27, 94, 32, 0.08)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.15)" 
+        : "rgba(27, 94, 32, 0.08)",
     },
     "&.Mui-selected": {
-      backgroundColor: "rgba(27, 94, 32, 0.15)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.2)" 
+        : "rgba(27, 94, 32, 0.15)",
       "&:hover": {
-        backgroundColor: "rgba(27, 94, 32, 0.2)",
+        backgroundColor: (props) => props.isDarkMode 
+          ? "rgba(76, 175, 80, 0.25)" 
+          : "rgba(27, 94, 32, 0.2)",
       },
     },
   },
   menuItemDisabled: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#999",
+    color: (props) => props.isDarkMode ? "#666" : "#999",
     padding: "10px",
     textAlign: "center",
-    borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
+    borderBottom: (props) => props.isDarkMode 
+      ? "1px solid rgba(255, 255, 255, 0.08)" 
+      : "1px solid rgba(0, 0, 0, 0.08)",
     marginBottom: 4,
   },
   // Surah Item in Dropdown
@@ -182,7 +206,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "0.85rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -190,13 +214,13 @@ const useStyles = makeStyles((theme) => ({
   surahNameArabic: {
     fontFamily: "'Amiri', serif",
     fontSize: "0.9rem",
-    color: "#2e7d32",
+    color: (props) => props.isDarkMode ? "#4caf50" : "#2e7d32",
     flexShrink: 0,
   },
   surahTranslation: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.7rem",
-    color: "#888",
+    color: (props) => props.isDarkMode ? "#808080" : "#888",
     marginTop: 1,
     whiteSpace: "nowrap",
     overflow: "hidden",
@@ -211,8 +235,10 @@ const useStyles = makeStyles((theme) => ({
   surahMetaBadge: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.6rem",
-    color: "#666",
-    backgroundColor: "rgba(27, 94, 32, 0.1)",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#666",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.15)" 
+      : "rgba(27, 94, 32, 0.1)",
     padding: "1px 6px",
     borderRadius: 8,
     whiteSpace: "nowrap",
@@ -249,11 +275,13 @@ const useStyles = makeStyles((theme) => ({
   },
   // Memorization Area
   memorizationArea: {
-    backgroundColor: "#fff",
+    backgroundColor: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 16,
     padding: "20px",
     marginBottom: 16,
-    boxShadow: "0 2px 12px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 12px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 12px rgba(0, 0, 0, 0.08)",
   },
   surahInfo: {
     display: "flex",
@@ -261,25 +289,31 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     marginBottom: 16,
     paddingBottom: 12,
-    borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
+    borderBottom: (props) => props.isDarkMode 
+      ? "1px solid rgba(255, 255, 255, 0.08)" 
+      : "1px solid rgba(0, 0, 0, 0.08)",
   },
   surahName: {
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "1rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
   },
   ayatProgress: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#666",
-    backgroundColor: "rgba(27, 94, 32, 0.1)",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#666",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.15)" 
+      : "rgba(27, 94, 32, 0.1)",
     padding: "4px 12px",
     borderRadius: 20,
   },
   // Ayat Card
   ayatCard: {
-    backgroundColor: "rgba(27, 94, 32, 0.04)",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.08)" 
+      : "rgba(27, 94, 32, 0.04)",
     borderRadius: 12,
     padding: "20px",
     marginBottom: 16,
@@ -308,7 +342,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Amiri', serif",
     fontSize: "1.8rem",
     lineHeight: 2.2,
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 16,
     direction: "rtl",
     paddingTop: 40,
@@ -321,10 +355,12 @@ const useStyles = makeStyles((theme) => ({
   translationText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.95rem",
-    color: "#555",
+    color: (props) => props.isDarkMode ? "#b0b0b0" : "#555",
     lineHeight: 1.6,
     paddingTop: 12,
-    borderTop: "1px dashed rgba(0, 0, 0, 0.1)",
+    borderTop: (props) => props.isDarkMode 
+      ? "1px dashed rgba(255, 255, 255, 0.1)" 
+      : "1px dashed rgba(0, 0, 0, 0.1)",
   },
   // Control Buttons
   controlButtons: {
@@ -359,11 +395,13 @@ const useStyles = makeStyles((theme) => ({
   },
   // Quiz Section
   quizSection: {
-    backgroundColor: "#fff",
+    backgroundColor: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 16,
     padding: "20px",
     marginBottom: 16,
-    boxShadow: "0 2px 12px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 12px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 12px rgba(0, 0, 0, 0.08)",
     border: "2px solid #ff9800",
   },
   quizHeader: {
@@ -385,10 +423,12 @@ const useStyles = makeStyles((theme) => ({
   quizQuestion: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.95rem",
-    color: "#555",
+    color: (props) => props.isDarkMode ? "#b0b0b0" : "#555",
     marginBottom: 16,
     padding: "12px",
-    backgroundColor: "rgba(255, 152, 0, 0.1)",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(255, 152, 0, 0.15)" 
+      : "rgba(255, 152, 0, 0.1)",
     borderRadius: 8,
   },
   quizAyatPreview: {
@@ -396,23 +436,29 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Amiri', serif",
     fontSize: "1.5rem",
     lineHeight: 2,
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginBottom: 16,
     direction: "rtl",
     padding: "16px",
-    backgroundColor: "rgba(27, 94, 32, 0.05)",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.1)" 
+      : "rgba(27, 94, 32, 0.05)",
     borderRadius: 8,
-    borderRight: "4px solid #1b5e20",
+    borderRight: (props) => props.isDarkMode 
+      ? "4px solid #81c784" 
+      : "4px solid #1b5e20",
   },
   quizAnswer: {
     textAlign: "right",
     fontFamily: "'Amiri', serif",
     fontSize: "1.5rem",
     lineHeight: 2,
-    color: "#2e7d32",
+    color: (props) => props.isDarkMode ? "#4caf50" : "#2e7d32",
     direction: "rtl",
     padding: "16px",
-    backgroundColor: "rgba(76, 175, 80, 0.1)",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.15)" 
+      : "rgba(76, 175, 80, 0.1)",
     borderRadius: 8,
     borderRight: "4px solid #4caf50",
     marginBottom: 16,
@@ -451,42 +497,64 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
     fontSize: "0.85rem",
     flex: 1,
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+    borderColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+    "&:hover": {
+      borderColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.1)" 
+        : "rgba(27, 94, 32, 0.05)",
+    },
+    "&.Mui-disabled": {
+      color: (props) => props.isDarkMode ? "#555" : "#ccc",
+      borderColor: (props) => props.isDarkMode ? "#555" : "#ccc",
+    },
   },
   // Audio Player
   audioContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: (props) => props.isDarkMode ? "#1e1e1e" : "#fff",
     borderRadius: 16,
     padding: "16px",
     marginBottom: 16,
-    boxShadow: "0 2px 12px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 12px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 12px rgba(0, 0, 0, 0.08)",
     "& .rhap_container": {
       borderRadius: 12,
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
-      background: "#f8faf8",
+      boxShadow: (props) => props.isDarkMode 
+        ? "0 2px 8px rgba(0, 0, 0, 0.2)" 
+        : "0 2px 8px rgba(0, 0, 0, 0.05)",
+      background: (props) => props.isDarkMode ? "#252525" : "#f8faf8",
       padding: "8px 12px",
     },
     "& .rhap_main-controls-button": {
-      color: "#1b5e20",
+      color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_progress-filled": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_progress-indicator": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_button-clear": {
-      color: "#1b5e20",
+      color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_volume-indicator": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_volume-filled": {
-      backgroundColor: "#1b5e20",
+      backgroundColor: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     },
     "& .rhap_time": {
       fontFamily: "'El Messiri', sans-serif",
       fontSize: "0.8rem",
-      color: "#1b5e20",
+      color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+    },
+    "& .rhap_progress-bar": {
+      backgroundColor: (props) => props.isDarkMode ? "#404040" : "#e0e0e0",
+    },
+    "& .rhap_volume-bar": {
+      backgroundColor: (props) => props.isDarkMode ? "#404040" : "#e0e0e0",
     },
   },
   // Loading
@@ -499,30 +567,34 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 60,
   },
   loadingCard: {
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 16,
     padding: "24px 40px",
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 4px 20px rgba(0, 0, 0, 0.3)" 
+      : "0 4px 20px rgba(0, 0, 0, 0.08)",
     textAlign: "center",
   },
   loadingSpinner: {
-    color: "#1b5e20 !important",
+    color: (props) => props.isDarkMode ? "#81c784 !important" : "#1b5e20 !important",
     marginBottom: 12,
   },
   loadingText: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.9rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
   },
   // Mode Tabs
   modeTabs: {
     display: "flex",
     gap: 8,
     marginBottom: 16,
-    backgroundColor: "#fff",
+    backgroundColor: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 12,
     padding: 8,
-    boxShadow: "0 2px 12px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 12px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 12px rgba(0, 0, 0, 0.08)",
   },
   modeTab: {
     flex: 1,
@@ -532,13 +604,15 @@ const useStyles = makeStyles((theme) => ({
     padding: "12px 16px",
     textTransform: "none",
     fontSize: "0.9rem",
-    color: "#666",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#666",
     border: "none",
     backgroundColor: "transparent",
     cursor: "pointer",
     transition: "all 0.2s ease",
     "&:hover": {
-      backgroundColor: "rgba(27, 94, 32, 0.08)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.15)" 
+        : "rgba(27, 94, 32, 0.08)",
     },
   },
   modeTabActive: {
@@ -550,11 +624,13 @@ const useStyles = makeStyles((theme) => ({
   },
   // Stats Card
   statsCard: {
-    backgroundColor: "#fff",
+    backgroundColor: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 16,
     padding: "16px 20px",
     marginBottom: 16,
-    boxShadow: "0 2px 12px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 12px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 12px rgba(0, 0, 0, 0.08)",
     display: "flex",
     justifyContent: "space-around",
     textAlign: "center",
@@ -568,12 +644,12 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1.5rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
   },
   statLabel: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.75rem",
-    color: "#888",
+    color: (props) => props.isDarkMode ? "#808080" : "#888",
   },
   // Change Surah Button
   changeSurahBtn: {
@@ -582,6 +658,12 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
     fontSize: "0.9rem",
     marginTop: 16,
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+    "&:hover": {
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.1)" 
+        : "rgba(27, 94, 32, 0.05)",
+    },
   },
 }));
 

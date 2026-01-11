@@ -12,8 +12,11 @@ import TrackChangesIcon from "@material-ui/icons/TrackChanges";
 import SearchIcon from "@material-ui/icons/Search";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
+import NoteIcon from "@material-ui/icons/Note";
 import LanguageIcon from "@material-ui/icons/Language";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
 import ColorLensIcon from "@material-ui/icons/ColorLens";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SchoolIcon from "@material-ui/icons/School";
@@ -21,13 +24,15 @@ import Flag from "react-world-flags";
 import { useHistory } from "react-router-dom";
 import { useLanguage } from "../../i18n";
 import { useTajwid, TAJWID_LEGEND } from "../../tajwid";
+import { useThemeContext } from "../../theme";
 import useStyles from "./styles";
 
 export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
   const Router = useHistory();
-  const classes = useStyles();
   const { t, language, toggleLanguage } = useLanguage();
   const { tajwidEnabled, toggleTajwid } = useTajwid();
+  const { isDarkMode, toggleDarkMode } = useThemeContext();
+  const classes = useStyles({ isDarkMode });
   const [showLegend, setShowLegend] = useState(false);
 
   const dataLocal = JSON.parse(localStorage.getItem("history"));
@@ -80,6 +85,17 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
               <BookmarkIcon />
             </ListItemIcon>
             <ListItemText primary={t("bookmark")} className={classes.menuText} />
+          </ListItem>
+
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={() => handleNavigation("/notes")}
+          >
+            <ListItemIcon className={classes.menuIcon}>
+              <NoteIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("notes")} className={classes.menuText} />
           </ListItem>
 
           <ListItem 
@@ -208,6 +224,32 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
                 </span>
               }
               className={classes.menuText} 
+            />
+          </ListItem>
+
+          {/* Dark Mode Toggle */}
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={toggleDarkMode}
+          >
+            <ListItemIcon className={classes.menuIcon}>
+              {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+            </ListItemIcon>
+            <ListItemText 
+              primary={t("darkMode")} 
+              secondary={isDarkMode ? t("darkModeOn") : t("darkModeOff")}
+              className={classes.menuText} 
+            />
+            <Switch
+              checked={isDarkMode}
+              onChange={(e) => {
+                e.stopPropagation();
+                toggleDarkMode();
+              }}
+              onClick={(e) => e.stopPropagation()}
+              size="small"
+              color="primary"
             />
           </ListItem>
 

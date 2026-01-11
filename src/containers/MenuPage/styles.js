@@ -3,30 +3,29 @@ import backgroundImg from "../../images/background.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(180deg, #1a2e1a 0%, #121212 100%)"
+      : "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
     minHeight: "100vh",
     paddingTop: 20,
     paddingBottom: 30,
+    transition: "background 0.3s ease",
   },
   greetingContainer: {
     paddingTop: 20,
-    "& h5:first-child": {
-      fontFamily: "'El Messiri', sans-serif",
-      fontSize: "1rem",
-      fontWeight: 500,
-      color: "#757575",
-      marginBottom: 4,
-    },
-    "& h5:last-child": {
-      fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
-      fontSize: "1.8rem",
-      fontWeight: 700,
-      color: "#1b5e20",
-      background: "linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%)",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-      backgroundClip: "text",
-    },
+  },
+  greetingText: {
+    fontFamily: "'El Messiri', sans-serif",
+    fontSize: "1rem",
+    fontWeight: 500,
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
+    marginBottom: 4,
+  },
+  nameText: {
+    fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
+    fontSize: "1.8rem",
+    fontWeight: 700,
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
   },
   lastHistoryContainer: {
     display: "flex",
@@ -91,12 +90,16 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     padding: "12px 4px",
     borderRadius: 16,
-    background: "#fff",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 8px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 8px rgba(0, 0, 0, 0.08)",
     transition: "all 0.3s ease",
     "&:hover": {
       transform: "translateY(-3px)",
-      boxShadow: "0 6px 20px rgba(0, 0, 0, 0.12)",
+      boxShadow: (props) => props.isDarkMode 
+        ? "0 6px 20px rgba(0, 0, 0, 0.4)" 
+        : "0 6px 20px rgba(0, 0, 0, 0.12)",
     },
     "&:active": {
       transform: "scale(0.95)",
@@ -119,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif !important",
     fontSize: "0.7rem !important",
     fontWeight: "600 !important",
-    color: "#424242",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#424242",
     textAlign: "center",
     lineHeight: "1.2 !important",
     maxWidth: "100%",
@@ -131,19 +134,23 @@ const useStyles = makeStyles((theme) => ({
   },
   surahListContainer: {
     marginTop: 25,
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#1e1e1e" : "#fff",
     borderRadius: 24,
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 4px 20px rgba(0, 0, 0, 0.3)" 
+      : "0 4px 20px rgba(0, 0, 0, 0.08)",
     overflow: "hidden",
     padding: "10px 0",
   },
   viewToggleContainer: {
     marginTop: 20,
     display: "flex",
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 16,
     padding: 4,
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 2px 8px rgba(0, 0, 0, 0.3)" 
+      : "0 2px 8px rgba(0, 0, 0, 0.08)",
   },
   viewToggleButton: {
     flex: 1,
@@ -155,12 +162,14 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif !important",
     fontSize: "0.95rem !important",
     fontWeight: "600 !important",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
     transition: "all 0.3s ease",
     textTransform: "none !important",
     "&:hover": {
-      color: "#1b5e20",
-      background: "rgba(27, 94, 32, 0.05)",
+      color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+      background: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.1)" 
+        : "rgba(27, 94, 32, 0.05)",
     },
   },
   viewToggleButtonActive: {

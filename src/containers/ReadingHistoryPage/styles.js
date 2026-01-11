@@ -2,16 +2,19 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(180deg, #1a2e1a 0%, #121212 100%)"
+      : "linear-gradient(180deg, #e8f5e9 0%, #f5f5f5 100%)",
     minHeight: "100vh",
     paddingTop: 20,
     paddingBottom: 30,
+    transition: "background 0.3s ease",
   },
   pageTitle: {
     fontFamily: "'Reem Kufi', 'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1.5rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     marginTop: 20,
     marginBottom: 8,
     textAlign: "center",
@@ -19,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   pageSubtitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.9rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#a0a0a0" : "#757575",
     textAlign: "center",
     marginBottom: 20,
   },
@@ -128,11 +131,13 @@ const useStyles = makeStyles((theme) => ({
 
   // Calendar Section
   calendarSection: {
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 20,
     padding: 20,
     marginBottom: 20,
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 4px 20px rgba(0, 0, 0, 0.3)" 
+      : "0 4px 20px rgba(0, 0, 0, 0.08)",
   },
   calendarHeader: {
     display: "flex",
@@ -144,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "1rem",
-    color: "#333",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#333",
   },
   calendarNav: {
     display: "flex",
@@ -153,13 +158,13 @@ const useStyles = makeStyles((theme) => ({
   },
   navButton: {
     padding: 4,
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
   },
   calendarMonthYear: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.9rem",
     fontWeight: 600,
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     minWidth: 120,
     textAlign: "center",
   },
@@ -172,7 +177,7 @@ const useStyles = makeStyles((theme) => ({
   weekDay: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.7rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#808080" : "#757575",
     textAlign: "center",
     padding: 4,
   },
@@ -189,11 +194,13 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 8,
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#333",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#333",
     cursor: "pointer",
     transition: "all 0.2s ease",
     "&:hover": {
-      backgroundColor: "rgba(27, 94, 32, 0.1)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.15)" 
+        : "rgba(27, 94, 32, 0.1)",
     },
   },
   calendarDayActive: {
@@ -202,14 +209,16 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 2px 8px rgba(27, 94, 32, 0.3)",
   },
   calendarDayToday: {
-    border: "2px solid #1b5e20",
+    border: (props) => props.isDarkMode 
+      ? "2px solid #81c784" 
+      : "2px solid #1b5e20",
     fontWeight: 700,
   },
   calendarDayEmpty: {
     visibility: "hidden",
   },
   calendarDayDisabled: {
-    color: "#ccc",
+    color: (props) => props.isDarkMode ? "#555" : "#ccc",
     cursor: "default",
     "&:hover": {
       backgroundColor: "transparent",
@@ -218,20 +227,24 @@ const useStyles = makeStyles((theme) => ({
 
   // History Section
   historySection: {
-    background: "#fff",
+    background: (props) => props.isDarkMode ? "#252525" : "#fff",
     borderRadius: 20,
-    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+    boxShadow: (props) => props.isDarkMode 
+      ? "0 4px 20px rgba(0, 0, 0, 0.3)" 
+      : "0 4px 20px rgba(0, 0, 0, 0.08)",
     overflow: "hidden",
   },
   historyHeader: {
     padding: "16px 20px",
-    borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
+    borderBottom: (props) => props.isDarkMode 
+      ? "1px solid rgba(255, 255, 255, 0.06)" 
+      : "1px solid rgba(0, 0, 0, 0.06)",
   },
   historyTitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "1rem",
-    color: "#333",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#333",
     display: "flex",
     alignItems: "center",
     gap: 8,
@@ -240,15 +253,29 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 400,
     overflowY: "auto",
   },
+  historyDateHeader: {
+    padding: "8px 20px",
+    backgroundColor: (props) => props.isDarkMode 
+      ? "rgba(76, 175, 80, 0.1)" 
+      : "rgba(27, 94, 32, 0.04)",
+    fontFamily: "'El Messiri', sans-serif",
+    fontSize: "0.8rem",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
+    fontWeight: 600,
+  },
   historyItem: {
     display: "flex",
     alignItems: "center",
     padding: "16px 20px",
-    borderBottom: "1px solid rgba(0, 0, 0, 0.04)",
+    borderBottom: (props) => props.isDarkMode 
+      ? "1px solid rgba(255, 255, 255, 0.04)" 
+      : "1px solid rgba(0, 0, 0, 0.04)",
     cursor: "pointer",
     transition: "all 0.2s ease",
     "&:hover": {
-      backgroundColor: "rgba(27, 94, 32, 0.04)",
+      backgroundColor: (props) => props.isDarkMode 
+        ? "rgba(76, 175, 80, 0.1)" 
+        : "rgba(27, 94, 32, 0.04)",
     },
     "&:last-child": {
       borderBottom: "none",
@@ -260,7 +287,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
+    background: (props) => props.isDarkMode 
+      ? "linear-gradient(135deg, #1a2e1a 0%, #2e7d32 100%)" 
+      : "linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)",
     borderRadius: 12,
     marginRight: 16,
     position: "relative",
@@ -268,7 +297,7 @@ const useStyles = makeStyles((theme) => ({
       content: '""',
       position: "absolute",
       inset: 2,
-      background: "#fff",
+      background: (props) => props.isDarkMode ? "#252525" : "#fff",
       borderRadius: 10,
     },
   },
@@ -276,7 +305,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 700,
     fontSize: "1rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     position: "relative",
     zIndex: 1,
   },
@@ -287,24 +316,24 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "1rem",
-    color: "#212121",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#212121",
     marginBottom: 2,
   },
   historyItemMeta: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.75rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#808080" : "#757575",
   },
   historyItemTime: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.75rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
     textAlign: "right",
   },
   historyItemArabic: {
     fontFamily: "'Amiri', serif",
     fontSize: "1.3rem",
-    color: "#1b5e20",
+    color: (props) => props.isDarkMode ? "#81c784" : "#1b5e20",
   },
 
   // Empty State
@@ -321,13 +350,13 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'El Messiri', sans-serif",
     fontWeight: 600,
     fontSize: "1.1rem",
-    color: "#333",
+    color: (props) => props.isDarkMode ? "#e0e0e0" : "#333",
     marginBottom: 8,
   },
   emptySubtitle: {
     fontFamily: "'El Messiri', sans-serif",
     fontSize: "0.85rem",
-    color: "#757575",
+    color: (props) => props.isDarkMode ? "#808080" : "#757575",
   },
 
   // Milestone Badge
@@ -351,6 +380,7 @@ const useStyles = makeStyles((theme) => ({
   clearButton: {
     marginTop: 16,
     textAlign: "center",
+    paddingBottom: 16,
   },
   clearButtonText: {
     fontFamily: "'El Messiri', sans-serif",
