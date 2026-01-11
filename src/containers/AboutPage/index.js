@@ -39,7 +39,7 @@ const AboutPage = () => {
         </Typography>
         <div className={classes.versionBadge}>
           <Typography className={classes.versionText}>
-            Version 1.0.0
+            Version 2.0.0
           </Typography>
         </div>
       </div>

@@ -20,6 +20,7 @@ import Brightness7Icon from "@material-ui/icons/Brightness7";
 import ColorLensIcon from "@material-ui/icons/ColorLens";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SchoolIcon from "@material-ui/icons/School";
+import GetAppIcon from "@material-ui/icons/GetApp";
 import Flag from "react-world-flags";
 import { useHistory } from "react-router-dom";
 import { useLanguage } from "../../i18n";
@@ -251,6 +252,18 @@ export default function TemporaryDrawer({ isDrawerOpen, isDrawerClose }) {
               size="small"
               color="primary"
             />
+          </ListItem>
+
+          {/* Install Tutorial */}
+          <ListItem 
+            button 
+            className={classes.menuItem}
+            onClick={() => handleNavigation("/install")}
+          >
+            <ListItemIcon className={classes.menuIcon}>
+              <GetAppIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("installTutorial")} className={classes.menuText} />
           </ListItem>
 
           {/* About */}

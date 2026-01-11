@@ -171,6 +171,27 @@ const id = {
   noteSaved: "Catatan berhasil disimpan",
   confirmDeleteNote: "Yakin ingin menghapus catatan ini?",
   viewNote: "Lihat Catatan",
+
+  // Install Tutorial
+  installTutorial: "Install Aplikasi",
+  installTitle: "Install Maca Quran",
+  installSubtitle: "Pasang aplikasi di perangkatmu untuk akses lebih cepat dan mudah",
+  installNow: "Install Sekarang",
+  alreadyInstalled: "Aplikasi sudah terinstall! ✓",
+  installBenefits: "Keuntungan Install Aplikasi",
+  benefit1: "Akses lebih cepat dari home screen",
+  benefit2: "Tampilan layar penuh seperti aplikasi native",
+  benefit3: "Tidak perlu download dari Play Store / App Store",
+  benefit4: "Hemat kuota, ukuran sangat kecil",
+  installAndroidStep1: "Tap tombol menu (⋮) di pojok kanan atas browser Chrome",
+  installAndroidStep2: "Pilih \"Install aplikasi\" atau \"Tambahkan ke layar utama\"",
+  installAndroidStep3: "Tap \"Install\" dan aplikasi akan muncul di home screen",
+  installIosStep1: "Tap tombol Share (kotak dengan panah ke atas) di Safari",
+  installIosStep2: "Scroll ke bawah dan pilih \"Tambahkan ke Layar Utama\"",
+  installIosStep3: "Tap \"Tambah\" dan aplikasi akan muncul di home screen",
+  installDesktopStep1: "Klik ikon install (⊕) di address bar atau menu browser",
+  installDesktopStep2: "Klik \"Install\" dan aplikasi akan terbuka di window terpisah",
+  installNote: "Catatan: Pastikan menggunakan browser Chrome (Android/Desktop) atau Safari (iOS) untuk pengalaman terbaik.",
 };
 
 export default id;

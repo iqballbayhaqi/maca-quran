@@ -136,6 +136,46 @@ const useStyles = makeStyles((theme) => ({
       opacity: 0.1,
       color: "#1b5e20",
     },
+    inputContainer: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 12,
+      position: "relative",
+      zIndex: 1,
+      padding: "0 20px",
+      width: "100%",
+      maxWidth: 300,
+    },
+    inputLabel: {
+      color: "#fff",
+      fontFamily: "'El Messiri', sans-serif",
+      fontSize: "1rem",
+      textAlign: "center",
+      textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
+    },
+    nameInput: {
+      width: "100%",
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "rgba(255, 255, 255, 0.95)",
+        borderRadius: 25,
+        "& fieldset": {
+          borderColor: "transparent",
+        },
+        "&:hover fieldset": {
+          borderColor: "#ff9800",
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: "#ff9800",
+        },
+      },
+      "& .MuiOutlinedInput-input": {
+        padding: "12px 20px",
+        fontFamily: "'El Messiri', sans-serif",
+        textAlign: "center",
+        fontSize: "1rem",
+      },
+    },
   }));
 
   export default useStyles;

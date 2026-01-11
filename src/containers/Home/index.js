@@ -1,10 +1,9 @@
-import React from "react";
-import { Container, Typography, Button, Box } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Container, Typography, Button, Box, TextField } from "@material-ui/core";
 import { MenuBook, Star } from "@material-ui/icons";
 import quranImage from "../../images/quran.png";
 import useStyles from "./styles";
 import { useHistory } from "react-router-dom";
-import swal from 'sweetalert';
 import { useLanguage } from "../../i18n";
 import SEO from "../../components/SEO";
 
@@ -12,22 +11,27 @@ const Home = () => {
   const classes = useStyles();
   const Router = useHistory();
   const { t } = useLanguage();
+  const [nama, setNama] = useState("");
 
-  const mulaiMembaca = () => {
-    swal({
-      text: t("introPrompt"),
-      content: "input",
-      button: {
-        text: t("introButton"),
-        closeModal: false,
-      },
-    })
-    .then(name => {
-      localStorage.setItem("nama", name);
-      Router.push("/menu")
-      swal.close()
-    })
-  }
+  useEffect(() => {
+    const savedNama = localStorage.getItem("nama");
+    if (savedNama) {
+      setNama(savedNama);
+    }
+  }, []);
+
+  const handleSubmit = () => {
+    if (nama.trim()) {
+      localStorage.setItem("nama", nama.trim());
+      Router.push("/menu");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
 
   return (
     <Container maxWidth="xs" className={classes.root}>
@@ -56,14 +60,30 @@ const Home = () => {
 
       <div className={classes.illustrationContainer}>
         <img src={quranImage} className={classes.quranImage} alt="quran" />
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.btnGetStarted}
-          onClick={mulaiMembaca}
-        >
-          {t("startReading")}
-        </Button>
+        
+        <div className={classes.inputContainer}>
+          <Typography className={classes.inputLabel}>
+            {t("introPrompt")}
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            value={nama}
+            onChange={(e) => setNama(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Masukkan nama..."
+            className={classes.nameInput}
+          />
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.btnGetStarted}
+            onClick={handleSubmit}
+            disabled={!nama.trim()}
+          >
+            {t("startReading")}
+          </Button>
+        </div>
       </div>
     </Container>
   );

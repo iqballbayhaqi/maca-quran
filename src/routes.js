@@ -10,6 +10,7 @@ import Memorization from "./containers/MemorizationPage";
 import ReadingHistory from "./containers/ReadingHistoryPage";
 import DailyTarget from "./containers/DailyTargetPage";
 import Notes from "./containers/NotesPage";
+import InstallTutorial from "./containers/InstallTutorialPage";
 
 const routes = [
     {
@@ -94,6 +95,13 @@ const routes = [
         name: "Notes",
         path: "/notes",
         page: <Notes/>,
+        exact: false
+    },
+    {
+        id: 13,
+        name: "InstallTutorial",
+        path: "/install",
+        page: <InstallTutorial/>,
         exact: false
     }
 ]

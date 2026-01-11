@@ -171,6 +171,27 @@ const en = {
   noteSaved: "Note saved successfully",
   confirmDeleteNote: "Are you sure you want to delete this note?",
   viewNote: "View Note",
+
+  // Install Tutorial
+  installTutorial: "Install App",
+  installTitle: "Install Maca Quran",
+  installSubtitle: "Install the app on your device for faster and easier access",
+  installNow: "Install Now",
+  alreadyInstalled: "App is already installed! ✓",
+  installBenefits: "Benefits of Installing the App",
+  benefit1: "Quick access from home screen",
+  benefit2: "Full screen display like native app",
+  benefit3: "No need to download from Play Store / App Store",
+  benefit4: "Save data, very small size",
+  installAndroidStep1: "Tap the menu button (⋮) at the top right corner of Chrome browser",
+  installAndroidStep2: "Select \"Install app\" or \"Add to Home screen\"",
+  installAndroidStep3: "Tap \"Install\" and the app will appear on your home screen",
+  installIosStep1: "Tap the Share button (box with arrow pointing up) in Safari",
+  installIosStep2: "Scroll down and select \"Add to Home Screen\"",
+  installIosStep3: "Tap \"Add\" and the app will appear on your home screen",
+  installDesktopStep1: "Click the install icon (⊕) in the address bar or browser menu",
+  installDesktopStep2: "Click \"Install\" and the app will open in a separate window",
+  installNote: "Note: Make sure to use Chrome browser (Android/Desktop) or Safari (iOS) for the best experience.",
 };
 
 export default en;
