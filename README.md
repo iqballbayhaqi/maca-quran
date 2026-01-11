@@ -1,28 +1,30 @@
 # 📖 Maca Quran
 
-Aplikasi baca Al-Quran online gratis dengan terjemahan Indonesia, audio murottal, tajwid berwarna, dan berbagai fitur menarik lainnya.
+A free online Al-Quran reading application with Indonesian translation, murottal audio, colored tajwid, and various other interesting features.
 
+![Version](https://img.shields.io/badge/Version-0.1.0-blue?style=flat)
 ![React](https://img.shields.io/badge/React-17.0.2-61DAFB?style=flat&logo=react)
 ![Material-UI](https://img.shields.io/badge/Material--UI-4.12.2-0081CB?style=flat&logo=mui)
+![Node](https://img.shields.io/badge/Node.js-24.x-339933?style=flat&logo=nodedotjs)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
 
-## ✨ Fitur
+## ✨ Features
 
-- 📚 **Baca Al-Quran** - Baca 114 surah Al-Quran lengkap dengan terjemahan Indonesia
-- 🎨 **Tajwid Berwarna** - Tampilan tajwid dengan warna untuk memudahkan bacaan
-- 🔊 **Audio Murottal** - Dengarkan bacaan ayat dengan audio murottal
-- 🔖 **Bookmark** - Simpan ayat favorit untuk dibaca kembali
-- 📝 **Catatan** - Tambahkan catatan pada ayat tertentu
-- 📅 **Ayat Harian** - Dapatkan ayat pilihan setiap hari
-- 🎯 **Target Harian** - Atur target membaca harian
-- 📖 **Mode Hafalan** - Fitur khusus untuk menghafal Al-Quran
-- 📜 **Riwayat Bacaan** - Lacak progress bacaan Anda
-- 🔍 **Pencarian** - Cari ayat dengan mudah
-- 🖼️ **Bagikan Ayat** - Bagikan ayat sebagai gambar
-- 🌙 **Mode Gelap** - Tema gelap untuk kenyamanan membaca
-- 🌐 **Multi Bahasa** - Dukungan bahasa Indonesia dan Inggris
+- 📚 **Read Al-Quran** - Read all 114 surahs of Al-Quran with Indonesian translation
+- 🎨 **Colored Tajwid** - Tajwid display with colors to facilitate reading
+- 🔊 **Murottal Audio** - Listen to verse recitations with murottal audio
+- 🔖 **Bookmark** - Save favorite verses to read again
+- 📝 **Notes** - Add notes to specific verses
+- 📅 **Daily Verse** - Get a selected verse every day
+- 🎯 **Daily Target** - Set daily reading targets
+- 📖 **Memorization Mode** - Special feature for memorizing Al-Quran
+- 📜 **Reading History** - Track your reading progress
+- 🔍 **Search** - Search verses easily
+- 🖼️ **Share Verse** - Share verses as images
+- 🌙 **Dark Mode** - Dark theme for comfortable reading
+- 🌐 **Multi Language** - Indonesian and English language support
 
-## 🛠️ Teknologi
+## 🛠️ Technologies
 
 - **Frontend**: React.js 17
 - **UI Framework**: Material-UI v4
@@ -31,16 +33,16 @@ Aplikasi baca Al-Quran online gratis dengan terjemahan Indonesia, audio murottal
 - **SEO**: React Helmet
 - **API**: [Quran API by Gading](https://api.quran.gading.dev)
 
-## 🚀 Instalasi
+## 🚀 Installation
 
-### Prasyarat
+### Prerequisites
 
 - Node.js 24.x
-- Yarn atau npm
+- Yarn or npm
 
-### Langkah Instalasi
+### Installation Steps
 
-1. Clone repository ini
+1. Clone this repository
 
 ```bash
 git clone https://github.com/iqballbayhaqi/maca-quran.git
@@ -51,73 +53,73 @@ cd maca-quran
 
 ```bash
 yarn install
-# atau
+# or
 npm install
 ```
 
-3. Jalankan aplikasi
+3. Run the application
 
 ```bash
 yarn start
-# atau
+# or
 npm start
 ```
 
-4. Buka [http://localhost:3000](http://localhost:3000) di browser
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## 📦 Scripts
 
-| Script | Deskripsi |
-|--------|-----------|
-| `yarn start` | Menjalankan aplikasi dalam mode development |
-| `yarn build` | Build aplikasi untuk production |
-| `yarn test` | Menjalankan test runner |
-| `yarn eject` | Eject dari Create React App |
+| Script | Description |
+|--------|-------------|
+| `yarn start` | Runs the app in development mode |
+| `yarn build` | Builds the app for production |
+| `yarn test` | Launches the test runner |
+| `yarn eject` | Ejects from Create React App |
 
-## 📁 Struktur Folder
+## 📁 Folder Structure
 
 ```
 src/
-├── components/          # Komponen reusable
+├── components/          # Reusable components
 │   ├── drawer/         # Side drawer navigation
 │   ├── header.js       # Header component
-│   ├── menuAyat.js     # Menu ayat component
-│   ├── menuSurat.js    # Menu surah component
-│   ├── NoteDialog.js   # Dialog untuk catatan
+│   ├── menuAyat.js     # Verse menu component
+│   ├── menuSurat.js    # Surah menu component
+│   ├── NoteDialog.js   # Notes dialog
 │   └── SEO.js          # SEO meta tags
-├── containers/          # Halaman utama
-│   ├── AboutPage/      # Halaman tentang
-│   ├── BookmarkPage/   # Halaman bookmark
-│   ├── DailyAyatPage/  # Halaman ayat harian
-│   ├── DailyTargetPage/# Halaman target harian
-│   ├── DetailPage/     # Halaman detail surah
-│   ├── Home/           # Halaman beranda
-│   ├── MemorizationPage/# Halaman mode hafalan
-│   ├── MenuPage/       # Halaman menu surah
-│   ├── NotesPage/      # Halaman catatan
-│   ├── ReadingHistoryPage/# Halaman riwayat
-│   ├── SearchPage/     # Halaman pencarian
-│   └── ShareAyatPage/  # Halaman bagikan ayat
-├── i18n/               # Internasionalisasi
-├── images/             # Gambar dan aset
-├── tajwid/             # Logic tajwid berwarna
-├── theme/              # Theme dan dark mode
+├── containers/          # Main pages
+│   ├── AboutPage/      # About page
+│   ├── BookmarkPage/   # Bookmark page
+│   ├── DailyAyatPage/  # Daily verse page
+│   ├── DailyTargetPage/# Daily target page
+│   ├── DetailPage/     # Surah detail page
+│   ├── Home/           # Home page
+│   ├── MemorizationPage/# Memorization mode page
+│   ├── MenuPage/       # Surah menu page
+│   ├── NotesPage/      # Notes page
+│   ├── ReadingHistoryPage/# History page
+│   ├── SearchPage/     # Search page
+│   └── ShareAyatPage/  # Share verse page
+├── i18n/               # Internationalization
+├── images/             # Images and assets
+├── tajwid/             # Colored tajwid logic
+├── theme/              # Theme and dark mode
 └── utils/              # Utility functions
 ```
 
-## 🤝 Kontribusi
+## 🤝 Contributing
 
-Kontribusi sangat diterima! Silakan buat pull request atau buka issue untuk saran dan perbaikan.
+Contributions are welcome! Please create a pull request or open an issue for suggestions and improvements.
 
-1. Fork repository ini
-2. Buat branch fitur (`git checkout -b feature/AmazingFeature`)
-3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
-4. Push ke branch (`git push origin feature/AmazingFeature`)
-5. Buka Pull Request
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 Lisensi
+## 📄 License
 
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
 ## 👨‍💻 Developer
 
